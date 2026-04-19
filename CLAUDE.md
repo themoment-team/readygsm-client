@@ -124,3 +124,4 @@ export const exampleUrl = {
 - 커밋 메시지는 `type: 설명` 형식을 따르세요 (scope 괄호 없음). 자세한 type 목록은 `.claude/commands/commit/references/scope-guide.md` 참고.
 - **커밋은 반드시 Bash 도구로 git 명령어를 직접 실행하세요.** `/commit` Skill은 사용자가 명시적으로 `/commit`을 입력할 때만 사용합니다. 일반 작업 후 자동 커밋 시 Skill 도구를 호출하지 마세요.
 - `git add .` 대신 변경된 파일을 명시적으로 스테이징하세요. `.env`, `.env.local` 등 환경변수 파일은 절대 포함하지 마세요.
+- PR 제목은 `[type] 설명` 형식으로 작성하세요 (예: `[feat] 로그인 폼 추가`). `feat(scope): ...` 형식은 사용하지 않습니다.
