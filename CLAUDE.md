@@ -82,15 +82,20 @@ export default Example;
 
 ### File/Folder Naming
 
-- Component folders: `PascalCase/index.tsx` (e.g., `Header/index.tsx`)
-- Simple single-file components: `ui/header.tsx` (lowercase)
+- FSD 슬라이스 내 UI 컴포넌트: `{layer}/{slice}/ui/{Component}.tsx` (e.g., `widgets/header/ui/Header.tsx`)
+  - `{slice}` 폴더명: `camelCase` (e.g., `header`, `homeProgramSection`)
+  - `{Component}` 파일명: `PascalCase` (e.g., `Header.tsx`, `HomeProgramSection.tsx`)
 - Hooks/utils/constants/types: `camelCase` (e.g., `useDebounce.ts`, `cookies.ts`)
 - Asset components: `PascalCase.tsx` (e.g., `Logo.tsx`)
+- 배럴 export: 각 슬라이스 루트에 `index.ts` 생성
 
 ### Styling
 
 - Tailwind CSS only; use `cn()` for conditional/merged classes
 - Use CVA (`class-variance-authority`) for components with multiple variants
+- 색상은 `src/shared/styles/globals.css`에 선언된 CSS 변수를 우선 사용하세요. 해당 변수가 없는 경우에만 hex 값 사용 허용.
+  - 예: `text-brand-primary`, `bg-surface-container`, `border-border-variant`
+  - 주요 변수: `brand-primary`, `brand-accent`, `neutral-dark`, `deep-black`, `neutral-slate`, `cool-neutral`, `secondary-slate`, `soft-gray`, `base-fill`, `surface-container`, `pure-white`, `error-red` 등
 
 ### API Hooks (in `entities/` or `features/`)
 
@@ -121,6 +126,8 @@ export const exampleUrl = {
 ## Claude 행동 규칙
 
 - 작업 완료 후 자동으로 변경사항을 커밋하세요.
-- 커밋 메시지는 `.claude/commands/commit/references/scope-guide.md` 형식을 따르세요.
+- 커밋 메시지는 `type: 설명` 형식을 따르세요 (scope 괄호 없음). 자세한 type 목록은 `.claude/commands/commit/references/scope-guide.md` 참고.
 - **커밋은 반드시 Bash 도구로 git 명령어를 직접 실행하세요.** `/commit` Skill은 사용자가 명시적으로 `/commit`을 입력할 때만 사용합니다. 일반 작업 후 자동 커밋 시 Skill 도구를 호출하지 마세요.
 - `git add .` 대신 변경된 파일을 명시적으로 스테이징하세요. `.env`, `.env.local` 등 환경변수 파일은 절대 포함하지 마세요.
+- PR 제목은 `[type] 설명` 형식으로 작성하세요 (예: `[feat] 로그인 폼 추가`). `feat(scope): ...` 형식은 사용하지 않습니다.
+- PR 리뷰 코멘트는 **한 번에 모두 수정하지 마세요.** 코멘트 하나를 수정 → 커밋 → 답글 순서로 하나씩 처리하세요.

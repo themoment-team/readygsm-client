@@ -13,9 +13,10 @@
 `.claude/commands/commit/references/scope-guide.md` 를 참고해서 메시지를 작성하세요.
 
 ```
-type(scope): 설명
+type: 설명
 ```
 
+- scope(괄호)는 사용하지 않음
 - 설명은 **한국어**로 작성
 - 명령형으로 작성 (예: "추가", "수정", "제거")
 - 50자 이내
@@ -30,7 +31,7 @@ type(scope): 설명
 
 ```bash
 git add <변경된 파일들>  # git add . 금지 — 파일을 명시적으로 지정
-git commit -m "type(scope): 설명"
+git commit -m "type: 설명"
 git push
 ```
 

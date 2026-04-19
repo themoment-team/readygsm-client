@@ -24,6 +24,17 @@ git push -u origin HEAD
 bash .claude/commands/pr-draft/scripts/create-pr.sh "<제목>" "<본문>"
 ```
 
+## PR 제목 형식
+
+```
+[type] 설명
+```
+
+- `type`은 브랜치 prefix와 일치 (feat, fix, docs, refactor, chore, design, perf)
+- 설명은 **한국어**로 작성
+- 예: `[feat] 로그인 폼 컴포넌트 추가`, `[fix] 프로그램 목록 조회 오류 수정`
+- `feat(scope): ...` 형식은 사용하지 않음
+
 ## PR 템플릿
 
 `.github/PULL_REQUEST_TEMPLATE.md` 형식을 따르세요:
