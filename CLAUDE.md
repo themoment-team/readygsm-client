@@ -82,10 +82,12 @@ export default Example;
 
 ### File/Folder Naming
 
-- Component folders: `PascalCase/index.tsx` (e.g., `Header/index.tsx`)
-- Simple single-file components: `ui/header.tsx` (lowercase)
+- FSD 슬라이스 내 UI 컴포넌트: `{layer}/{slice}/ui/{Component}.tsx` (e.g., `widgets/header/ui/Header.tsx`)
+  - `{slice}` 폴더명: `camelCase` (e.g., `header`, `homeProgramSection`)
+  - `{Component}` 파일명: `PascalCase` (e.g., `Header.tsx`, `HomeProgramSection.tsx`)
 - Hooks/utils/constants/types: `camelCase` (e.g., `useDebounce.ts`, `cookies.ts`)
 - Asset components: `PascalCase.tsx` (e.g., `Logo.tsx`)
+- 배럴 export: 각 슬라이스 루트에 `index.ts` 생성
 
 ### Styling
 
