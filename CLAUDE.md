@@ -91,6 +91,9 @@ export default Example;
 
 - Tailwind CSS only; use `cn()` for conditional/merged classes
 - Use CVA (`class-variance-authority`) for components with multiple variants
+- 색상은 반드시 `src/shared/styles/globals.css`에 선언된 CSS 변수를 사용하세요. 하드코딩 금지.
+  - 예: `text-brand-primary`, `bg-surface-container`, `border-border-variant`
+  - 주요 변수: `brand-primary`, `brand-accent`, `neutral-dark`, `deep-black`, `neutral-slate`, `cool-neutral`, `secondary-slate`, `soft-gray`, `base-fill`, `surface-container`, `pure-white`, `error-red` 등
 
 ### API Hooks (in `entities/` or `features/`)
 
