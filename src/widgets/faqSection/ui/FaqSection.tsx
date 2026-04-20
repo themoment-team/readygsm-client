@@ -47,7 +47,7 @@ const faqList: FaqItemType[] = [
 ];
 
 const FaqSection = () => {
-  const [openIndexes, setOpenIndexes] = useState<Set<number>>(new Set([0]));
+  const [openIndexes, setOpenIndexes] = useState<Set<number>>(new Set());
 
   const handleToggle = (index: number) => {
     setOpenIndexes((prev) => {
