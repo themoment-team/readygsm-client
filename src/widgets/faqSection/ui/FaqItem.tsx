@@ -44,17 +44,19 @@ const FaqItem = ({ item, index, isOpen, onToggle }: FaqItemProps) => (
         isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
       )}
     >
-      <div className={cn('flex gap-2.5 overflow-hidden px-6', isOpen && 'pt-2.5 pb-5')}>
-        <span className={cn('invisible shrink-0 text-sm')} aria-hidden="true">
-          Q.
-        </span>
-        <p
-          className={cn(
-            'text-secondary-slate text-base leading-[1.6rem] font-normal tracking-[0.03rem]',
-          )}
-        >
-          {item.answer}
-        </p>
+      <div className="overflow-hidden">
+        <div className="flex gap-2.5 px-6 pt-2.5 pb-5">
+          <span className={cn('invisible shrink-0 text-sm')} aria-hidden="true">
+            Q.
+          </span>
+          <p
+            className={cn(
+              'text-secondary-slate text-base leading-[1.6rem] font-normal tracking-[0.03rem]',
+            )}
+          >
+            {item.answer}
+          </p>
+        </div>
       </div>
     </div>
   </li>
