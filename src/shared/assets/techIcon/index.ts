@@ -1,0 +1,9 @@
+export { default as AndroidIcon } from './ui/AndroidIcon';
+export { default as BackendIcon } from './ui/BackendIcon';
+export { default as CloudIcon } from './ui/CloudIcon';
+export { default as CodeIcon } from './ui/CodeIcon';
+export { default as DesignIcon } from './ui/DesignIcon';
+export { default as GitIcon } from './ui/GitIcon';
+export { default as IOSIcon } from './ui/IOSIcon';
+export { default as LinkIcon } from './ui/LinkIcon';
+export { default as MergeIcon } from './ui/MergeIcon';
