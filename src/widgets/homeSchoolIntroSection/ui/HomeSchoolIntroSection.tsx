@@ -27,7 +27,7 @@ const HomeSchoolIntroSection = () => {
             가 여러분의 코드를 완성합니다
           </span>
         </div>
-        <div className="text-brand-primary flex flex-wrap items-center gap-[21px_36px] shadow-[0px_4px_20px_0px_rgba(0,5,28,0.08)]">
+        <div className="text-brand-primary flex flex-wrap items-center gap-[21px_36px]">
           <GitIcon />
           <MergeIcon />
           <CodeIcon />
