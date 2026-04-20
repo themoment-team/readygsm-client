@@ -16,7 +16,7 @@ interface FaqItemProps {
 const FaqItem = ({ item, index, isOpen, onToggle }: FaqItemProps) => (
   <li
     className={cn(
-      'rounded-lg border transition-[border-color] duration-300',
+      'overflow-hidden rounded-lg border transition-[border-color] duration-300',
       isOpen ? 'border-brand-primary' : 'border-border-variant',
     )}
   >
