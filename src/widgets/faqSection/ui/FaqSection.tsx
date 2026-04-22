@@ -14,8 +14,7 @@ interface FaqItemType {
 const faqList: FaqItemType[] = [
   {
     question: '학과 체험은 한 번만 신청 가능한가요?',
-    answer:
-      '학과 체험은 분기마다 한번씩 총 3번 신청 가능합니다.',
+    answer: '학과 체험은 분기마다 한번씩 총 3번 신청 가능합니다.',
   },
   {
     question: '3번의 학과 체험을 다 같은 과목으로 신청이 가능한가요?',
@@ -24,7 +23,8 @@ const faqList: FaqItemType[] = [
   },
   {
     question: '여러 개의 학과체험을 한분기에 신청할 수 있나요?',
-    answer: '한 분기에는 1개의 학과 체험만 신청 가능합니다.\n동일 기간에 여러 체험이 동시에 진행되기 때문에 중복 참여가 불가능합니다.',
+    answer:
+      '한 분기에는 1개의 학과 체험만 신청 가능합니다.\n동일 기간에 여러 체험이 동시에 진행되기 때문에 중복 참여가 불가능합니다.',
   },
   {
     question: '전 분기에 신청했던 학과체험을 다시 신청하게 된다면 어떻게 되나요?',
@@ -42,7 +42,8 @@ const faqList: FaqItemType[] = [
   },
   {
     question: '신청한 학과 체험을 변경할 수 있나요?',
-    answer: '신청 완료 후에는 체험 내용을 직접 변경할 수 없습니다.\n변경을 원하실 경우, 기존 신청을 취소한 뒤 다시 신청해야 합니다. 단, 재신청 시 정원이 마감된 경우 예비 신청으로 전환될 수 있으며 이 경우 최종 참여가 어려울 수 있으니 신중하게 신청해 주세요.',
+    answer:
+      '신청 완료 후에는 체험 내용을 직접 변경할 수 없습니다.\n변경을 원하실 경우, 기존 신청을 취소한 뒤 다시 신청해야 합니다. 단, 재신청 시 정원이 마감된 경우 예비 신청으로 전환될 수 있으며 이 경우 최종 참여가 어려울 수 있으니 신중하게 신청해 주세요.',
   },
 ];
 
@@ -64,7 +65,7 @@ const FaqSection = () => {
   return (
     <main
       className={cn(
-        'flex h-[calc(100vh-6.25rem)] flex-col items-center bg-white px-4 pt-9 pb-12 overflow-y-auto',
+        'flex h-[calc(100vh-6.25rem)] flex-col items-center overflow-y-auto bg-white px-4 pt-9 pb-12',
       )}
     >
       <div className={cn('w-full max-w-150')}>
