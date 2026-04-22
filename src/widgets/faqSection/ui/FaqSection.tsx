@@ -43,7 +43,7 @@ const faqList: FaqItemType[] = [
   {
     question: '신청한 학과 체험을 변경할 수 있나요?',
     answer:
-      '신청 완료 후에는 체험 내용을 직접 변경할 수 없습니다.\n변경을 원하실 경우, 기존 신청을 취소한 뒤 다시 신청해야 합니다. 단, 재신청 시 정원이 마감된 경우 예비 신청으로 전환될 수 있으며 이 경우 최종 참여가 어려울 수 있으니 신중하게 신청해 주세요.',
+      '신청 완료 후에는 체험 내용을 직접 변경할 수 없습니다.\n변경을 원하실 경우, 기존 신청을 취소한 뒤 다시 신청해야 합니다.\n단, 재신청 시 정원이 마감된 경우 예비 신청으로 전환될 수 있으며 이 경우 최종 참여가 어려울 수 있으니 신중하게 신청해 주세요.',
   },
 ];
 
@@ -65,7 +65,7 @@ const FaqSection = () => {
   return (
     <main
       className={cn(
-        'flex h-[calc(100vh-6.25rem)] flex-col items-center overflow-y-auto bg-white px-4 pt-9 pb-12',
+        'flex min-h-[calc(100vh-6.25rem-11.3125rem)] flex-col items-center bg-white px-4 pt-9 pb-12',
       )}
     >
       <div className={cn('w-full max-w-150')}>
