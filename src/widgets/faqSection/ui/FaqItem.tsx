@@ -51,7 +51,7 @@ const FaqItem = ({ item, index, isOpen, onToggle }: FaqItemProps) => (
           </span>
           <p
             className={cn(
-              'text-secondary-slate text-base leading-[1.6rem] font-normal tracking-[0.03rem]',
+              'text-secondary-slate text-base leading-[1.6rem] font-normal tracking-[0.03rem] whitespace-pre-wrap',
             )}
           >
             {item.answer}
