@@ -27,7 +27,7 @@ export async function getTeamMembers(): Promise<MemberType[]> {
       'Notion-Version': '2022-06-28',
       'Content-Type': 'application/json',
     },
-    next: { revalidate: 3600 },
+    next: { revalidate: process.env.NODE_ENV === 'production' ? 3600 : 0 },
   });
 
   if (!res.ok) return [];
