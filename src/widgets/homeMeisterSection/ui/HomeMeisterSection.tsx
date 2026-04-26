@@ -1,9 +1,15 @@
+'use client';
+
 import Image from 'next/image';
 
 import ChevronDoubleDownIcon from '@/shared/assets/ChevronDoubleDownIcon';
 import GSMTitle from '@/shared/assets/GSMTitle';
 
+import useScrollDown from '../model/useScrollDown';
+
 const HomeMeisterSection = () => {
+  const { handleScrollDown } = useScrollDown();
+
   return (
     <section className="bg-neutral-dark relative flex h-[calc(100vh-6.25rem)] w-full flex-col items-center overflow-hidden pt-16">
       <div className="absolute inset-0">
@@ -36,10 +42,13 @@ const HomeMeisterSection = () => {
             </div>
             <p>학과 체험 접수 기간 : 2024. 7. 14 (화) ~ 2024. 7. 28 (화), 오전 9시 ~ 오후 4시</p>
           </div>
-          <div className="relative z-10 mb-12 flex items-center gap-[0.88rem]">
+          <button
+            onClick={handleScrollDown}
+            className="relative z-10 mb-12 flex cursor-pointer items-center gap-[0.88rem]"
+          >
             <p className="text-center">스크롤 해서 더 알아보기</p>
             <ChevronDoubleDownIcon />
-          </div>
+          </button>
         </div>
       </div>
     </section>
