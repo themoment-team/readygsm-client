@@ -12,7 +12,7 @@ import {
 
 const HomeSchoolIntroSection = () => {
   return (
-    <div className="flex h-screen w-7xl flex-col justify-center">
+    <div className="flex w-7xl flex-col justify-center pt-[23.06rem]">
       <section className="flex flex-col items-start gap-9">
         <p className="text-neutral-dark text-[36px] leading-normal font-bold">
           책 속 이론이 아닌

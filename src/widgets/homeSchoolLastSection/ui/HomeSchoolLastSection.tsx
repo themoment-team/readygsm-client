@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const HomeSchoolLastSection = () => {
   return (
-    <div className="text-neutral-dark flex h-screen w-7xl flex-col justify-center gap-30 text-[2.25rem] leading-[2.7rem] font-bold">
+    <div className="text-neutral-dark flex w-7xl flex-col justify-center gap-30 py-90 text-[2.25rem] leading-[2.7rem] font-bold">
       <div>
         <div>아직 잘 모르겠다면...</div>
         <div>

@@ -25,8 +25,8 @@ const awardGroups = [
 
 const HomeAwardSection = () => {
   return (
-    <div className="relative flex h-screen w-full flex-col items-center pt-50">
-      <div className="absolute top-50 right-0 -z-10 flex flex-col gap-12">
+    <div className="relative flex h-screen w-full flex-col items-center pt-90">
+      <div className="absolute top-90 right-0 -z-10 flex flex-col gap-12">
         {awardGroups.map((group) => (
           <Image
             key={group.image}
