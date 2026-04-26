@@ -16,26 +16,20 @@ const HomeMeisterSection = () => {
           backgroundPosition: 'center',
         }}
       />
-      <div className="relative z-10 flex w-7xl flex-1 flex-col gap-[22.62rem]">
-        <div>
-          <GSM />
-        </div>
-        <div className="flex flex-col gap-[7.12rem]">
+      <div className="relative z-10 flex w-7xl flex-1 flex-col gap-[22.62rem] text-white">
+        <GSM />
+        <div className="flex flex-col gap-[7.12rem] text-xl leading-[1.4]">
           <div className="flex flex-col gap-4">
-            <div>
-              <p className="text-[48px] leading-[1.5] font-bold text-white">단순한 개발자를 넘어</p>
-              <p className="text-[48px] leading-[1.5] font-bold text-white">
+            <div className="text-5xl leading-normal font-bold">
+              <p>단순한 개발자를 넘어</p>
+              <p>
                 세상을 바꾸는 <span className="text-brand-primary">마이스터(Meister)</span>의 길
               </p>
             </div>
-            <p className="text-[20px] leading-[1.4] text-white">
-              학과 체험 접수 기간 : 2024. 7. 14 (화) ~ 2024. 7. 28 (화), 오전 9시 ~ 오후 4시
-            </p>
+            <p>학과 체험 접수 기간 : 2024. 7. 14 (화) ~ 2024. 7. 28 (화), 오전 9시 ~ 오후 4시</p>
           </div>
           <div className="relative z-10 mb-12 flex items-center gap-[0.88rem]">
-            <p className="text-center text-[20px] leading-[1.4] text-white">
-              스크롤 해서 더 알아보기
-            </p>
+            <p className="text-center">스크롤 해서 더 알아보기</p>
             <ChevronDownIcon />
           </div>
         </div>
