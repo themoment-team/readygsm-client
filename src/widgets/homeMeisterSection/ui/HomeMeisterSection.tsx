@@ -24,7 +24,7 @@ const HomeMeisterSection = () => {
           }}
         />
       </div>
-      <div className="relative z-10 flex w-7xl flex-1 flex-col gap-[22.62rem] text-white">
+      <div className="relative z-10 flex w-7xl flex-1 flex-col justify-between text-white">
         <GSMTitle />
         <div className="flex flex-col gap-[7.12rem] text-xl leading-[1.4]">
           <div className="flex flex-col gap-4">
