@@ -39,7 +39,6 @@ const TeamSection2 = () => {
         <span
           className={cn(
             'text-[#5D5B64]',
-            'sm:text-[1.25rem]/[2rem]',
             'text-[1rem]/[1.75rem]',
             'font-normal',
             'text-center',

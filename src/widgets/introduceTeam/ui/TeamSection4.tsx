@@ -87,15 +87,7 @@ const TeamSection4 = ({ data }: TeamSection4Props) => {
         'gap-25',
       )}
     >
-      <h3
-        className={cn(
-          'text-[#0F0921]',
-          'xs:text-[2.75rem]/[3.85rem]',
-          'text-[1.75rem]/[2.75rem]',
-          'font-bold',
-          'text-center',
-        )}
-      >
+      <h3 className={cn('text-[#0F0921]', 'text-[1.75rem]/[2.75rem]', 'font-bold', 'text-center')}>
         &quot;학과체험 서비스, <br className={cn('block', 'sm:hidden')} />
         누가 만들었을까요?&quot;
       </h3>

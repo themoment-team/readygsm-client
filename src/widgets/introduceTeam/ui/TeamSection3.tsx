@@ -79,14 +79,7 @@ const TeamSection3 = () => {
                 'py-8',
               )}
             >
-              <div
-                className={cn(
-                  'sm:text-[1.75rem]/[2.8rem]',
-                  'text-[1.25rem]/[2.5rem]',
-                  'font-bold',
-                  'text-left',
-                )}
-              >
+              <div className={cn('text-[1.25rem]/[2.5rem]', 'font-bold', 'text-left')}>
                 {element.description}
               </div>
             </div>
