@@ -3,12 +3,7 @@
 import Image from 'next/image';
 
 import { BottomArrow, SmallTheMomentIcon } from '@/shared/assets';
-import { cn } from '@/shared/lib';
-
-const scrollToElement = (selector: string) => {
-  const el = document.querySelector(selector);
-  el?.scrollIntoView({ behavior: 'smooth' });
-};
+import { cn, scrollToElement } from '@/shared/lib';
 
 const TeamSection1 = () => {
   const scrollToSection2 = () => {
