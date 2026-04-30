@@ -26,26 +26,28 @@ const TeamSection2 = () => {
         <h1
           className={cn(
             'text-[#473B6B]',
-            'text-[4rem]/[5.2rem]',
+            'text-7xl',
+            'leading-[5.525rem]',
             'font-bold',
             'text-center',
             'md:text-left',
           )}
         >
-          <span className={cn('text-[4rem] text-[#7C58E9]')}>더모먼트</span>는
+          <span className={cn('text-[#7C58E9]')}>더모먼트</span>는
           <br />
           어떤 팀 인가요?
         </h1>
         <span
           className={cn(
             'text-[#5D5B64]',
-            'text-[1rem]/[1.75rem]',
+            'text-base',
+            'leading-8',
             'font-normal',
             'text-center',
             'md:text-left',
           )}
         >
-          더모먼트는 광주소프트웨어마이스터고등학교의 전공 동아리입니다. <br />
+          더모먼트팀은 광주소프트웨어마이스터고등학교의 전공 동아리입니다. <br />
           약 30명의 재학생, 졸업생들이 모여서 활동하고, <br
             className={cn('sm:hidden', 'block')}
           />{' '}

@@ -7,8 +7,6 @@ import { cn } from '@/shared/lib';
 
 const GITHUB_URL = 'https://github.com';
 
-const HIGHLIGHTED_IDS = new Set(['seoxeon09', 'yeondon125', 'hongjm0912', 'ZaMan-O', 'KIEYU5']);
-
 const roleColors: Record<string, string> = {
   Server: 'text-orange-500',
   Frontend: 'text-sky-600',
@@ -17,8 +15,6 @@ const roleColors: Record<string, string> = {
 };
 
 const MemberCard = ({ name, githubId, avatarUrl, role }: MemberType) => {
-  const isHighlighted = HIGHLIGHTED_IDS.has(githubId);
-
   return (
     <a
       href={`${GITHUB_URL}/${githubId}`}
@@ -31,15 +27,13 @@ const MemberCard = ({ name, githubId, avatarUrl, role }: MemberType) => {
         'h-28',
         'rounded-xl',
         'border',
+        'border-[#B2B2B2]',
         'bg-white',
         'p-5',
         'gap-1',
         'space-x-4',
         'shrink-0',
         'cursor-pointer',
-        isHighlighted
-          ? 'border-[#7C58E9] shadow-[0_0_20px_0_rgba(65,49,113,0.12)]'
-          : 'border-[#B2B2B2]',
       )}
     >
       <Image
@@ -51,8 +45,8 @@ const MemberCard = ({ name, githubId, avatarUrl, role }: MemberType) => {
         unoptimized
       />
       <div>
-        <p className={cn('text-[1.5rem]/[2rem]', 'font-medium')}>{name}</p>
-        <p className={cn(['text-[1.375rem]/[1.75rem]', 'font-normal', roleColors[role]])}>{role}</p>
+        <p className={cn('text-2xl', 'leading-8', 'font-medium')}>{name}</p>
+        <p className={cn(['text-xl', 'leading-7', 'font-normal', roleColors[role]])}>{role}</p>
       </div>
     </a>
   );
@@ -87,7 +81,15 @@ const TeamSection4 = ({ data }: TeamSection4Props) => {
         'gap-25',
       )}
     >
-      <h3 className={cn('text-[#0F0921]', 'text-[1.75rem]/[2.75rem]', 'font-bold', 'text-center')}>
+      <h3
+        className={cn(
+          'text-[#0F0921]',
+          'text-5xl',
+          'leading-[3.85rem]',
+          'font-bold',
+          'text-center',
+        )}
+      >
         &quot;학과체험 서비스, <br className={cn('block', 'sm:hidden')} />
         누가 만들었을까요?&quot;
       </h3>

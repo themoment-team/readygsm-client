@@ -45,7 +45,7 @@ const TeamSection3 = () => {
       <h1
         className={cn(
           'text-[#473B6B]',
-          'text-[4rem]/[5.2rem]',
+          'text-5xl',
           'font-bold',
           'px-0',
           'sm:px-15',
@@ -55,9 +55,10 @@ const TeamSection3 = () => {
           'uhd:px-[22.5rem]',
           'text-center',
           'md:text-left',
+          'leading-[3.85rem]',
         )}
       >
-        <span className={cn('text-[4rem] text-[#7C58E9]')}>더모먼트</span>는
+        <span className={cn('text-[#7C58E9]')}>더모먼트팀</span>은
         <br />
         아래의 비전을 가지고 활동해요.
       </h1>
@@ -79,7 +80,7 @@ const TeamSection3 = () => {
                 'py-8',
               )}
             >
-              <div className={cn('text-[1.25rem]/[2.5rem]', 'font-bold', 'text-left')}>
+              <div className={cn('text-[1.75rem]', 'leading-10', 'font-bold', 'text-left')}>
                 {element.description}
               </div>
             </div>
