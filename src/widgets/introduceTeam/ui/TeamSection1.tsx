@@ -56,13 +56,13 @@ const TeamSection1 = () => {
           >
             <SmallTheMomentIcon />
           </div>
-          <p className={cn('text-[2.1875rem]', 'leading-normal', 'font-medium', 'text-white')}>
-            the_moment
+          <p className={cn('text-4xl', 'leading-normal', 'font-medium', 'text-white')}>
+            the_moment Team
           </p>
         </div>
 
         <div className={cn('flex', 'flex-col', 'justify-center', 'items-center', 'gap-5')}>
-          <p className={cn('text-[2.35rem]', 'leading-normal', 'font-bold', 'text-white')}>
+          <p className={cn('text-8xl', 'leading-normal', 'font-bold', 'text-white')}>
             순간의 가치를 비춰내다.
           </p>
         </div>
@@ -79,7 +79,7 @@ const TeamSection1 = () => {
         >
           <p
             onClick={scrollToSection2}
-            className={cn('text-lg', 'text-2xl', 'text-white', 'cursor-pointer')}
+            className={cn('text-2xl', 'text-white', 'cursor-pointer', 'font-600', 'leading-7')}
           >
             스크롤 해서 더 알아보기
           </p>
