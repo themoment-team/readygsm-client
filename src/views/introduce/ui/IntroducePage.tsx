@@ -3,7 +3,7 @@ import { cn } from '@/shared/lib';
 import { TeamSection1, TeamSection2, TeamSection3, TeamSection4 } from '@/widgets/introduceTeam';
 
 const IntroducePage = async () => {
-  const members = await getTeamMembers();
+  const members = await getTeamMembers().catch(() => []);
 
   return (
     <main className={cn('flex flex-col')}>
