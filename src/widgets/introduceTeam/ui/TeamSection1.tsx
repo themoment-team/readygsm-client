@@ -16,10 +16,10 @@ const TeamSection1 = () => {
         fill
         alt="더모먼트 팀 배경"
         sizes="100vw"
-        className={cn('object-cover', 'blur-md', 'brightness-75', 'scale-110')}
+        className={cn('object-cover', 'scale-110')}
         priority
       />
-      <div className={cn('absolute', 'inset-0', 'bg-black/40')} />
+      <div className={cn('absolute', 'inset-0', 'bg-black/40', 'backdrop-blur-[11.2px]')} />
       <div
         className={cn(
           'absolute',
@@ -57,7 +57,7 @@ const TeamSection1 = () => {
             <SmallTheMomentIcon />
           </div>
           <p className={cn('text-4xl', 'leading-normal', 'font-medium', 'text-white')}>
-            the_moment Team
+            the_moment
           </p>
         </div>
 
