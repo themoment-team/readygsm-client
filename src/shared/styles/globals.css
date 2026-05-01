@@ -155,6 +155,24 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+@keyframes scrollRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(var(--scroll-end));
+  }
+}
+
+@keyframes scrollLeft {
+  from {
+    transform: translateX(var(--scroll-end));
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

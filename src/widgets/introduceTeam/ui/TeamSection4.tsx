@@ -1,5 +1,7 @@
 'use client';
 
+import React from 'react';
+
 import Image from 'next/image';
 
 import { MemberType } from '@/entities/teamMember';
@@ -110,10 +112,13 @@ const TeamSection4 = ({ data }: TeamSection4Props) => {
       <div className={cn('flex', 'flex-col', 'relative', 'w-full', 'overflow-hidden', 'gap-6')}>
         <div
           className={cn('flex', 'space-x-4', 'whitespace-nowrap')}
-          style={{
-            width: `${totalWidth * 2}rem`,
-            animation: 'scrollRight 25s linear infinite',
-          }}
+          style={
+            {
+              width: `${totalWidth * 2}rem`,
+              animation: 'scrollRight 25s linear infinite',
+              '--scroll-end': `-${totalWidth + 1}rem`,
+            } as React.CSSProperties
+          }
         >
           {memberListDoubled.map((member, index) => (
             <MemberCard key={index} {...member} />
@@ -121,34 +126,19 @@ const TeamSection4 = ({ data }: TeamSection4Props) => {
         </div>
         <div
           className={cn('flex', 'space-x-4', 'whitespace-nowrap')}
-          style={{
-            width: `${totalWidth * 2}rem`,
-            animation: 'scrollLeft 25s linear infinite',
-          }}
+          style={
+            {
+              width: `${totalWidth * 2}rem`,
+              animation: 'scrollLeft 25s linear infinite',
+              '--scroll-end': `-${totalWidth + 1}rem`,
+            } as React.CSSProperties
+          }
         >
           {memberListDoubled.map((member, index) => (
             <MemberCard key={index} {...member} />
           ))}
         </div>
       </div>
-      <style jsx global>{`
-        @keyframes scrollRight {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-${totalWidth + 1}rem);
-          }
-        }
-        @keyframes scrollLeft {
-          0% {
-            transform: translateX(-${totalWidth + 1}rem);
-          }
-          100% {
-            transform: translateX(0);
-          }
-        }
-      `}</style>
     </div>
   );
 };
