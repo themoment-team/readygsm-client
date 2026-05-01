@@ -30,7 +30,7 @@ export async function getTeamMembers(): Promise<MemberType[]> {
     next: { revalidate: process.env.NODE_ENV === 'production' ? 3600 : 0 },
   });
 
-  if (!res.ok) return [];
+  if (!res.ok) throw new Error(`Notion API error: ${res.status}`);
 
   const data = await res.json();
   const members: MemberType[] = data.results.map((page: NotionPage) => {
