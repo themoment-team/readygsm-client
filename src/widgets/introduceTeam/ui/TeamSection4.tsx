@@ -7,6 +7,19 @@ import { cn } from '@/shared/lib';
 
 const GITHUB_URL = 'https://github.com';
 
+const ALLOWED_IDS = new Set([
+  'seoxeon09',
+  'yeondon125',
+  'junjuny0227',
+  'h-0y28',
+  'LeeSangHyeok0731',
+  'snowykte0426',
+  'wwwcomcomcomcom',
+  'ZaMan-O',
+  'hongjm0912',
+  'KIEYU5',
+]);
+
 const roleColors: Record<string, string> = {
   Server: 'text-orange-500',
   Frontend: 'text-sky-600',
@@ -57,16 +70,17 @@ interface TeamSection4Props {
 }
 
 const TeamSection4 = ({ data }: TeamSection4Props) => {
+  const filtered = data.filter((m) => ALLOWED_IDS.has(m.githubId));
   const itemWidth = 18.4375;
   const itemSpacing = 1;
 
-  const totalItemWidth = data.length * itemWidth;
-  const totalSpacingWidth = (data.length - 1) * itemSpacing;
+  const totalItemWidth = filtered.length * itemWidth;
+  const totalSpacingWidth = (filtered.length - 1) * itemSpacing;
   const totalWidth = totalItemWidth + totalSpacingWidth;
 
-  const memberListDoubled = [...data, ...data];
+  const memberListDoubled = [...filtered, ...filtered];
 
-  if (data.length === 0) return null;
+  if (filtered.length === 0) return null;
 
   return (
     <div
@@ -90,7 +104,7 @@ const TeamSection4 = ({ data }: TeamSection4Props) => {
           'text-center',
         )}
       >
-        &quot;학과체험 서비스, <br className={cn('block', 'sm:hidden')} />
+        &quot;학과 체험 서비스, <br className={cn('block', 'sm:hidden')} />
         누가 만들었을까요?&quot;
       </h3>
       <div className={cn('flex', 'flex-col', 'relative', 'w-full', 'overflow-hidden', 'gap-6')}>
