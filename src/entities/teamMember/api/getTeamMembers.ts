@@ -43,5 +43,8 @@ export async function getTeamMembers(): Promise<MemberType[]> {
     };
   });
 
-  return members.sort(() => Math.random() - 0.5);
+  return members
+    .map((member) => ({ member, sortKey: Math.random() }))
+    .sort((a, b) => a.sortKey - b.sortKey)
+    .map(({ member }) => member);
 }
