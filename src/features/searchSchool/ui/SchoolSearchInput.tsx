@@ -30,7 +30,7 @@ const SchoolSearchInput = ({ value, onChange, schools, onSelect }: SchoolSearchI
           <div className="max-h-40 overflow-y-auto">
             {schools.map((school) => (
               <button
-                key={`${school.SCHUL_NM}-${school.ORG_RDNMA}`}
+                key={school.SD_SCHUL_CODE}
                 type="button"
                 className="hover:bg-base-fill text-neutral-dark flex w-full items-center rounded-lg py-1.5 pr-2 pl-3 text-left text-sm"
                 onClick={() => onSelect(school)}

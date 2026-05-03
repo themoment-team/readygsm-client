@@ -1,4 +1,5 @@
 export interface SchoolType {
+  SD_SCHUL_CODE: string;
   SCHUL_NM: string;
   ORG_RDNMA: string;
 }
