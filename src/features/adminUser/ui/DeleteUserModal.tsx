@@ -25,15 +25,7 @@ const DeleteUserModal = ({ isOpen, onClose, userId }: DeleteUserModalProps) => {
           <Button variant="outlineDanger" size="sm" onClick={onClose}>
             취소
           </Button>
-          <Button
-            variant="danger"
-            size="sm"
-            disabled={isPending}
-            onClick={() => {
-              handleConfirm();
-              onClose();
-            }}
-          >
+          <Button variant="danger" size="sm" disabled={isPending} onClick={handleConfirm}>
             확인
           </Button>
         </div>
