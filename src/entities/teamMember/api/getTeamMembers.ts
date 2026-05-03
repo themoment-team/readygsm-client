@@ -1,20 +1,6 @@
-import { MemberType } from '../model/types';
+import { MemberType, NotionPage } from '../model/types';
 
 const NOTION_API = 'https://api.notion.com/v1';
-
-interface NotionRichText {
-  plain_text: string;
-}
-
-interface NotionMemberProperties {
-  name: { title: NotionRichText[] };
-  githubId: { rich_text: NotionRichText[] };
-  role: { rich_text: NotionRichText[] };
-}
-
-interface NotionPage {
-  properties: NotionMemberProperties;
-}
 
 export async function getTeamMembers(): Promise<MemberType[]> {
   const DATABASE_ID = process.env.NOTION_MEMBER_DATABASE_ID;
