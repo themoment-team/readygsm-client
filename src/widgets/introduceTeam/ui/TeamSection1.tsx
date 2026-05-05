@@ -10,80 +10,45 @@ const TeamSection1 = () => {
     scrollToElement('#section2');
   };
   return (
-    <div className={cn('relative', 'w-full', 'h-[calc(100vh-4.625rem)]', 'overflow-hidden')}>
+    <div className={cn('relative h-[calc(100vh-4.625rem)] w-full overflow-hidden')}>
       <Image
         src={'/images/themoment.jpg'}
         fill
         alt="더모먼트 팀 배경"
         sizes="100vw"
-        className={cn('object-cover', 'scale-110')}
+        className={cn('scale-110 object-cover')}
         priority
       />
-      <div className={cn('absolute', 'inset-0', 'bg-black/40', 'backdrop-blur-[11.2px]')} />
+      <div className={cn('absolute inset-0 bg-black/40 backdrop-blur-[11.2px]')} />
       <div
         className={cn(
-          'absolute',
-          'inset-0',
-          'w-full',
-          'h-full',
-          'flex',
-          'justify-center',
-          'items-center',
-          'text-center',
+          'absolute inset-0 flex h-full w-full items-center justify-center text-center',
         )}
       >
         <div
           className={cn(
-            'absolute',
-            'top-1/2',
-            'transform',
-            '-translate-y-[calc(50%+8.5rem)]',
-            'flex',
-            'flex-col',
-            'justify-center',
-            'items-center',
+            'absolute top-1/2 flex -translate-y-[calc(50%+8.5rem)] transform flex-col items-center justify-center',
           )}
         >
-          <div
-            className={cn(
-              'flex',
-              'justify-center',
-              'items-center',
-              'w-17',
-              'h-17',
-              'drop-shadow-lg',
-            )}
-          >
+          <div className={cn('flex h-17 w-17 items-center justify-center drop-shadow-lg')}>
             <SmallTheMomentIcon />
           </div>
-          <p className={cn('text-4xl', 'leading-normal', 'font-medium', 'text-white')}>
-            the_moment
-          </p>
+          <p className={cn('text-4xl leading-normal font-medium text-white')}>the_moment</p>
         </div>
 
-        <div className={cn('flex', 'flex-col', 'justify-center', 'items-center', 'gap-5')}>
-          <p className={cn('text-8xl', 'leading-normal', 'font-bold', 'text-white')}>
+        <div className={cn('flex flex-col items-center justify-center gap-5')}>
+          <p className={cn('text-8xl leading-normal font-bold text-white')}>
             순간의 가치를 비춰내다.
           </p>
         </div>
-        <div
-          className={cn(
-            'absolute',
-            'bottom-14',
-            'gap-1',
-            'z-3',
-            'flex',
-            'flex-col',
-            'items-center',
-          )}
-        >
+        <div className={cn('absolute bottom-14 z-3 flex flex-col items-center gap-1')}>
           <p
             onClick={scrollToSection2}
-            className={cn('text-2xl', 'text-white', 'cursor-pointer', 'font-600', 'leading-7')}
+            className={cn('font-600 cursor-pointer text-2xl leading-7 text-white')}
           >
             스크롤 해서 더 알아보기
           </p>
-          <div onClick={scrollToSection2} className={cn('animate-bounce', 'cursor-pointer')}>
+          <div onClick={scrollToSection2} className={cn('animate-bounce cursor-pointer')}>
             <BottomArrow />
           </div>
         </div>

@@ -36,19 +36,7 @@ const MemberCard = ({ name, githubId, avatarUrl, role }: MemberType) => {
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        'flex',
-        'items-center',
-        'w-73.75',
-        'h-28',
-        'rounded-xl',
-        'border',
-        'border-[#B2B2B2]',
-        'bg-white',
-        'p-5',
-        'gap-1',
-        'space-x-4',
-        'shrink-0',
-        'cursor-pointer',
+        'flex h-28 w-73.75 shrink-0 cursor-pointer items-center gap-1 space-x-4 rounded-xl border border-[#B2B2B2] bg-white p-5',
       )}
     >
       <Image
@@ -60,8 +48,8 @@ const MemberCard = ({ name, githubId, avatarUrl, role }: MemberType) => {
         unoptimized
       />
       <div>
-        <p className={cn('text-2xl', 'leading-8', 'font-medium')}>{name}</p>
-        <p className={cn(['text-xl', 'leading-7', 'font-normal', roleColors[role]])}>{role}</p>
+        <p className={cn('text-2xl leading-8 font-medium')}>{name}</p>
+        <p className={cn('text-xl leading-7 font-normal', roleColors[role])}>{role}</p>
       </div>
     </a>
   );
@@ -85,33 +73,14 @@ const TeamSection4 = ({ data }: TeamSection4Props) => {
   if (filtered.length === 0) return null;
 
   return (
-    <div
-      className={cn(
-        'flex',
-        'flex-col',
-        'overflow-hidden',
-        'w-full',
-        'bg-white',
-        'py-60',
-        'items-center',
-        'gap-25',
-      )}
-    >
-      <h3
-        className={cn(
-          'text-[#0F0921]',
-          'text-5xl',
-          'leading-[3.85rem]',
-          'font-bold',
-          'text-center',
-        )}
-      >
-        &quot;학과 체험 서비스, <br className={cn('block', 'sm:hidden')} />
+    <div className={cn('flex w-full flex-col items-center gap-25 overflow-hidden bg-white py-60')}>
+      <h3 className={cn('text-center text-5xl leading-[3.85rem] font-bold text-[#0F0921]')}>
+        &quot;학과 체험 서비스, <br className={cn('block sm:hidden')} />
         누가 만들었을까요?&quot;
       </h3>
-      <div className={cn('flex', 'flex-col', 'relative', 'w-full', 'overflow-hidden', 'gap-6')}>
+      <div className={cn('relative flex w-full flex-col gap-6 overflow-hidden')}>
         <div
-          className={cn('flex', 'space-x-4', 'whitespace-nowrap')}
+          className={cn('flex space-x-4 whitespace-nowrap')}
           style={
             {
               width: `${totalWidth * 2}rem`,
@@ -125,7 +94,7 @@ const TeamSection4 = ({ data }: TeamSection4Props) => {
           ))}
         </div>
         <div
-          className={cn('flex', 'space-x-4', 'whitespace-nowrap')}
+          className={cn('flex space-x-4 whitespace-nowrap')}
           style={
             {
               width: `${totalWidth * 2}rem`,
