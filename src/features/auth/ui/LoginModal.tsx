@@ -1,5 +1,4 @@
-import GoogleIcon from '@/shared/assets/GoogleIcon';
-import KakaoIcon from '@/shared/assets/KakaoIcon';
+import { GoogleIcon, KakaoIcon } from '@/shared/assets';
 import { Modal } from '@/shared/ui';
 
 import { useLogin } from '../model/useLogin';
