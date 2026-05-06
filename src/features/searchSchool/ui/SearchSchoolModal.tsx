@@ -18,8 +18,15 @@ const SearchSchoolModal = ({ isOpen, onClose, setValue }: SearchSchoolModalProps
     setValue?.('schoolAddress', school.ORG_RDNMA, { shouldValidate: true, shouldDirty: true });
   };
 
-  const { keyword, displaySchools, handleKeywordChange, handleSchoolSelect, isSelected } =
-    useSearchSchool(handleSelectFormValues);
+  const {
+    keyword,
+    displaySchools,
+    focusedIndex,
+    handleKeywordChange,
+    handleKeyDown,
+    handleSchoolSelect,
+    isSelected,
+  } = useSearchSchool(handleSelectFormValues);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} className="w-120 p-4">
@@ -28,8 +35,10 @@ const SearchSchoolModal = ({ isOpen, onClose, setValue }: SearchSchoolModalProps
         <SchoolSearchInput
           value={keyword}
           onChange={handleKeywordChange}
+          onKeyDown={handleKeyDown}
           schools={displaySchools}
           onSelect={handleSchoolSelect}
+          focusedIndex={focusedIndex}
         />
         <div className="flex justify-end gap-2">
           <Button variant="outlinePrimary" size="sm" onClick={onClose}>

@@ -10,6 +10,7 @@ export const useSearchSchool = (onSchoolSelect?: (school: SchoolType) => void) =
   const [keyword, setKeyword] = useState('');
   const [schools, setSchools] = useState<SchoolType[]>([]);
   const [isSelected, setIsSelected] = useState(false);
+  const [focusedIndex, setFocusedIndex] = useState(-1);
   const skipFetchRef = useRef(false);
 
   const debouncedKeyword = useDebounce(keyword, 400);
@@ -39,6 +40,7 @@ export const useSearchSchool = (onSchoolSelect?: (school: SchoolType) => void) =
   const handleKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value);
     setIsSelected(false);
+    setFocusedIndex(-1);
   };
 
   const handleSchoolSelect = (school: SchoolType) => {
@@ -46,11 +48,44 @@ export const useSearchSchool = (onSchoolSelect?: (school: SchoolType) => void) =
     setKeyword(school.SCHUL_NM);
     setSchools([]);
     setIsSelected(true);
+    setFocusedIndex(-1);
     onSchoolSelect?.(school);
   };
 
-  // 키워드가 없으면 이전 결과를 표시하지 않음
   const displaySchools = debouncedKeyword.trim() ? schools : [];
 
-  return { keyword, displaySchools, handleKeywordChange, handleSchoolSelect, isSelected };
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (displaySchools.length === 0) return;
+
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault();
+        setFocusedIndex((prev) => Math.min(prev + 1, displaySchools.length - 1));
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        setFocusedIndex((prev) => Math.max(prev - 1, 0));
+        break;
+      case 'Enter':
+        if (focusedIndex >= 0) {
+          e.preventDefault();
+          handleSchoolSelect(displaySchools[focusedIndex]);
+        }
+        break;
+      case 'Escape':
+        setSchools([]);
+        setFocusedIndex(-1);
+        break;
+    }
+  };
+
+  return {
+    keyword,
+    displaySchools,
+    focusedIndex,
+    handleKeywordChange,
+    handleKeyDown,
+    handleSchoolSelect,
+    isSelected,
+  };
 };
