@@ -6,5 +6,3 @@ export { default as Logo } from './Logo';
 export { default as SearchIcon } from './SearchIcon';
 export { default as SmallTheMomentIcon } from './SmallTheMomentIcon';
 export { default as TheMomentIcon } from './TheMomentIcon';
-export { default as GoogleIcon } from './GoogleIcon';
-export { default as SearchIcon } from './SearchIcon';
