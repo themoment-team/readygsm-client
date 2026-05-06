@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode } from 'react';
+import { ReactNode, useSyncExternalStore } from 'react';
 
 import { createPortal } from 'react-dom';
 
@@ -14,7 +14,13 @@ interface ModalProps {
 }
 
 const Modal = ({ isOpen, onClose, children, className }: ModalProps) => {
-  if (!isOpen) return null;
+  const isMounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
+
+  if (!isOpen || !isMounted) return null;
 
   return createPortal(
     <div
