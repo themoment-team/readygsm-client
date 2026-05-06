@@ -23,11 +23,16 @@ export const useSearchSchool = (onSchoolSelect?: (school: SchoolType) => void) =
     if (!debouncedKeyword.trim()) return;
 
     void (async () => {
-      const res = await fetch(
-        `https://open.neis.go.kr/hub/schoolInfo?KEY=${process.env.NEXT_PUBLIC_NEIS_API_KEY}&Type=json&SCHUL_NM=${encodeURIComponent(debouncedKeyword)}&SCHUL_KND_SC_NM=${encodeURIComponent('중학교')}`,
-      );
-      const data = await res.json();
-      setSchools(data?.schoolInfo?.[1]?.row ?? []);
+      try {
+        const res = await fetch(
+          `https://open.neis.go.kr/hub/schoolInfo?KEY=${process.env.NEXT_PUBLIC_NEIS_API_KEY}&Type=json&SCHUL_NM=${encodeURIComponent(debouncedKeyword)}&SCHUL_KND_SC_NM=${encodeURIComponent('중학교')}`,
+        );
+        if (!res.ok) return;
+        const data = await res.json();
+        setSchools(data?.schoolInfo?.[1]?.row ?? []);
+      } catch {
+        setSchools([]);
+      }
     })();
   }, [debouncedKeyword]);
 
