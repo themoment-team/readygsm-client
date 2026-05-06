@@ -8,7 +8,7 @@ import { cn } from '@/shared/lib';
 
 interface ModalProps {
   isOpen: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   children: ReactNode;
   className?: string;
 }

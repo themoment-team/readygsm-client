@@ -15,7 +15,7 @@ const DeleteUserModal = ({ isOpen, onClose, userId }: DeleteUserModalProps) => {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} className="w-120 px-6 py-5">
+    <Modal isOpen={isOpen} onClose={isPending ? undefined : onClose} className="w-120 px-6 py-5">
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-2">
           <h2 className="text-neutral-dark text-2xl font-semibold">신청자 정보 삭제</h2>
