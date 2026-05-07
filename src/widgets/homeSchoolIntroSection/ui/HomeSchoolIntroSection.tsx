@@ -8,7 +8,7 @@ import {
   IOSIcon,
   LinkIcon,
   MergeIcon,
-} from '@/shared/assets/techIcon';
+} from '@/shared/assets/';
 
 const HomeSchoolIntroSection = () => {
   return (

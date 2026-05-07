@@ -2,8 +2,7 @@
 
 import Image from 'next/image';
 
-import { BottomArrow } from '@/shared/assets';
-import GSMTitle from '@/shared/assets/GSMTitle';
+import { BottomArrow, GSMTitle } from '@/shared/assets';
 import { scrollToElement } from '@/shared/lib';
 
 const HomeMeisterSection = () => {
