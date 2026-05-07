@@ -1,9 +1,11 @@
 import Link from 'next/link';
 
+import { AnimateOnView } from '@/shared/ui';
+
 const HomeSchoolLastSection = () => {
   return (
     <div className="text-neutral-dark flex w-7xl flex-col justify-center gap-30 py-90 text-[2.25rem] leading-[2.7rem] font-bold">
-      <div>
+      <AnimateOnView>
         <div>아직 잘 모르겠다면...</div>
         <div>
           <span className="bg-brand-primary px-1 leading-[1.2] text-white">
@@ -11,8 +13,8 @@ const HomeSchoolLastSection = () => {
           </span>
           에서 학과 체험은 어떨까요?
         </div>
-      </div>
-      <div className="flex flex-row gap-9">
+      </AnimateOnView>
+      <AnimateOnView className="flex flex-row gap-9">
         <div>
           내가 정말&nbsp;
           <span className="bg-brand-primary px-1 leading-[1.2] text-white">개발자</span>
@@ -21,7 +23,7 @@ const HomeSchoolLastSection = () => {
         <Link href="/programs" className="text-brand-primary cursor-pointer underline">
           학과 체험을 통해 확인해보세요!
         </Link>
-      </div>
+      </AnimateOnView>
     </div>
   );
 };
