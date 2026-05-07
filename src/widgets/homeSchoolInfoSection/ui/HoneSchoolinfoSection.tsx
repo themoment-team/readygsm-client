@@ -4,7 +4,7 @@ import { schoolInfoSections } from '../model/schoolInfoData';
 
 const HomeSchoolInfoSection = () => {
   return (
-    <div className="flex flex-col items-center pt-50">
+    <div className="flex flex-col items-center pt-50" id="homeSection2">
       <div className="flex w-7xl flex-col gap-20">
         <div className="text-brand-primary text-4xl leading-[120%] font-bold">Curriculum</div>
         <div className="flex w-full flex-col gap-20">
