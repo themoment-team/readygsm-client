@@ -1,5 +1,6 @@
 import Image from 'next/image';
 
+import { cn } from '@/shared/lib';
 import { AnimateOnView } from '@/shared/ui';
 
 const awardGroups = [
@@ -27,8 +28,8 @@ const awardGroups = [
 
 const HomeAwardSection = () => {
   return (
-    <div className="relative flex w-full flex-col items-center pt-90">
-      <div className="absolute top-90 right-0 -z-10 flex flex-col gap-12">
+    <div className={cn('relative flex w-full flex-col items-center pt-90')}>
+      <div className={cn('absolute top-90 right-0 -z-10 flex flex-col gap-12')}>
         {awardGroups.map((group) => (
           <AnimateOnView key={group.image}>
             <Image
@@ -36,26 +37,26 @@ const HomeAwardSection = () => {
               alt={group.title}
               width={459}
               height={197}
-              className="rounded-lg object-cover"
+              className={cn('rounded-lg object-cover')}
             />
           </AnimateOnView>
         ))}
       </div>
-      <div className="flex w-7xl items-start justify-between">
-        <h2 className="text-neutral-dark shrink-0 text-4xl leading-normal font-bold">
+      <div className={cn('flex w-7xl items-start justify-between')}>
+        <h2 className={cn('text-neutral-dark shrink-0 text-4xl leading-normal font-bold')}>
           <AnimateOnView>각종 대회 수상 경력</AnimateOnView>
         </h2>
-        <div className="flex w-151 flex-col gap-12">
+        <div className={cn('flex w-151 flex-col gap-12')}>
           {awardGroups.map((group) => (
-            <div key={group.title} className="flex flex-col gap-2.5">
-              <h3 className="text-brand-primary text-4xl leading-[1.2] font-bold">
+            <div key={group.title} className={cn('flex flex-col gap-2.5')}>
+              <h3 className={cn('text-brand-primary text-4xl leading-[1.2] font-bold')}>
                 <AnimateOnView>{group.title}</AnimateOnView>
               </h3>
-              <ul className="list-disc pl-9">
+              <ul className={cn('list-disc pl-9')}>
                 {group.items.map((item) => (
                   <li
                     key={item}
-                    className="text-secondary-slate text-2xl leading-normal font-medium"
+                    className={cn('text-secondary-slate text-2xl leading-normal font-medium')}
                   >
                     <AnimateOnView>{item}</AnimateOnView>
                   </li>

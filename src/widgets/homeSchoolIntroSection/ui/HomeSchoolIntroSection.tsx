@@ -9,31 +9,36 @@ import {
   LinkIcon,
   MergeIcon,
 } from '@/shared/assets/';
+import { cn } from '@/shared/lib';
 import { AnimateOnView } from '@/shared/ui';
 
 const HomeSchoolIntroSection = () => {
   return (
-    <div className="flex w-7xl flex-col justify-center pt-[23.06rem]">
-      <section className="flex flex-col items-start gap-9">
+    <div className={cn('flex w-7xl flex-col justify-center pt-[23.06rem]')}>
+      <section className={cn('flex flex-col items-start gap-9')}>
         <AnimateOnView>
-          <p className="text-neutral-dark text-[36px] leading-normal font-bold">
+          <p className={cn('text-neutral-dark text-[36px] leading-normal font-bold')}>
             책 속 이론이 아닌
             <br />
             현장의 실전을 배우는 진짜 소프트웨어 교육
           </p>
         </AnimateOnView>
         <AnimateOnView>
-          <div className="flex items-center gap-0.5">
-            <span className="bg-brand-primary px-1 text-[28px] leading-[1.2] font-semibold text-white">
+          <div className={cn('flex items-center gap-0.5')}>
+            <span
+              className={cn(
+                'bg-brand-primary px-1 text-[28px] leading-[1.2] font-semibold text-white',
+              )}
+            >
               광주소프트웨어마이스터고
             </span>
-            <span className="text-neutral-dark text-[28px] leading-[1.2] font-semibold">
+            <span className={cn('text-neutral-dark text-[28px] leading-[1.2] font-semibold')}>
               가 여러분의 코드를 완성합니다
             </span>
           </div>
         </AnimateOnView>
         <AnimateOnView>
-          <div className="text-brand-primary flex flex-wrap items-center gap-[21px_36px]">
+          <div className={cn('text-brand-primary flex flex-wrap items-center gap-[21px_36px]')}>
             <GitIcon />
             <MergeIcon />
             <CodeIcon />

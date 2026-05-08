@@ -3,7 +3,7 @@
 import Image from 'next/image';
 
 import { BottomArrow, GSMTitle } from '@/shared/assets';
-import { scrollToElement } from '@/shared/lib';
+import { cn, scrollToElement } from '@/shared/lib';
 import { AnimateOnView } from '@/shared/ui';
 
 const HomeMeisterSection = () => {
@@ -11,17 +11,21 @@ const HomeMeisterSection = () => {
     scrollToElement('#homeSection2');
   };
   return (
-    <section className="bg-neutral-dark relative flex h-[calc(100vh-6.25rem)] w-full flex-col items-center overflow-hidden pt-16">
-      <div className="absolute inset-0">
+    <section
+      className={cn(
+        'bg-neutral-dark relative flex h-[calc(100vh-6.25rem)] w-full flex-col items-center overflow-hidden pt-16',
+      )}
+    >
+      <div className={cn('absolute inset-0')}>
         <Image
           src="/images/themoment.jpg"
           alt=""
           fill
           priority
-          className="object-cover object-center"
+          className={cn('object-cover object-center')}
         />
         <div
-          className="absolute inset-0 backdrop-blur-[6.35px]"
+          className={cn('absolute inset-0 backdrop-blur-[6.35px]')}
           style={{
             backgroundImage: `
               linear-gradient(90deg, #292b2f 0%, transparent 17.788%, transparent 81.25%, #292b2f 100%),
@@ -30,17 +34,18 @@ const HomeMeisterSection = () => {
           }}
         />
       </div>
-      <div className="relative z-10 flex w-7xl flex-1 flex-col justify-between text-white">
+      <div className={cn('relative z-10 flex w-7xl flex-1 flex-col justify-between text-white')}>
         <AnimateOnView>
           <GSMTitle />
         </AnimateOnView>
-        <div className="flex flex-col gap-[7.12rem] text-xl leading-[1.4]">
+        <div className={cn('flex flex-col gap-[7.12rem] text-xl leading-[1.4]')}>
           <AnimateOnView className="flex flex-col gap-4">
             <AnimateOnView delay={200}>
-              <p className="text-5xl leading-normal font-bold">
+              <p className={cn('text-5xl leading-normal font-bold')}>
                 <p>단순한 개발자를 넘어</p>
                 <p>
-                  세상을 바꾸는 <span className="text-brand-primary">마이스터(Meister)</span>의 길
+                  세상을 바꾸는 <span className={cn('text-brand-primary')}>마이스터(Meister)</span>
+                  의 길
                 </p>
               </p>
             </AnimateOnView>
@@ -49,10 +54,10 @@ const HomeMeisterSection = () => {
           <AnimateOnView>
             <button
               onClick={scrollToSection2}
-              className="relative z-10 mb-12 flex cursor-pointer items-center gap-[0.88rem]"
+              className={cn('relative z-10 mb-12 flex cursor-pointer items-center gap-[0.88rem]')}
             >
-              <p className="text-center">스크롤 해서 더 알아보기</p>
-              <div className="animate-bounce">
+              <p className={cn('text-center')}>스크롤 해서 더 알아보기</p>
+              <div className={cn('animate-bounce')}>
                 <BottomArrow />
               </div>
             </button>
