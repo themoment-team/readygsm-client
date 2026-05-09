@@ -2,7 +2,7 @@ import { InfoCard } from '@/entities/schoolInfo';
 import { cn } from '@/shared/lib';
 import { AnimateOnView } from '@/shared/ui';
 
-import { schoolInfoSections } from '../../homeSchoolInfoSection/model/schoolInfoData';
+import { schoolInfoSections } from '../../homeSection/model/schoolInfoData';
 
 const HomeSection2 = () => {
   return (
