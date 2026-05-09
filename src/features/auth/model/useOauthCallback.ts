@@ -4,13 +4,15 @@ import { useEffect } from 'react';
 
 import { useRouter, useSearchParams } from 'next/navigation';
 
-import { type OAuthProviderType, usePostAuth } from '@/entities/auth';
+import { useQueryClient } from '@tanstack/react-query';
 
-import { getRedirectUri } from './oauthUrl';
+import { getRedirectUri, type OAuthProviderType, usePostAuth } from '@/entities/auth';
+import { userQueryKeys } from '@/entities/user';
 
 export const useOauthCallback = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const queryClient = useQueryClient();
   const { mutate: postAuth } = usePostAuth();
 
   useEffect(() => {
@@ -27,7 +29,8 @@ export const useOauthCallback = () => {
       {
         onSuccess: () => {
           sessionStorage.removeItem('oauth_provider');
-          // TODO: GET /me로 role 확인 후 admin이면 router.replace('/admin')으로 분기
+          queryClient.invalidateQueries({ queryKey: userQueryKeys.getMyInfo() });
+          // TODO: useGetMyInfo로 role 확인 후 ADMIN이면 router.replace('/admin')으로 분기
           router.replace('/');
         },
         onError: () => {
