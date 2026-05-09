@@ -1,6 +1,6 @@
 'use client';
 
-import { useOauthCallback } from '@/features/oauthLogin';
+import { useOauthCallback } from '@/features/auth';
 
 const OauthCallbackPage = () => {
   useOauthCallback();
