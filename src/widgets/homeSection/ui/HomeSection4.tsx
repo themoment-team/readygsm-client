@@ -26,7 +26,7 @@ const awardGroups = [
   },
 ];
 
-const HomeAwardSection = () => {
+const HomeSection4 = () => {
   return (
     <div className={cn('relative flex w-full flex-col items-center pt-90')}>
       <div className={cn('absolute top-90 right-0 -z-10 flex flex-col gap-12')}>
@@ -70,4 +70,4 @@ const HomeAwardSection = () => {
   );
 };
 
-export default HomeAwardSection;
+export default HomeSection4;

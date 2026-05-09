@@ -12,7 +12,7 @@ import {
 import { cn } from '@/shared/lib';
 import { AnimateOnView } from '@/shared/ui';
 
-const HomeSchoolIntroSection = () => {
+const HomeSection3 = () => {
   return (
     <div className={cn('flex w-7xl flex-col justify-center pt-[23.06rem]')}>
       <section className={cn('flex flex-col items-start gap-9')}>
@@ -55,4 +55,4 @@ const HomeSchoolIntroSection = () => {
   );
 };
 
-export default HomeSchoolIntroSection;
+export default HomeSection3;

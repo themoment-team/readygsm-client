@@ -2,9 +2,9 @@ import { InfoCard } from '@/entities/schoolInfo';
 import { cn } from '@/shared/lib';
 import { AnimateOnView } from '@/shared/ui';
 
-import { schoolInfoSections } from '../model/schoolInfoData';
+import { schoolInfoSections } from '../../homeSchoolInfoSection/model/schoolInfoData';
 
-const HomeSchoolInfoSection = () => {
+const HomeSection2 = () => {
   return (
     <div className={cn('flex flex-col items-center pt-50')} id="homeSection2">
       <div className={cn('flex w-7xl flex-col gap-20')}>
@@ -34,4 +34,4 @@ const HomeSchoolInfoSection = () => {
   );
 };
 
-export default HomeSchoolInfoSection;
+export default HomeSection2;

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { cn } from '@/shared/lib';
 import { AnimateOnView } from '@/shared/ui';
 
-const HomeSchoolLastSection = () => {
+const HomeSection5 = () => {
   return (
     <div
       className={cn(
@@ -33,4 +33,4 @@ const HomeSchoolLastSection = () => {
   );
 };
 
-export default HomeSchoolLastSection;
+export default HomeSection5;

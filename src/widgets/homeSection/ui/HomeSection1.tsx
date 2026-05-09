@@ -6,7 +6,7 @@ import { BottomArrow, GSMTitle } from '@/shared/assets';
 import { cn, scrollToElement } from '@/shared/lib';
 import { AnimateOnView } from '@/shared/ui';
 
-const HomeMeisterSection = () => {
+const HomeSection1 = () => {
   const scrollToSection2 = () => {
     scrollToElement('#homeSection2');
   };
@@ -68,4 +68,4 @@ const HomeMeisterSection = () => {
   );
 };
 
-export default HomeMeisterSection;
+export default HomeSection1;
