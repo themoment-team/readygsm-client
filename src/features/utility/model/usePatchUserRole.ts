@@ -1,8 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 
+import { UserRoleType } from '@/entities/user';
 import { ApiResponseType, patch, utilityUrl } from '@/shared/api';
-
-type UserRoleType = 'UNAUTHENTICATED' | 'USER' | 'ADMIN' | 'ROOT';
 
 interface PatchUserRoleParamsType {
   email: string;
