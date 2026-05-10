@@ -1,4 +1,4 @@
-export type UserRoleType = 'ADMIN' | 'STUDENT';
+export type UserRoleType = 'UNAUTHENTICATED' | 'USER' | 'ADMIN' | 'ROOT';
 
 export interface UserType {
   id: number;
