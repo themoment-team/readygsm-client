@@ -5,8 +5,10 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
+import { useQueryClient } from '@tanstack/react-query';
+
 import { usePostSignOut } from '@/entities/auth';
-import { useGetMyInfo } from '@/entities/user';
+import { useGetMyInfo, userQueryKeys } from '@/entities/user';
 import { LoginModal } from '@/features/auth';
 import { Logo } from '@/shared/assets';
 import { cn } from '@/shared/lib';
@@ -19,16 +21,20 @@ const Header = () => {
   const router = useRouter();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
+  const queryClient = useQueryClient();
   const { data: user } = useGetMyInfo();
   const { mutate: signOut } = usePostSignOut();
 
   const isAdmin = pathname.startsWith('/admin');
-  const isAdminRole = user?.role === 'ADMIN';
+  const isAdminRole = user?.role === 'ADMIN' || user?.role === 'ROOT';
   const links = isAdmin ? NAV_LINKS.admin : NAV_LINKS.client;
 
   const handleSignOut = () => {
     signOut(undefined, {
-      onSuccess: () => router.replace('/'),
+      onSuccess: () => {
+        queryClient.removeQueries({ queryKey: userQueryKeys.getMyInfo() });
+        router.replace('/');
+      },
     });
   };
 
