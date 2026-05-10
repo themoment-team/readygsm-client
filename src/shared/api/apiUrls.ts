@@ -6,3 +6,7 @@ export const authUrl = {
 export const userUrl = {
   getMyInfo: () => '/v1/user/me',
 } as const;
+
+export const utilityUrl = {
+  patchUserRole: () => '/api/v1/utility/user/role',
+} as const;
