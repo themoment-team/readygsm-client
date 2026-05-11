@@ -67,13 +67,13 @@ const HomeSection1 = ({ start, end }: HomeSection1Props) => {
         <div className={cn('flex flex-col gap-[7.12rem] text-xl leading-[1.4]')}>
           <AnimateOnView className="flex flex-col gap-4">
             <AnimateOnView delay={200}>
-              <p className={cn('text-5xl leading-normal font-bold')}>
+              <div className={cn('text-5xl leading-normal font-bold')}>
                 <p>단순한 개발자를 넘어</p>
                 <p>
                   세상을 바꾸는 <span className={cn('text-brand-primary')}>마이스터(Meister)</span>
                   의 길
                 </p>
-              </p>
+              </div>
             </AnimateOnView>
             <p>{activityPeriod}</p>
           </AnimateOnView>
