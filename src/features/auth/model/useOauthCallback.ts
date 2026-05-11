@@ -50,5 +50,5 @@ export const useOauthCallback = () => {
         },
       },
     );
-  }, []);
+  }, [postAuth, queryClient, router, searchParams]);
 };
