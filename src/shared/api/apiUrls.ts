@@ -8,5 +8,5 @@ export const userUrl = {
 } as const;
 
 export const utilityUrl = {
-  patchUserRole: () => '/api/v1/utility/user/role',
+  patchUserRole: () => '/v1/utility/user/role',
 } as const;
