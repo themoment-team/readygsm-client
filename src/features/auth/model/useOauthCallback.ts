@@ -7,7 +7,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
 
 import { getRedirectUri, type OAuthProviderType, usePostAuth } from '@/entities/auth';
-import { userQueryKeys, type UserType } from '@/entities/user';
+import { checkIsAdmin, userQueryKeys, type UserType } from '@/entities/user';
 import { type ApiResponseType, get, userUrl } from '@/shared/api';
 
 export const useOauthCallback = () => {
@@ -39,8 +39,7 @@ export const useOauthCallback = () => {
               queryKey: userQueryKeys.getMyInfo(),
               queryFn: () => get<ApiResponseType<UserType>>(userUrl.getMyInfo()),
             });
-            const isAdminRole = response.data.role === 'ADMIN' || response.data.role === 'ROOT';
-            router.replace(isAdminRole ? '/admin' : '/');
+            router.replace(checkIsAdmin(response.data.role) ? '/admin' : '/');
           } catch {
             router.replace('/');
           }

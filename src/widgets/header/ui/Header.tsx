@@ -8,7 +8,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
 
 import { usePostSignOut } from '@/entities/auth';
-import { useGetMyInfo, userQueryKeys } from '@/entities/user';
+import { checkIsAdmin, useGetMyInfo, userQueryKeys } from '@/entities/user';
 import { LoginModal } from '@/features/auth';
 import { Logo } from '@/shared/assets';
 import { cn } from '@/shared/lib';
@@ -26,7 +26,7 @@ const Header = () => {
   const { mutate: signOut } = usePostSignOut();
 
   const isAdmin = pathname.startsWith('/admin');
-  const isAdminRole = user?.role === 'ADMIN' || user?.role === 'ROOT';
+  const isAdminRole = checkIsAdmin(user?.role);
   const links = isAdmin ? NAV_LINKS.admin : NAV_LINKS.client;
 
   const handleSignOut = () => {
