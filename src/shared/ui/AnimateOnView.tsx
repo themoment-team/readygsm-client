@@ -1,3 +1,5 @@
+'use client';
+
 import { ReactNode } from 'react';
 
 import useInView from '@/shared/hooks/useInView';

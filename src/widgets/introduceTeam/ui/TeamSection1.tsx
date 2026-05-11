@@ -19,7 +19,7 @@ const TeamSection1 = () => {
         className={cn('scale-110 object-cover')}
         priority
       />
-      <div className={cn('absolute inset-0 bg-black/40 backdrop-blur-[11.2px]')} />
+      <div className={cn('absolute inset-0 bg-black/40 backdrop-blur-[0.7rem]')} />
       <div
         className={cn(
           'absolute inset-0 flex h-full w-full items-center justify-center text-center',

@@ -6,7 +6,36 @@ import { BottomArrow, GSMTitle } from '@/shared/assets';
 import { cn, scrollToElement } from '@/shared/lib';
 import { AnimateOnView } from '@/shared/ui';
 
-const HomeSection1 = () => {
+const KO_DAYS = ['일', '월', '화', '수', '목', '금', '토'] as const;
+
+const formatKoreanPeriod = (start: string, end: string): string => {
+  const s = new Date(start);
+  const e = new Date(end);
+
+  const formatDate = (d: Date) =>
+    `${d.getFullYear()}. ${d.getMonth() + 1}. ${d.getDate()} (${KO_DAYS[d.getDay()]})`;
+
+  const formatTime = (d: Date) => {
+    const h = d.getHours();
+    const period = h < 12 ? '오전' : '오후';
+    const hour = h % 12 === 0 ? 12 : h % 12;
+    return `${period} ${hour}시`;
+  };
+
+  return `학과 체험 접수 기간 : ${formatDate(s)} ~ ${formatDate(e)}, ${formatTime(s)} ~ ${formatTime(e)}`;
+};
+
+interface HomeSection1Props {
+  start?: string;
+  end?: string;
+}
+
+const HomeSection1 = ({ start, end }: HomeSection1Props) => {
+  const activityPeriod =
+    start && end
+      ? formatKoreanPeriod(start, end)
+      : '학과 체험 접수 기간 : 접수 기간 정보가 없습니다.';
+
   const scrollToSection2 = () => {
     scrollToElement('#homeSection2');
   };
@@ -49,7 +78,7 @@ const HomeSection1 = () => {
                 </p>
               </p>
             </AnimateOnView>
-            <p>학과 체험 접수 기간 : 2024. 7. 14 (화) ~ 2024. 7. 28 (화), 오전 9시 ~ 오후 4시</p>
+            <p>{activityPeriod}</p>
           </AnimateOnView>
           <AnimateOnView>
             <button
