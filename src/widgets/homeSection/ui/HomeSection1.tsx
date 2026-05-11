@@ -12,17 +12,14 @@ const formatKoreanPeriod = (start: string, end: string): string => {
   const s = new Date(start);
   const e = new Date(end);
 
-  const formatDate = (d: Date) =>
-    `${d.getFullYear()}. ${d.getMonth() + 1}. ${d.getDate()} (${KO_DAYS[d.getDay()]})`;
-
-  const formatTime = (d: Date) => {
+  const formatDateTime = (d: Date) => {
     const h = d.getHours();
     const period = h < 12 ? '오전' : '오후';
     const hour = h % 12 === 0 ? 12 : h % 12;
-    return `${period} ${hour}시`;
+    return `${d.getFullYear()}. ${d.getMonth() + 1}. ${d.getDate()}. (${KO_DAYS[d.getDay()]}) ${period} ${hour}시`;
   };
 
-  return `학과 체험 접수 기간 : ${formatDate(s)} ~ ${formatDate(e)}, ${formatTime(s)} ~ ${formatTime(e)}`;
+  return `학과 체험 접수 기간 : ${formatDateTime(s)} ~ ${formatDateTime(e)}`;
 };
 
 interface HomeSection1Props {
