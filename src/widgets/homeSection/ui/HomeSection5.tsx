@@ -10,7 +10,7 @@ const HomeSection5 = () => {
         'text-neutral-dark flex w-7xl flex-col justify-center gap-30 py-90 text-[2.25rem] leading-[2.7rem] font-bold',
       )}
     >
-      <AnimateOnView>
+      <AnimateOnView className={cn('flex flex-col gap-9')}>
         <div>아직 잘 모르겠다면...</div>
         <div>
           <span className={cn('bg-brand-primary px-1 leading-[1.2] text-white')}>
@@ -22,8 +22,8 @@ const HomeSection5 = () => {
       <AnimateOnView className="flex flex-row gap-9">
         <div>
           내가 정말&nbsp;
-          <span className={cn('bg-brand-primary px-1 leading-[1.2] text-white')}>개발자</span>
-          &nbsp;가 적성일까?
+          <span className={cn('bg-brand-primary px-1 leading-[1.2] text-white')}>개발자</span>가
+          적성일까?
         </div>
         <Link href="/programs" className={cn('text-brand-primary cursor-pointer underline')}>
           학과 체험을 통해 확인해보세요!
