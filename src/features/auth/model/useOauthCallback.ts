@@ -34,14 +34,16 @@ export const useOauthCallback = () => {
       {
         onSuccess: async () => {
           sessionStorage.removeItem('oauth_provider');
-
-          const response = await queryClient.fetchQuery({
-            queryKey: userQueryKeys.getMyInfo(),
-            queryFn: () => get<ApiResponseType<UserType>>(userUrl.getMyInfo()),
-          });
-
-          const isAdminRole = response.data.role === 'ADMIN' || response.data.role === 'ROOT';
-          router.replace(isAdminRole ? '/admin' : '/');
+          try {
+            const response = await queryClient.fetchQuery({
+              queryKey: userQueryKeys.getMyInfo(),
+              queryFn: () => get<ApiResponseType<UserType>>(userUrl.getMyInfo()),
+            });
+            const isAdminRole = response.data.role === 'ADMIN' || response.data.role === 'ROOT';
+            router.replace(isAdminRole ? '/admin' : '/');
+          } catch {
+            router.replace('/');
+          }
         },
         onError: () => {
           sessionStorage.removeItem('oauth_provider');
