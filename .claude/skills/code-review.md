@@ -1,12 +1,7 @@
-# /code-review
+# code-review
 
 현재 변경된 파일을 FSD 컨벤션과 코드 품질 기준으로 리뷰합니다.
-
-## 사용법
-
-```
-/code-review
-```
+커밋 또는 PR 생성 전에 자동으로 실행하세요.
 
 ## 검토 순서
 
@@ -64,7 +59,7 @@
 
 ### 개선 필요 ⚠️
 
-**src/features/auth/ui/LoginForm/index.tsx**
+**src/features/auth/ui/LoginForm.tsx**
 - [FSD] entities를 import하는 건 OK지만, 같은 features 레이어의 다른 슬라이스를 import하고 있음 (라인 5)
   → 수정: shared로 옮기거나 props로 전달
 

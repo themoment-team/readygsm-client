@@ -1,6 +1,7 @@
-# /fsd-check
+# fsd-check
 
 현재 프로젝트의 FSD(Feature-Sliced Design) import 규칙 위반을 검사합니다.
+코드 작성·수정·커밋 전에 자동으로 실행하세요.
 
 ## FSD 레이어 import 규칙
 
@@ -37,7 +38,7 @@ app → views → widgets → features → entities → shared
 위반이 있는 경우:
 
 ```
-[FSD 위반] src/entities/program/ui/ProgramCard/index.tsx
+[FSD 위반] src/entities/program/ui/ProgramCard.tsx
   - import '@/features/auth' — entities는 features를 import할 수 없음
   수정 방법: props나 composition으로 의존성을 역전시키세요.
 ```
