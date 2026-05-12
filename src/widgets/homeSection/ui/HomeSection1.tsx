@@ -60,11 +60,15 @@ const HomeSection1 = ({ start, end }: HomeSection1Props) => {
           }}
         />
       </div>
-      <div className={cn('relative z-10 flex w-7xl flex-1 flex-col justify-between text-white')}>
+      <div
+        className={cn(
+          'relative z-10 flex w-232 flex-1 flex-col gap-[4.94rem] text-white xl:w-7xl xl:justify-between xl:gap-0',
+        )}
+      >
         <AnimateOnView>
           <GSMTitle />
         </AnimateOnView>
-        <div className={cn('flex flex-col gap-[7.12rem] text-xl leading-[1.4]')}>
+        <div className={cn('flex flex-col gap-[4.94rem] text-xl leading-[1.4] xl:gap-[7.12rem]')}>
           <AnimateOnView className="flex flex-col gap-4">
             <AnimateOnView delay={200}>
               <div className={cn('text-5xl leading-normal font-bold')}>

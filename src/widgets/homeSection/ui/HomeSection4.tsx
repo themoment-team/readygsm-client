@@ -28,8 +28,8 @@ const awardGroups = [
 
 const HomeSection4 = () => {
   return (
-    <div className={cn('relative flex w-full flex-col items-center pt-90')}>
-      <div className={cn('absolute top-90 right-0 -z-10 flex flex-col gap-12')}>
+    <div className={cn('relative flex w-full flex-col items-center pt-40 xl:pt-90')}>
+      <div className={cn('absolute top-62.5 right-0 -z-10 flex flex-col gap-12 xl:top-90')}>
         {awardGroups.map((group) => (
           <AnimateOnView key={group.image}>
             <Image
@@ -42,7 +42,11 @@ const HomeSection4 = () => {
           </AnimateOnView>
         ))}
       </div>
-      <div className={cn('flex w-7xl items-start justify-between')}>
+      <div
+        className={cn(
+          'fhd:gap-[22.38rem] fhd:flex-start flex w-232 flex-col items-start gap-9 xl:w-7xl xl:flex-row xl:gap-[9.12rem]',
+        )}
+      >
         <h2 className={cn('text-neutral-dark shrink-0 text-4xl leading-normal font-bold')}>
           <AnimateOnView>각종 대회 수상 경력</AnimateOnView>
         </h2>

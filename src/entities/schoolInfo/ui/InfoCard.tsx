@@ -12,7 +12,7 @@ const InfoCard = ({ category, descriptions }: InfoCardType) => {
       <p className={cn('text-brand-primary text-[1.75rem] leading-[1.2] font-bold')}>{category}</p>
       <ul
         className={cn(
-          'text-secondary-slate flex flex-col text-[1.5rem] leading-normal font-medium',
+          'text-secondary-slate flex flex-col text-[1.25rem] leading-normal font-medium xl:text-[1.5rem]',
         )}
       >
         {descriptions.map((desc, index) => (

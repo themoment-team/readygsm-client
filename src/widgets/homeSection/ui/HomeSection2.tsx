@@ -6,8 +6,8 @@ import { schoolInfoSections } from '../../homeSection/model/schoolInfoData';
 
 const HomeSection2 = () => {
   return (
-    <div className={cn('flex flex-col items-center pt-50')} id="homeSection2">
-      <div className={cn('flex w-7xl flex-col gap-20')}>
+    <div className={cn('flex flex-col items-center pt-16 xl:pt-50')} id="homeSection2">
+      <div className={cn('flex w-232 flex-col gap-20 xl:w-7xl')}>
         <AnimateOnView>
           <div className={cn('text-brand-primary text-4xl leading-[120%] font-bold')}>
             Curriculum

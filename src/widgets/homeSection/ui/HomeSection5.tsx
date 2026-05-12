@@ -7,7 +7,7 @@ const HomeSection5 = () => {
   return (
     <div
       className={cn(
-        'text-neutral-dark flex w-7xl flex-col justify-center gap-30 py-90 text-[2.25rem] leading-[2.7rem] font-bold',
+        'text-neutral-dark flex w-232 flex-col justify-center gap-30 py-58 text-[2.25rem] leading-[2.7rem] font-bold xl:w-7xl xl:py-90',
       )}
     >
       <AnimateOnView className={cn('flex flex-col gap-9')}>
