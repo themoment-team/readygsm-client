@@ -27,7 +27,7 @@
 - [ ] 화살표 함수 + `default export` 사용
 - [ ] Props는 `interface`로 선언 (union은 `type`)
 - [ ] 내부 순서: hooks/variables → handlers → `useEffect` → `return`
-- [ ] 컴포넌트 폴더: `PascalCase/index.tsx`
+- [ ] UI 컴포넌트 파일명: `{layer}/{slice}/ui/{Component}.tsx` (e.g. `widgets/header/ui/Header.tsx`) — `index.tsx`로 생성하지 않음
 
 ### 타입 안전성
 
@@ -50,7 +50,8 @@
 ### 스타일
 
 - [ ] Tailwind CSS만 사용 (인라인 style 지양)
-- [ ] 조건부 클래스에 `cn()` 사용
+- [ ] 모든 `className`에 `cn()` 사용 — 조건부 클래스가 없는 경우에도 예외 없음
+- [ ] Tailwind arbitrary value에서 `px` 단위 미사용 (e.g. `w-[100px]` ❌, `w-[6.25rem]` or `w-24` ✅)
 - [ ] 다중 variant는 CVA 사용
 
 ## 출력 형식

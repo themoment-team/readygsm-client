@@ -18,18 +18,19 @@ FSD `widgets` 레이어에 새 widget을 스캐폴딩합니다.
 src/widgets/<name>/
 ├── index.ts
 └── ui/
-    └── index.tsx
+    └── <ComponentName>.tsx
 ```
 
 ## 규칙
 
 - `<name>`은 camelCase (예: `header`, `programSection`)
 - 컴포넌트 이름은 PascalCase (예: `Header`, `ProgramSection`)
+- UI 컴포넌트 파일은 `index.tsx`가 아닌 PascalCase 이름으로 생성하세요 (예: `Header.tsx`)
 - `widgets` 레이어는 `features`, `entities`, `shared` 레이어만 import 가능
 
 ## 보일러플레이트
 
-**`src/widgets/<name>/ui/index.tsx`:**
+**`src/widgets/<name>/ui/<ComponentName>.tsx`:**
 
 ```tsx
 const <ComponentName> = () => {
@@ -46,7 +47,7 @@ export default <ComponentName>;
 **`src/widgets/<name>/index.ts`:**
 
 ```ts
-export { default as <ComponentName> } from './ui';
+export { default as <ComponentName> } from './ui/<ComponentName>';
 ```
 
 인수($ARGUMENTS)에서 widget 이름을 읽어 위 구조대로 파일들을 생성하세요.

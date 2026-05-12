@@ -85,14 +85,16 @@ export default Example;
 - FSD 슬라이스 내 UI 컴포넌트: `{layer}/{slice}/ui/{Component}.tsx` (e.g., `widgets/header/ui/Header.tsx`)
   - `{slice}` 폴더명: `camelCase` (e.g., `header`, `homeProgramSection`)
   - `{Component}` 파일명: `PascalCase` (e.g., `Header.tsx`, `HomeProgramSection.tsx`)
+  - UI 컴포넌트 파일은 `index.tsx`가 아닌 컴포넌트 이름으로 생성하세요.
 - Hooks/utils/constants/types: `camelCase` (e.g., `useDebounce.ts`, `cookies.ts`)
 - Asset components: `PascalCase.tsx` (e.g., `Logo.tsx`)
 - 배럴 export: 각 슬라이스 루트에 `index.ts` 생성
 
 ### Styling
 
-- Tailwind CSS only; use `cn()` for conditional/merged classes
+- Tailwind CSS only; 모든 `className`에 예외 없이 `cn()`을 사용하세요 (조건부 클래스 없이도 포함).
 - Use CVA (`class-variance-authority`) for components with multiple variants
+- Tailwind arbitrary value에서 `px` 단위를 사용하지 마세요 — Tailwind spacing scale 또는 `rem`/`em` 사용.
 - 색상은 `src/shared/styles/globals.css`에 선언된 CSS 변수를 우선 사용하세요. 해당 변수가 없는 경우에만 hex 값 사용 허용.
   - 예: `text-brand-primary`, `bg-surface-container`, `border-border-variant`
   - 주요 변수: `brand-primary`, `brand-accent`, `neutral-dark`, `deep-black`, `neutral-slate`, `cool-neutral`, `secondary-slate`, `soft-gray`, `base-fill`, `surface-container`, `pure-white`, `error-red` 등
@@ -130,4 +132,4 @@ export const exampleUrl = {
 - **커밋은 반드시 Bash 도구로 git 명령어를 직접 실행하세요.** `/commit` Skill은 사용자가 명시적으로 `/commit`을 입력할 때만 사용합니다. 일반 작업 후 자동 커밋 시 Skill 도구를 호출하지 마세요.
 - `git add .` 대신 변경된 파일을 명시적으로 스테이징하세요. `.env`, `.env.local` 등 환경변수 파일은 절대 포함하지 마세요.
 - PR 제목은 `[type] 설명` 형식으로 작성하세요 (예: `[feat] 로그인 폼 추가`). `feat(scope): ...` 형식은 사용하지 않습니다.
-- PR 리뷰 코멘트는 **한 번에 모두 수정하지 마세요.** 코멘트 하나를 수정 → 커밋 → 답글 순서로 하나씩 처리하세요.
+- PR 리뷰 코멘트 처리는 `/fix-review` 커맨드를 사용하세요.
