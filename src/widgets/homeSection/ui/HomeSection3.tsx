@@ -17,7 +17,7 @@ const HomeSection3 = () => {
     <div className={cn('flex flex-col justify-center pt-[10.56rem] xl:w-7xl xl:pt-[23.06rem]')}>
       <section className={cn('flex flex-col items-start gap-9')}>
         <AnimateOnView>
-          <p className={cn('text-neutr al-dark w-232 text-[2.25rem] leading-normal font-bold')}>
+          <p className={cn('text-neutral-dark w-232 text-[2.25rem] leading-normal font-bold')}>
             책 속 이론이 아닌
             <br />
             현장의 실전을 배우는 진짜 소프트웨어 교육
