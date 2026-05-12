@@ -3,28 +3,47 @@
 import { useState } from 'react';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
+import { useQueryClient } from '@tanstack/react-query';
+
+import { usePostSignOut } from '@/entities/auth';
+import { checkIsAdmin, useGetMyInfo, userQueryKeys } from '@/entities/user';
+import { LoginModal } from '@/features/auth';
 import { Logo } from '@/shared/assets';
 import { cn } from '@/shared/lib';
 import { Button, buttonVariants } from '@/shared/ui';
 
 import { NAV_LINKS } from '../model/navigation';
 
-type Role = 'guest' | 'client' | 'admin';
-
 const Header = () => {
   const pathname = usePathname();
-  const [role, setRole] = useState<Role>('admin'); // 임시로 admin으로 설정함
+  const router = useRouter();
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
+  const queryClient = useQueryClient();
+  const { data: user } = useGetMyInfo();
+  const { mutate: signOut } = usePostSignOut();
+
   const isAdmin = pathname.startsWith('/admin');
+  const isAdminRole = checkIsAdmin(user?.role);
   const links = isAdmin ? NAV_LINKS.admin : NAV_LINKS.client;
+
+  const handleSignOut = () => {
+    signOut(undefined, {
+      onSuccess: () => {
+        queryClient.removeQueries({ queryKey: userQueryKeys.getMyInfo() });
+        router.replace('/');
+      },
+    });
+  };
 
   return (
     <header className={cn('w-full bg-white')}>
       <div
         className={cn(
           'mx-auto flex h-25 max-w-480 items-center justify-between',
-          role === 'admin' && !isAdmin ? 'pr-[6.69rem] pl-80' : 'px-80',
+          isAdminRole && !isAdmin ? 'pr-[6.69rem] pl-80' : 'px-80',
         )}
       >
         <Link href="/" className={cn('flex items-center gap-3')}>
@@ -58,20 +77,24 @@ const Header = () => {
         </nav>
 
         <div className={cn('flex items-center gap-4')}>
-          <Button
-            onClick={() => setRole((prev) => (prev === 'guest' ? 'client' : 'guest'))} // 임시
-            variant={role === 'guest' ? 'default' : 'outlinePrimary'}
-            size="md"
-          >
-            {role === 'guest' ? '로그인' : '로그아웃'}
-          </Button>
-          {role === 'admin' && !isAdmin && (
+          {user ? (
+            <Button onClick={handleSignOut} variant="outlinePrimary" size="md">
+              로그아웃
+            </Button>
+          ) : (
+            <Button onClick={() => setIsLoginModalOpen(true)} variant="default" size="md">
+              로그인
+            </Button>
+          )}
+          {isAdminRole && !isAdmin && (
             <Link href="/admin" className={cn(buttonVariants({ variant: 'default', size: 'md' }))}>
               어드민 페이지로 이동
             </Link>
           )}
         </div>
       </div>
+
+      <LoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />
     </header>
   );
 };
