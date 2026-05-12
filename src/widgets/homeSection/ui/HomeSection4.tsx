@@ -44,7 +44,7 @@ const HomeSection4 = () => {
       </div>
       <div
         className={cn(
-          'fhd:gap-[22.38rem] fhd:flex-start flex w-232 flex-col items-start gap-9 xl:w-7xl xl:flex-row xl:gap-[9.12rem]',
+          'fhd:gap-[22.38rem] flex w-232 flex-col items-start gap-9 xl:w-7xl xl:flex-row xl:gap-[9.12rem]',
         )}
       >
         <h2 className={cn('text-neutral-dark shrink-0 text-4xl leading-normal font-bold')}>
