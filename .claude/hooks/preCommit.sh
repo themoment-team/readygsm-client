@@ -8,7 +8,7 @@ COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
 
 ALLOWED_TYPES="feat|fix|refactor|style|docs|test|chore|build|ci|revert|merge"
 
-if ! echo "$COMMIT_MSG" | grep -qE "^($ALLOWED_TYPES): .+"; then
+if ! head -n 1 "$COMMIT_MSG_FILE" | grep -qE "^($ALLOWED_TYPES): .+"; then
   echo "❌ 커밋 메시지 형식 오류"
   echo ""
   echo "올바른 형식: type: description"
