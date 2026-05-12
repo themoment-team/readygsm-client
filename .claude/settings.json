@@ -2,7 +2,7 @@
   "hooks": {
     "PreToolUse": [
       {
-        "matcher": "Bash",
+        "matcher": "Bash|Write",
         "hooks": [
           {
             "type": "command",
@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash .claude/hooks/postToolUse.sh \"$CLAUDE_TOOL_NAME\""
+            "command": "bash .claude/hooks/postToolUse.sh \"$CLAUDE_TOOL_NAME\" \"$CLAUDE_TOOL_INPUT\""
           }
         ]
       }
