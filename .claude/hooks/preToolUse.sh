@@ -38,7 +38,7 @@ fi
 
 # Write: UI 컴포넌트 파일명 규칙 검사
 if [[ "$TOOL_NAME" == "Write" ]]; then
-  FILE_PATH=$(echo "$TOOL_INPUT" | grep -o '"file_path":"[^"]*"' | head -1 | sed 's/"file_path":"//;s/"//')
+  FILE_PATH=$(echo "$TOOL_INPUT" | grep -o '"path":"[^"]*"' | head -1 | sed 's/"path":"//;s/"//')
 
   if echo "$FILE_PATH" | grep -qE '.*/ui/index\.tsx$'; then
     echo "⛔ UI 컴포넌트 파일명 규칙 위반: index.tsx 사용 불가"
