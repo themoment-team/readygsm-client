@@ -8,10 +8,10 @@ COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
 
 ALLOWED_TYPES="feat|fix|refactor|style|docs|test|chore|build|ci|revert|merge"
 
-if ! echo "$COMMIT_MSG" | grep -qE "^($ALLOWED_TYPES)(\(.+\))?: .+"; then
+if ! echo "$COMMIT_MSG" | grep -qE "^($ALLOWED_TYPES): .+"; then
   echo "❌ 커밋 메시지 형식 오류"
   echo ""
-  echo "올바른 형식: type(scope?): description"
+  echo "올바른 형식: type: description"
   echo ""
   echo "허용되는 type:"
   echo "  feat     새로운 기능"
@@ -26,7 +26,7 @@ if ! echo "$COMMIT_MSG" | grep -qE "^($ALLOWED_TYPES)(\(.+\))?: .+"; then
   echo "  revert   커밋 되돌리기"
   echo "  merge    브랜치 병합"
   echo ""
-  echo "예시: feat(auth): 로그인 폼 추가"
+  echo "예시: feat: 로그인 폼 추가"
   exit 1
 fi
 

@@ -9,6 +9,6 @@ if [[ "$TOOL_NAME" == "Write" || "$TOOL_NAME" == "Edit" ]]; then
 
   if [[ "$FILE_PATH" =~ \.(ts|tsx)$ ]]; then
     echo "🔍 lint 검사 중... ($FILE_PATH)"
-    pnpm lint 2>&1 | tail -20
+    pnpm eslint "$FILE_PATH" 2>&1
   fi
 fi
