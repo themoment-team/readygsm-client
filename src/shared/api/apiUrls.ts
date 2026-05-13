@@ -10,3 +10,7 @@ export const userUrl = {
 export const utilityUrl = {
   patchUserRole: () => '/v1/utility/user/role',
 } as const;
+
+export const activityUrl = {
+  getActivityList: () => '/v1/activity',
+} as const;
