@@ -4,11 +4,12 @@ import { Button, Modal } from '@/shared/ui';
 interface CancelApplyModalProps {
   isOpen: boolean;
   onClose: () => void;
-  applicationId: number;
+  userId: number;
+  activityId: number;
 }
 
-const CancelApplyModal = ({ isOpen, onClose, applicationId }: CancelApplyModalProps) => {
-  const { cancelApply, isPending } = useCancelApply(applicationId);
+const CancelApplyModal = ({ isOpen, onClose, userId, activityId }: CancelApplyModalProps) => {
+  const { cancelApply, isPending } = useCancelApply(userId, activityId);
 
   const handleConfirm = () => {
     cancelApply(undefined, { onSuccess: onClose });

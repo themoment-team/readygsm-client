@@ -1,14 +1,4 @@
-interface ApiFetcherOptions {
-  endpoint: string;
-  context: string;
-  errorMessage: string;
-}
-
-export const apiFetcher = async <T>({
-  endpoint,
-  context,
-  errorMessage,
-}: ApiFetcherOptions): Promise<T | undefined> => {
+export const get = async <T>(endpoint: string): Promise<T | undefined> => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${endpoint}`, {
       next: { revalidate: 3600 },
@@ -18,7 +8,7 @@ export const apiFetcher = async <T>({
 
     return (await res.json()) as T;
   } catch (error) {
-    console.error(`[${context}] ${errorMessage}`, error);
+    console.error(error);
     return undefined;
   }
 };
