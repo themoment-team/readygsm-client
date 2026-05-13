@@ -1,6 +1,6 @@
 import { cn } from '@/shared/lib';
 
-import type { ProgramComponentTypes } from '../../model/types';
+import type { ProgramComponentTypes } from '../model/types';
 
 interface ProgramComponent extends ProgramComponentTypes {
   isSelected?: boolean;
