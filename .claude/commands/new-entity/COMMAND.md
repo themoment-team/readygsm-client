@@ -23,8 +23,7 @@ src/entities/<name>/
 │   ├── url.ts
 │   └── hooks.ts
 └── ui/
-    └── <EntityCard>/
-        └── index.tsx
+    └── <EntityCard>.tsx
 ```
 
 ## 규칙

@@ -20,8 +20,7 @@ src/features/<name>/
 ├── model/
 │   └── types.ts
 └── ui/
-    └── <ComponentName>/
-        └── index.tsx
+    └── <ComponentName>.tsx
 ```
 
 ## 규칙
@@ -42,7 +41,7 @@ export interface <Name>Type {
 }
 ```
 
-**`src/features/<name>/ui/<ComponentName>/index.tsx`:**
+**`src/features/<name>/ui/<ComponentName>.tsx`:**
 
 ```tsx
 interface <ComponentName>Props {
