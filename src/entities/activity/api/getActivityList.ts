@@ -1,9 +1,13 @@
 import { activityUrl } from '@/shared/api';
-import { get } from '@/shared/api/fetcher';
+import { apiFetcher } from '@/shared/api/fetcher';
 
 import { ActivityListResponseType } from '../model/types';
 
 const getActivityList = async (): Promise<ActivityListResponseType | undefined> =>
-  get<ActivityListResponseType>(activityUrl.getActivityList());
+  apiFetcher<ActivityListResponseType>({
+    endpoint: activityUrl.getActivityList(),
+    context: 'getActivityList',
+    errorMessage: '학과체험 목록 조회 실패:',
+  });
 
 export default getActivityList;
