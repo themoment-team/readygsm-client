@@ -13,6 +13,7 @@ export const utilityUrl = {
 
 export const activityUrl = {
   getActivityList: () => '/v1/activity',
+  getActivityById: (id: number) => `/v1/activity/${id}`,
 } as const;
 
 export const applicationUrl = {

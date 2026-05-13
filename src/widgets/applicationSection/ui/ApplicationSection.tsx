@@ -2,7 +2,9 @@
 
 import { useState } from 'react';
 
+import { useGetActivityById } from '@/entities/activity';
 import { useGetMyApplication } from '@/entities/application';
+import { ProgramCard } from '@/entities/program';
 import { useGetMyInfo } from '@/entities/user';
 import { CancelApplyModal } from '@/features/cancelApply';
 import { Button } from '@/shared/ui';
@@ -15,8 +17,12 @@ const ApplicationSection = () => {
     user?.id ?? 0,
     isLoggedIn,
   );
+  const { data: activity, isLoading: isActivityLoading } = useGetActivityById(
+    application?.activityId ?? 0,
+    !!application,
+  );
 
-  if (isUserLoading || isApplicationLoading) return null;
+  if (isUserLoading || isApplicationLoading || isActivityLoading) return null;
 
   if (!user || user.role === 'UNAUTHENTICATED') {
     return (
@@ -46,6 +52,26 @@ const ApplicationSection = () => {
   return (
     <main className="flex min-h-[calc(100vh-6.25rem-11.3125rem)] flex-col items-center bg-white px-4 py-12">
       <div className="flex w-full max-w-155.5 flex-col gap-9">
+        {activity && (
+          <section className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
+              <h1 className="text-neutral-dark text-[1.5rem] font-semibold">
+                신청한 학과 체험 정보
+              </h1>
+              <p className="text-secondary-slate text-[0.875rem]">
+                로그인된 계정으로 신청된 학과 체험을 확인할 수 있습니다.
+              </p>
+            </div>
+            <ProgramCard
+              title={activity.name}
+              content={[activity.description]}
+              date={activity.activityDate}
+              personnel={activity.maxApplicant}
+              disableHover
+            />
+          </section>
+        )}
+
         <section className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
             <h1 className="text-neutral-dark text-[1.5rem] font-semibold">신청자 정보</h1>
