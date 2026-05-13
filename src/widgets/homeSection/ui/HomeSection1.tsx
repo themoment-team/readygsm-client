@@ -54,8 +54,8 @@ const HomeSection1 = ({ start, end }: HomeSection1Props) => {
           className={cn('absolute inset-0 backdrop-blur-[6.35px]')}
           style={{
             backgroundImage: `
-              linear-gradient(90deg, #292b2f 0%, transparent 17.788%, transparent 81.25%, #292b2f 100%),
-              linear-gradient(180deg, transparent 0%, rgba(41, 43, 47, 0.745) 60.577%, #292b2f 100%)
+              linear-gradient(90deg, var(--neutral-dark) 0%, transparent 17.788%, transparent 81.25%, var(--neutral-dark) 100%),
+              linear-gradient(180deg, transparent 0%, rgba(41, 43, 47, 0.745) 60.577%, var(--neutral-dark) 100%)
             `,
           }}
         />
