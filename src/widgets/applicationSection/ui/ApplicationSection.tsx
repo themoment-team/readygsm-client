@@ -2,30 +2,22 @@
 
 import { useState } from 'react';
 
-import { useGetActivityById } from '@/entities/activity';
-import { useGetMyApplication } from '@/entities/application';
+import { type ActivityType } from '@/entities/activity';
+import { type ApplicationType } from '@/entities/application';
 import { ProgramCard } from '@/entities/program';
-import { useGetMyInfo } from '@/entities/user';
+import { type UserType } from '@/entities/user';
 import { CancelApplyModal } from '@/features/cancelApply';
 import { cn } from '@/shared/lib';
 import { Button } from '@/shared/ui';
 
-const ApplicationSection = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const { data: user, isLoading: isUserLoading } = useGetMyInfo();
-  const isLoggedIn = !!user && user.role !== 'UNAUTHENTICATED';
-  const { data: application, isLoading: isApplicationLoading } = useGetMyApplication(
-    user?.id ?? 0,
-    isLoggedIn,
-  );
-  const { data: activity, isLoading: isActivityLoading } = useGetActivityById(
-    application?.activityId ?? 0,
-    !!application,
-  );
+interface ApplicationSectionProps {
+  user: UserType | undefined;
+  application: ApplicationType | undefined;
+  activity: ActivityType | undefined;
+}
 
-  if (isUserLoading || isApplicationLoading || isActivityLoading) {
-    return <main className={cn('min-h-[calc(100vh-6.25rem-11.3125rem)] bg-white')} />;
-  }
+const ApplicationSection = ({ user, application, activity }: ApplicationSectionProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   if (!user || user.role === 'UNAUTHENTICATED') {
     return (
