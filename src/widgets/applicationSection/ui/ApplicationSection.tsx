@@ -23,7 +23,9 @@ const ApplicationSection = () => {
     !!application,
   );
 
-  if (isUserLoading || isApplicationLoading || isActivityLoading) return null;
+  if (isUserLoading || isApplicationLoading || isActivityLoading) {
+    return <main className={cn('min-h-[calc(100vh-6.25rem-11.3125rem)] bg-white')} />;
+  }
 
   if (!user || user.role === 'UNAUTHENTICATED') {
     return (
