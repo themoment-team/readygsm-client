@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from '@/shared/ui';
 
-type GuardianRelationType = '부' | '모' | '기타';
+type GuardianRelationType = '부' | '모' | string;
 
 const GUARDIAN_RELATIONS: { value: GuardianRelationType; label: string }[] = [
   { value: '부', label: '부' },
@@ -29,7 +29,8 @@ const ApplicationForm = () => {
   const [school, setSchool] = useState('');
   const [phone, setPhone] = useState('');
   const [guardianPhone, setGuardianPhone] = useState('');
-  const [guardianRelation, setGuardianRelation] = useState<GuardianRelationType>('부');
+  const [guardianRelation, setGuardianRelation] = useState<GuardianRelationType>('');
+  const [customGuardianRelation, setCustomGuardianRelation] = useState('');
   const [agreed, setAgreed] = useState(false);
 
   const isFormComplete = Boolean(
@@ -157,6 +158,14 @@ const ApplicationForm = () => {
             </label>
           ))}
         </div>
+        {guardianRelation === '기타' && (
+          <Input
+            placeholder="보호자 관계를 직접 입력해주세요"
+            value={customGuardianRelation}
+            onChange={(e) => setCustomGuardianRelation(e.target.value)}
+            className={cn('w-full')}
+          />
+        )}
       </div>
 
       <label className={cn('flex cursor-pointer items-center gap-2 py-3')}>
