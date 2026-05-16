@@ -16,7 +16,7 @@ export const apiFetcher = async <T>({
 
     if (!res.ok) throw new Error(`${res.status}`);
 
-    return (await res.json()) as T;
+    return res.json() as Promise<T>;
   } catch (error) {
     console.error(`[${context}] ${errorMessage}`, error);
     return undefined;
