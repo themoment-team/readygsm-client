@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import { SearchSchoolModal } from '@/features/searchSchool';
 import { cn } from '@/shared/lib';
 import {
   Button,
@@ -32,18 +33,30 @@ const ApplicationForm = () => {
   const [guardianRelation, setGuardianRelation] = useState<GuardianRelationType>('');
   const [customGuardianRelation, setCustomGuardianRelation] = useState('');
   const [agreed, setAgreed] = useState(false);
+  const [isSchoolModalOpen, setIsSchoolModalOpen] = useState(false);
 
   const isFormComplete = Boolean(
     name && grade && classNum && number && school && phone && guardianPhone && agreed,
   );
 
+  const handleSchoolSetValue: Parameters<typeof SearchSchoolModal>[0]['setValue'] = (
+    fieldName,
+    value,
+  ) => {
+    if (fieldName === 'schoolName') setSchool(value as string);
+  };
+
   const handleSchoolSearch = () => {
-    // TODO: 학교 검색 모달 연동 후 setSchool(selectedSchool) 호출
-    setSchool('');
+    setIsSchoolModalOpen(true);
   };
 
   return (
     <div className={cn('flex w-full flex-col gap-4')}>
+      <SearchSchoolModal
+        isOpen={isSchoolModalOpen}
+        onClose={() => setIsSchoolModalOpen(false)}
+        setValue={handleSchoolSetValue}
+      />
       <div className={cn('flex flex-col gap-1')}>
         <label className={cn('text-neutral-dark text-sm leading-[1.4] font-medium')}>이름</label>
         <Input
