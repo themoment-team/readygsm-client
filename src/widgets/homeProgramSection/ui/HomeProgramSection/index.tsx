@@ -2,10 +2,15 @@
 
 import { useState } from 'react';
 
-import { ProgramCard, projectMockList } from '@/entities/program';
+import { ActivityType } from '@/entities/activity';
+import { ProgramCard } from '@/entities/program';
 import { cn } from '@/shared/lib';
 
-const HomeProgramSection = () => {
+interface HomeProgramSectionProps {
+  activities: ActivityType[];
+}
+
+const HomeProgramSection = ({ activities }: HomeProgramSectionProps) => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   return (
@@ -14,15 +19,15 @@ const HomeProgramSection = () => {
         'flex min-h-screen flex-col items-center justify-center gap-4 bg-white px-4 py-8 md:py-12',
       )}
     >
-      {projectMockList.map((project, index) => (
+      {activities.map((activity, index) => (
         <ProgramCard
-          key={index}
-          content={project.content}
-          date={project.date}
+          key={activity.id}
+          title={activity.name}
+          content={[activity.description]}
+          date={activity.activityDate}
+          personnel={activity.maxApplicant}
           isSelected={selectedIndex === index}
           onClick={() => setSelectedIndex(index)}
-          personnel={project.personnel}
-          title={project.title}
         />
       ))}
     </main>
