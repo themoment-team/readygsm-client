@@ -36,8 +36,13 @@ const GUARDIAN_RELATIONS = [
   { value: '기타', label: '기타(직접 입력)' },
 ] as const;
 
-const ApplicationForm = () => {
-  const { form, isSchoolModalOpen, setIsSchoolModalOpen, handleSubmit } = useApplicationForm();
+interface ApplicationFormProps {
+  activityId: number;
+}
+
+const ApplicationForm = ({ activityId }: ApplicationFormProps) => {
+  const { form, isSchoolModalOpen, setIsSchoolModalOpen, handleSubmit } =
+    useApplicationForm(activityId);
   const {
     register,
     control,

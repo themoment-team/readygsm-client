@@ -1,29 +1,33 @@
 'use client';
 
-import { useState } from 'react';
-
 import { ActivityType } from '@/entities/activity';
 import { ProgramCard } from '@/entities/program';
 import { cn } from '@/shared/lib';
 
 interface HomeProgramSectionProps {
   activities: ActivityType[];
+  selectedActivityId?: number;
+  onSelect: (activity: ActivityType) => void;
 }
 
-const HomeProgramSection = ({ activities }: HomeProgramSectionProps) => {
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-
+const HomeProgramSection = ({
+  activities,
+  selectedActivityId,
+  onSelect,
+}: HomeProgramSectionProps) => {
   return (
     <main className={cn('flex flex-col items-center justify-center gap-4 bg-white')}>
-      {activities.map((activity, index) => (
+      {activities.map((activity) => (
         <ProgramCard
           key={activity.id}
           title={activity.name}
           content={[activity.description]}
           date={activity.activityDate}
           personnel={activity.maxApplicant}
-          isSelected={selectedIndex === index}
-          onClick={() => setSelectedIndex(index)}
+          isSelected={
+            selectedActivityId === undefined ? undefined : selectedActivityId === activity.id
+          }
+          onClick={() => onSelect(activity)}
         />
       ))}
     </main>
