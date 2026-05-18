@@ -20,7 +20,7 @@ const ProgramCard = ({
   return (
     <section
       className={cn(
-        'w-full max-w-155.5 rounded-lg border bg-white px-6 py-5',
+        'w-155.5 max-w-155.5 rounded-lg border bg-white px-6 py-5',
         !disableHover && 'cursor-pointer transition-colors duration-200 hover:bg-[#EFF4FF]',
         isSelected
           ? 'border-[#2563EB]'

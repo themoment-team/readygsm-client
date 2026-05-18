@@ -14,11 +14,7 @@ const HomeProgramSection = ({ activities }: HomeProgramSectionProps) => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   return (
-    <main
-      className={cn(
-        'flex min-h-screen flex-col items-center justify-center gap-4 bg-white px-4 py-8 md:py-12',
-      )}
-    >
+    <main className={cn('flex flex-col items-center justify-center gap-4 bg-white')}>
       {activities.map((activity, index) => (
         <ProgramCard
           key={activity.id}
