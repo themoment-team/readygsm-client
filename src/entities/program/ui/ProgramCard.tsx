@@ -3,7 +3,7 @@ import { cn } from '@/shared/lib';
 import type { ProgramComponentTypes } from '../model/types';
 
 interface ProgramComponent extends ProgramComponentTypes {
-  isSelected?: boolean;
+  isSelected?: boolean | undefined;
   disableHover?: boolean;
   onClick?: () => void;
 }
@@ -13,7 +13,7 @@ const ProgramCard = ({
   content,
   date,
   personnel,
-  isSelected = false,
+  isSelected,
   disableHover = false,
   onClick,
 }: ProgramComponent) => {
@@ -22,9 +22,11 @@ const ProgramCard = ({
       className={cn(
         'w-155.5 max-w-155.5 rounded-lg border bg-white px-6 py-5',
         !disableHover && 'cursor-pointer transition-colors duration-200 hover:bg-[#EFF4FF]',
-        isSelected
+        isSelected === true
           ? 'border-[#2563EB]'
-          : cn('border-border-variant', !disableHover && 'hover:border-[#7C91A9]'),
+          : isSelected === false
+            ? 'opacity-50'
+            : cn('border-border-variant', !disableHover && 'hover:border-[#7C91A9]'),
       )}
       onClick={onClick}
     >
