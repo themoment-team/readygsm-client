@@ -4,15 +4,36 @@ import { useState } from 'react';
 
 import { ActivityType } from '@/entities/activity';
 import { cn } from '@/shared/lib';
+import { CompletionMessage } from '@/shared/ui';
 import { ApplicationForm } from '@/widgets/applicationSection';
 import { HomeProgramSection } from '@/widgets/homeProgramSection';
 
 interface ProgramsPageProps {
   activities: ActivityType[];
+  isLoggedIn: boolean;
+  application: boolean;
 }
 
-const ProgramsPage = ({ activities }: ProgramsPageProps) => {
+const ProgramsPage = ({ activities, isLoggedIn, application }: ProgramsPageProps) => {
   const [selectedActivity, setSelectedActivity] = useState<ActivityType | null>(null);
+
+  if (!isLoggedIn) {
+    return (
+      <CompletionMessage
+        title="로그인이 필요한 기능입니다"
+        description="학과 체험 신청은 로그인이 필요한 기능입니다. 로그인 후 이용해주세요"
+      />
+    );
+  }
+
+  if (application) {
+    return (
+      <CompletionMessage
+        title="학과 체험 신청이 완료되었습니다  "
+        description="신청한 학과 체험은 신청 조회에서 확인해주세요."
+      />
+    );
+  }
 
   return (
     <div className={cn('mx-auto flex h-[calc(100vh-6.25rem)] w-7xl justify-center gap-9 py-9')}>
