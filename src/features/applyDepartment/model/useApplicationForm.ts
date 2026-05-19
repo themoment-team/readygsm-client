@@ -8,7 +8,7 @@ import { useGetMyInfo } from '@/entities/user';
 
 import { ApplicationFormSchema, type ApplicationFormType } from './schema';
 
-export const useApplicationForm = (activityId: number) => {
+export const useApplicationForm = (activityId: number, onSuccess?: () => void) => {
   const [isSchoolModalOpen, setIsSchoolModalOpen] = useState(false);
   const { mutate: postApplication } = usePostApplication();
   const { data: user } = useGetMyInfo();
@@ -33,17 +33,20 @@ export const useApplicationForm = (activityId: number) => {
 
   const handleSubmit = form.handleSubmit((data) => {
     if (!user) return;
-    postApplication({
-      userId: user.id,
-      activityId,
-      name: data.name,
-      grade: Number(data.grade),
-      classNumber: Number(data.classNum),
-      number: Number(data.number),
-      schoolName: data.schoolName,
-      phoneNumber: data.phone,
-      familyPhoneNumber: data.guardianPhone,
-    });
+    postApplication(
+      {
+        userId: user.id,
+        activityId,
+        name: data.name,
+        grade: Number(data.grade),
+        classNumber: Number(data.classNum),
+        number: Number(data.number),
+        schoolName: data.schoolName,
+        phoneNumber: data.phone,
+        familyPhoneNumber: data.guardianPhone,
+      },
+      { onSuccess },
+    );
   });
 
   return {

@@ -16,6 +16,7 @@ interface ProgramsPageProps {
 
 const ProgramsPage = ({ activities, isLoggedIn, application }: ProgramsPageProps) => {
   const [selectedActivity, setSelectedActivity] = useState<ActivityType | null>(null);
+  const [isApplicationCompleted, setIsApplicationCompleted] = useState(false);
 
   if (!isLoggedIn) {
     return (
@@ -26,7 +27,7 @@ const ProgramsPage = ({ activities, isLoggedIn, application }: ProgramsPageProps
     );
   }
 
-  if (application) {
+  if (application || isApplicationCompleted) {
     return (
       <CompletionMessage
         title="학과 체험 신청이 완료되었습니다  "
@@ -60,7 +61,10 @@ const ProgramsPage = ({ activities, isLoggedIn, application }: ProgramsPageProps
               신청 이후 정보 수정이 불가하니 정보를 정확히 입력해 주세요.
             </p>
           </div>
-          <ApplicationForm activityId={selectedActivity.id} />
+          <ApplicationForm
+            activityId={selectedActivity.id}
+            onSuccess={() => setIsApplicationCompleted(true)}
+          />
         </div>
       )}
     </div>
