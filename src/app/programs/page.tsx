@@ -1,6 +1,6 @@
 import { getActivityList } from '@/entities/activity';
-import getMyApplication from '@/entities/application/api/getMyApplication';
-import getMyInfo from '@/entities/user/api/getMyInfo';
+import { getMyApplication } from '@/entities/application';
+import { getMyInfo } from '@/entities/user';
 import { ProgramsPage } from '@/views/programs';
 
 const Programs = async () => {
