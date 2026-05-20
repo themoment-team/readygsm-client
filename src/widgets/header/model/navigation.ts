@@ -7,7 +7,7 @@ export const NAV_LINKS = {
     { href: '/introduce', label: '더모먼트' },
   ],
   admin: [
-    { href: '/admin/form', label: '학과 체험' },
+    { href: '/admin', label: '학과 체험' },
     { href: '/admin/applicants', label: '신청자' },
   ],
 } as const;

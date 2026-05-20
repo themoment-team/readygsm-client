@@ -34,18 +34,26 @@ export const useOauthCallback = () => {
       {
         onSuccess: async () => {
           sessionStorage.removeItem('oauth_provider');
+          const returnUrl = sessionStorage.getItem('oauth_return_url') ?? '/';
+          sessionStorage.removeItem('oauth_return_url');
           try {
             const response = await queryClient.fetchQuery({
               queryKey: userQueryKeys.getMyInfo(),
               queryFn: () => get<ApiResponseType<UserType>>(userUrl.getMyInfo()),
             });
-            router.replace(checkIsAdmin(response.data.role) ? '/admin' : '/');
+            const isAdmin = checkIsAdmin(response.data.role);
+            if (isAdmin) {
+              router.replace('/admin');
+            } else {
+              router.replace(returnUrl === '/admin' ? '/' : returnUrl);
+            }
           } catch {
             router.replace('/');
           }
         },
         onError: () => {
           sessionStorage.removeItem('oauth_provider');
+          sessionStorage.removeItem('oauth_return_url');
           router.replace('/');
         },
       },
