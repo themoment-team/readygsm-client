@@ -56,10 +56,11 @@ const ApplicationSection = ({ user, application, activity }: ApplicationSectionP
               </p>
             </div>
             <ProgramCard
-              title={activity.name}
-              content={[activity.description]}
-              date={activity.activityDate}
-              personnel={activity.maxApplicant}
+              name={activity.name}
+              description={activity.description}
+              activityDate={activity.activityDate}
+              maxApplicant={activity.maxApplicant}
+              currentApplicant={activity.currentApplicant}
               disableHover
             />
           </section>

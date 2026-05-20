@@ -20,10 +20,11 @@ const HomeProgramSection = ({
       {activities.map((activity) => (
         <ProgramCard
           key={activity.id}
-          title={activity.name}
-          content={[activity.description]}
-          date={activity.activityDate}
-          personnel={activity.maxApplicant}
+          name={activity.name}
+          description={activity.description}
+          activityDate={activity.activityDate}
+          maxApplicant={activity.maxApplicant}
+          currentApplicant={activity.currentApplicant}
           isSelected={
             selectedActivityId === undefined ? undefined : selectedActivityId === activity.id
           }

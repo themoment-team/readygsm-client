@@ -1,22 +1,25 @@
+import type { ActivityType } from '@/entities/activity';
 import { cn } from '@/shared/lib';
 
-import type { ProgramComponentTypes } from '../model/types';
-
-interface ProgramComponent extends ProgramComponentTypes {
+interface ProgramCardProps extends Pick<
+  ActivityType,
+  'name' | 'description' | 'activityDate' | 'maxApplicant' | 'currentApplicant'
+> {
   isSelected?: boolean | undefined;
   disableHover?: boolean;
   onClick?: () => void;
 }
 
 const ProgramCard = ({
-  title,
-  content,
-  date,
-  personnel,
+  name,
+  description,
+  activityDate,
+  maxApplicant,
+  currentApplicant,
   isSelected,
   disableHover = false,
   onClick,
-}: ProgramComponent) => {
+}: ProgramCardProps) => {
   return (
     <section
       className={cn(
@@ -37,7 +40,7 @@ const ProgramCard = ({
             isSelected ? 'text-[#2563EB]' : 'text-neutral-dark',
           )}
         >
-          {title}
+          {name}
         </h2>
         <p
           className={cn(
@@ -45,22 +48,16 @@ const ProgramCard = ({
             isSelected ? 'text-[#2563EB]' : 'text-neutral-dark',
           )}
         >
-          {personnel}/18
+          {currentApplicant}/{maxApplicant}
         </p>
       </header>
 
-      <ul
-        className={cn(
-          'text-secondary-slate mt-2 list-disc space-y-0.5 pl-5.25 text-[0.875rem] leading-[1.4] font-normal',
-        )}
-      >
-        {content.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </ul>
+      <p className={cn('text-secondary-slate mt-2 text-[0.875rem] leading-[1.4] font-normal')}>
+        {description}
+      </p>
 
       <p className={cn('text-secondary-slate mt-2 text-[0.875rem] leading-[1.4] font-normal')}>
-        {date}
+        {activityDate}
       </p>
     </section>
   );

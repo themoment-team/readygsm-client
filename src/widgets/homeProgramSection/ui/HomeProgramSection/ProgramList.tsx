@@ -17,12 +17,13 @@ const ProgramList = ({ programs }: ProgramListProps) => {
       {programs.map((program, index) => (
         <ProgramCard
           key={program.id}
-          content={[program.description]}
-          date={program.activityDate}
+          name={program.name}
+          description={program.description}
+          activityDate={program.activityDate}
+          maxApplicant={program.maxApplicant}
+          currentApplicant={program.currentApplicant}
           isSelected={selectedIndex === index}
           onClick={() => setSelectedIndex(index)}
-          personnel={program.maxApplicant}
-          title={program.name}
         />
       ))}
     </>

@@ -4,6 +4,7 @@ export interface ActivityType {
   place: string;
   description: string;
   maxApplicant: number;
+  currentApplicant: number;
   activityDate: string;
   registrationStartAt: string;
   registrationEndAt: string;
