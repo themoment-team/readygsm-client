@@ -8,6 +8,7 @@ const getActivityList = async (): Promise<ActivityListResponseType | undefined> 
     endpoint: activityUrl.getActivityList(),
     context: 'getActivityList',
     errorMessage: '학과체험 목록 조회 실패:',
+    tags: ['activity-list'],
   });
 
 export default getActivityList;
