@@ -4,7 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/shared/lib';
 
 const buttonVariants = cva(
-  'inline-flex shrink-0 items-center justify-center whitespace-nowrap border text-sm leading-5 font-semibold transition-colors outline-none select-none disabled:cursor-not-allowed disabled:opacity-50',
+  'inline-flex shrink-0 items-center justify-center whitespace-nowrap border text-sm leading-5 font-semibold transition-colors outline-none select-none disabled:cursor-not-allowed disabled:pointer-events-none',
   {
     variants: {
       variant: {
@@ -39,11 +39,12 @@ function Button({
   ...props
 }: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
   const isDisabled = variant === 'neutral' || Boolean(disabled);
+  const effectiveVariant = isDisabled ? 'neutral' : variant;
 
   return (
     <ButtonPrimitive
       data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }))}
+      className={cn(buttonVariants({ variant: effectiveVariant, size, className }))}
       disabled={isDisabled}
       {...props}
     />

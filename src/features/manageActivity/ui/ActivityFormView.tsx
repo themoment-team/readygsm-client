@@ -50,7 +50,8 @@ const ActivityFormView = ({ mode, activity }: ActivityFormViewProps) => {
     register,
     handleSubmit,
     control,
-    formState: { errors },
+    formState: { errors, isValid, isDirty },
+    trigger,
   } = useForm<ActivityFormType>({
     resolver: zodResolver(ActivityFormSchema),
     defaultValues: activity ? toFormValues(activity) : undefined,
@@ -297,15 +298,21 @@ const ActivityFormView = ({ mode, activity }: ActivityFormViewProps) => {
             </div>
           </FormField>
 
-          <Button
-            type="submit"
-            variant="default"
-            size="full"
-            disabled={isPending}
+          <div
             className={cn('mt-2')}
+            onClick={() => {
+              if (mode === 'create' && !isValid) trigger();
+            }}
           >
-            {mode === 'create' ? '학과 체험 만들기' : '학과 체험 수정하기'}
-          </Button>
+            <Button
+              type="submit"
+              variant="default"
+              size="full"
+              disabled={isPending || (mode === 'create' ? !isValid : !isDirty)}
+            >
+              {mode === 'create' ? '학과 체험 만들기' : '학과 체험 수정하기'}
+            </Button>
+          </div>
         </form>
       </div>
     </main>
