@@ -4,6 +4,7 @@ import { Controller, useWatch } from 'react-hook-form';
 
 import { useApplicationForm } from '@/features/applyDepartment';
 import { SearchSchoolModal } from '@/features/searchSchool';
+import { CheckIcon } from '@/shared/assets';
 import { cn } from '@/shared/lib';
 import {
   Button,
@@ -280,23 +281,7 @@ const ApplicationForm = ({ activityId, userId, onSuccess }: ApplicationFormProps
               : 'border-border-variant bg-pure-white',
           )}
         >
-          {agreed && (
-            <svg
-              width="10"
-              height="8"
-              viewBox="0 0 10 8"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1 4L3.5 6.5L9 1"
-                stroke="white"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          )}
+          {agreed && <CheckIcon />}
         </div>
         <span className={cn('text-cool-neutral text-sm leading-5')}>
           [필수] 개인정보 수집 및 이용에 동의합니다.
