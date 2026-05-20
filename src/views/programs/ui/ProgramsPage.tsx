@@ -58,7 +58,7 @@ const ProgramsPage = ({ activities, isLoggedIn, application, userId }: ProgramsP
           onSelect={setSelectedActivity}
         />
       </div>
-      {selectedActivity && (
+      {selectedActivity && userId && (
         <div className={cn('flex flex-col gap-5')}>
           <div>
             <p className={cn('text-[1.5rem] font-bold')}>체험 신청자 정보 작성</p>
@@ -68,7 +68,7 @@ const ProgramsPage = ({ activities, isLoggedIn, application, userId }: ProgramsP
           </div>
           <ApplicationForm
             activityId={selectedActivity.id}
-            userId={userId!}
+            userId={userId}
             onSuccess={() => setIsApplicationCompleted(true)}
           />
         </div>
