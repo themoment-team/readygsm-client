@@ -31,7 +31,7 @@ const ProgramsPage = ({ activities, isLoggedIn, application, userId }: ProgramsP
   if (application || isApplicationCompleted) {
     return (
       <CompletionMessage
-        title="학과 체험 신청이 완료되었습니다  "
+        title="학과 체험 신청이 완료되었습니다"
         description="신청한 학과 체험은 신청 조회에서 확인해주세요."
       />
     );
