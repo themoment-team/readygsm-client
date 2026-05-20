@@ -38,12 +38,14 @@ const GUARDIAN_RELATIONS = [
 
 interface ApplicationFormProps {
   activityId: number;
+  userId: number;
   onSuccess?: () => void;
 }
 
-const ApplicationForm = ({ activityId, onSuccess }: ApplicationFormProps) => {
+const ApplicationForm = ({ activityId, userId, onSuccess }: ApplicationFormProps) => {
   const { form, isSchoolModalOpen, setIsSchoolModalOpen, handleSubmit } = useApplicationForm(
     activityId,
+    userId,
     onSuccess,
   );
   const {

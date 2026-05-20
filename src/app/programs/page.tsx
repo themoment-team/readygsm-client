@@ -15,6 +15,7 @@ const Programs = async () => {
       activities={result?.data ?? []}
       isLoggedIn={isLoggedIn}
       application={!!application}
+      userId={user?.id}
     />
   );
 };

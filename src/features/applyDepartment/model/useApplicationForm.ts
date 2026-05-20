@@ -4,14 +4,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
 import { usePostApplication } from '@/entities/application';
-import { useGetMyInfo } from '@/entities/user';
 
 import { ApplicationFormSchema, type ApplicationFormType } from './schema';
 
-export const useApplicationForm = (activityId: number, onSuccess?: () => void) => {
+export const useApplicationForm = (activityId: number, userId: number, onSuccess?: () => void) => {
   const [isSchoolModalOpen, setIsSchoolModalOpen] = useState(false);
   const { mutate: postApplication } = usePostApplication();
-  const { data: user } = useGetMyInfo();
 
   const form = useForm<ApplicationFormType>({
     resolver: zodResolver(ApplicationFormSchema),
@@ -32,10 +30,9 @@ export const useApplicationForm = (activityId: number, onSuccess?: () => void) =
   });
 
   const handleSubmit = form.handleSubmit((data) => {
-    if (!user) return;
     postApplication(
       {
-        userId: user.id,
+        userId,
         activityId,
         name: data.name,
         grade: Number(data.grade),

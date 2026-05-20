@@ -12,9 +12,10 @@ interface ProgramsPageProps {
   activities: ActivityType[];
   isLoggedIn: boolean;
   application: boolean;
+  userId?: number;
 }
 
-const ProgramsPage = ({ activities, isLoggedIn, application }: ProgramsPageProps) => {
+const ProgramsPage = ({ activities, isLoggedIn, application, userId }: ProgramsPageProps) => {
   const [selectedActivity, setSelectedActivity] = useState<ActivityType | null>(null);
   const [isApplicationCompleted, setIsApplicationCompleted] = useState(false);
 
@@ -67,6 +68,7 @@ const ProgramsPage = ({ activities, isLoggedIn, application }: ProgramsPageProps
           </div>
           <ApplicationForm
             activityId={selectedActivity.id}
+            userId={userId!}
             onSuccess={() => setIsApplicationCompleted(true)}
           />
         </div>
