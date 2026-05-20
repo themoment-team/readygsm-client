@@ -8,7 +8,7 @@ import { ProgramCard } from '@/entities/program';
 import { type UserType } from '@/entities/user';
 import { CancelApplyModal } from '@/features/cancelApply';
 import { cn } from '@/shared/lib';
-import { Button, CompletionMessage } from '@/shared/ui';
+import { Button, EmptyState, SectionHeader } from '@/shared/ui';
 
 interface ApplicationSectionProps {
   user: UserType | undefined;
@@ -21,7 +21,7 @@ const ApplicationSection = ({ user, application, activity }: ApplicationSectionP
 
   if (!user || user.role === 'UNAUTHENTICATED') {
     return (
-      <CompletionMessage
+      <EmptyState
         title="로그인이 필요한 기능입니다"
         description="학과 체험 신청 조회는 로그인이 필요한 기능입니다. 로그인 후 이용해주세요"
       />
@@ -30,10 +30,9 @@ const ApplicationSection = ({ user, application, activity }: ApplicationSectionP
 
   if (!application) {
     return (
-      <CompletionMessage
+      <EmptyState
         title="학과 체험을 아직 신청하지 않았습니다"
-        description="학과 체험을 아직 신청하지 않은 상태입니다. 학과 체험을 신청하거나 로그인된 계정을
-          확인해주세요."
+        description="학과 체험을 아직 신청하지 않은 상태입니다. 학과 체험을 신청하거나 로그인된 계정을 확인해주세요."
       />
     );
   }
@@ -47,14 +46,10 @@ const ApplicationSection = ({ user, application, activity }: ApplicationSectionP
       <div className={cn('flex w-full max-w-155.5 flex-col gap-9')}>
         {activity && (
           <section className={cn('flex flex-col gap-4')}>
-            <div className={cn('flex flex-col gap-2')}>
-              <h1 className={cn('text-neutral-dark text-[1.5rem] font-semibold')}>
-                신청한 학과 체험 정보
-              </h1>
-              <p className={cn('text-secondary-slate text-[0.875rem]')}>
-                로그인된 계정으로 신청된 학과 체험을 확인할 수 있습니다.
-              </p>
-            </div>
+            <SectionHeader
+              title="신청한 학과 체험 정보"
+              description="로그인된 계정으로 신청된 학과 체험을 확인할 수 있습니다."
+            />
             <ProgramCard
               name={activity.name}
               description={activity.description}
@@ -67,12 +62,10 @@ const ApplicationSection = ({ user, application, activity }: ApplicationSectionP
         )}
 
         <section className={cn('flex flex-col gap-4')}>
-          <div className={cn('flex flex-col gap-2')}>
-            <h1 className={cn('text-neutral-dark text-[1.5rem] font-semibold')}>신청자 정보</h1>
-            <p className={cn('text-secondary-slate text-[0.875rem]')}>
-              학과 체험을 신청한 사람의 정보를 불러옵니다.
-            </p>
-          </div>
+          <SectionHeader
+            title="신청자 정보"
+            description="학과 체험을 신청한 사람의 정보를 불러옵니다."
+          />
           <div className={cn('border-border-variant w-full rounded-lg border bg-white px-6 py-5')}>
             <div className={cn('grid grid-cols-2 gap-4')}>
               <dl className={cn('flex flex-col gap-4')}>

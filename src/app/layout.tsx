@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { TanStackProvider } from '@/shared/lib';
+import { cn, TanStackProvider } from '@/shared/lib';
 import { pretendard } from '@/shared/styles';
 import { Footer } from '@/widgets/footer';
 import { Header } from '@/widgets/header';
@@ -22,7 +22,7 @@ const RootLayout = ({
       <body className={pretendard.className}>
         <TanStackProvider>
           <Header />
-          {children}
+          <div className={cn('flex-1')}>{children}</div>
           <Footer />
         </TanStackProvider>
       </body>
