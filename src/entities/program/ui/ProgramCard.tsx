@@ -20,6 +20,8 @@ const ProgramCard = ({
   disableHover = false,
   onClick,
 }: ProgramCardProps) => {
+  const reservePersonnel = maxApplicant - currentApplicant;
+
   return (
     <section
       className={cn(
@@ -48,7 +50,7 @@ const ProgramCard = ({
             isSelected ? 'text-[#2563EB]' : 'text-neutral-dark',
           )}
         >
-          {currentApplicant}/{maxApplicant}
+          {reservePersonnel > 0 ? `${currentApplicant}/${maxApplicant}` : '예비 신청'}
         </p>
       </header>
 
