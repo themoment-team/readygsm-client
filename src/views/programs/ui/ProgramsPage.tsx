@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { ActivityType } from '@/entities/activity';
 import { cn } from '@/shared/lib';
 import { CompletionMessage } from '@/shared/ui';
-import { ApplicationForm } from '@/widgets/applicationSection';
+import { ApplicationForm } from '@/widgets/applyDepartment';
 import { HomeProgramSection } from '@/widgets/homeProgramSection';
 
 interface ProgramsPageProps {
