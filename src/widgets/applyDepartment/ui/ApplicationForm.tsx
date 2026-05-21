@@ -53,6 +53,7 @@ const ApplicationForm = ({ activityId, userId, onSuccess }: ApplicationFormProps
     register,
     control,
     setValue,
+    trigger,
     formState: { isValid, errors },
   } = form;
 
@@ -288,9 +289,19 @@ const ApplicationForm = ({ activityId, userId, onSuccess }: ApplicationFormProps
         </span>
       </label>
 
-      <Button type="submit" variant={isValid ? 'default' : 'neutral'} size="full">
-        학과 체험 신청
-      </Button>
+      <div
+        className={cn('w-full', !isValid && 'cursor-not-allowed')}
+        onClick={!isValid ? () => trigger() : undefined}
+      >
+        <Button
+          type="submit"
+          variant={isValid ? 'default' : 'neutral'}
+          size="full"
+          className={cn(!isValid && 'pointer-events-none')}
+        >
+          학과 체험 신청
+        </Button>
+      </div>
     </form>
   );
 };
