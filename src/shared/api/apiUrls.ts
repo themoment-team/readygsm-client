@@ -18,4 +18,5 @@ export const activityUrl = {
 
 export const applicationUrl = {
   getMyApplication: () => '/v1/application/my',
+  postApplication: () => '/v1/application/apply',
 } as const;

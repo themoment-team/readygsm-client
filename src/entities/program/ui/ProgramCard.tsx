@@ -1,30 +1,37 @@
+import type { ActivityType } from '@/entities/activity';
 import { cn } from '@/shared/lib';
 
-import type { ProgramComponentTypes } from '../model/types';
-
-interface ProgramComponent extends ProgramComponentTypes {
-  isSelected?: boolean;
+interface ProgramCardProps extends Pick<
+  ActivityType,
+  'name' | 'description' | 'activityDate' | 'maxApplicant' | 'currentApplicant'
+> {
+  isSelected?: boolean | undefined;
   disableHover?: boolean;
   onClick?: () => void;
 }
 
 const ProgramCard = ({
-  title,
-  content,
-  date,
-  personnel,
-  isSelected = false,
+  name,
+  description,
+  activityDate,
+  maxApplicant,
+  currentApplicant,
+  isSelected,
   disableHover = false,
   onClick,
-}: ProgramComponent) => {
+}: ProgramCardProps) => {
+  const reservePersonnel = maxApplicant - currentApplicant;
+
   return (
     <section
       className={cn(
-        'w-full max-w-155.5 rounded-lg border bg-white px-6 py-5',
+        'w-155.5 max-w-155.5 rounded-lg border bg-white px-6 py-5',
         !disableHover && 'cursor-pointer transition-colors duration-200 hover:bg-[#EFF4FF]',
-        isSelected
+        isSelected === true
           ? 'border-[#2563EB]'
-          : cn('border-border-variant', !disableHover && 'hover:border-[#7C91A9]'),
+          : isSelected === false
+            ? 'opacity-50'
+            : cn('border-border-variant', !disableHover && 'hover:border-[#7C91A9]'),
       )}
       onClick={onClick}
     >
@@ -35,7 +42,7 @@ const ProgramCard = ({
             isSelected ? 'text-[#2563EB]' : 'text-neutral-dark',
           )}
         >
-          {title}
+          {name}
         </h2>
         <p
           className={cn(
@@ -43,22 +50,16 @@ const ProgramCard = ({
             isSelected ? 'text-[#2563EB]' : 'text-neutral-dark',
           )}
         >
-          {personnel}/18
+          {reservePersonnel > 0 ? `${currentApplicant}/${maxApplicant}` : '예비 신청'}
         </p>
       </header>
 
-      <ul
-        className={cn(
-          'text-secondary-slate mt-2 list-disc space-y-0.5 pl-5.25 text-[0.875rem] leading-[1.4] font-normal',
-        )}
-      >
-        {content.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </ul>
+      <p className={cn('text-secondary-slate mt-2 text-[0.875rem] leading-[1.4] font-normal')}>
+        {description}
+      </p>
 
       <p className={cn('text-secondary-slate mt-2 text-[0.875rem] leading-[1.4] font-normal')}>
-        {date}
+        {activityDate}
       </p>
     </section>
   );

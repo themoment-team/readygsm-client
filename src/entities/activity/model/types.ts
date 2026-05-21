@@ -4,9 +4,12 @@ export interface ActivityType {
   place: string;
   description: string;
   maxApplicant: number;
+  currentApplicant: number;
   activityDate: string;
-  start: string;
-  end: string;
+  registrationStartAt: string;
+  registrationEndAt: string;
+  activityStartTime: string;
+  activityEndTime: string;
 }
 
 export interface ActivityListResponseType {

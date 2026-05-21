@@ -11,8 +11,8 @@ const HomePage = async () => {
   const result = await getActivityList();
   const activities = result?.data ?? [];
 
-  const start = activities[0]?.start;
-  const end = activities[activities.length - 1]?.end;
+  const start = activities[0]?.registrationStartAt;
+  const end = activities[activities.length - 1]?.registrationEndAt;
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center gap-4">

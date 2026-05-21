@@ -1,19 +1,36 @@
-import { getActivityList } from '@/entities/activity';
+'use client';
+
+import { ActivityType } from '@/entities/activity';
+import { ProgramCard } from '@/entities/program';
 import { cn } from '@/shared/lib';
 
-import ProgramList from './ProgramList';
+interface HomeProgramSectionProps {
+  activities: ActivityType[];
+  selectedActivityId?: number;
+  onSelect: (activity: ActivityType) => void;
+}
 
-const HomeProgramSection = async () => {
-  const result = await getActivityList();
-  const activities = result?.data ?? [];
-
+const HomeProgramSection = ({
+  activities,
+  selectedActivityId,
+  onSelect,
+}: HomeProgramSectionProps) => {
   return (
-    <main
-      className={cn(
-        'flex min-h-screen flex-col items-center justify-center gap-4 bg-white px-4 py-8 md:py-12',
-      )}
-    >
-      <ProgramList programs={activities} />
+    <main className={cn('flex flex-col items-center justify-center gap-4 bg-white')}>
+      {activities.map((activity) => (
+        <ProgramCard
+          key={activity.id}
+          name={activity.name}
+          description={activity.description}
+          activityDate={activity.activityDate}
+          maxApplicant={activity.maxApplicant}
+          currentApplicant={activity.currentApplicant}
+          isSelected={
+            selectedActivityId === undefined ? undefined : selectedActivityId === activity.id
+          }
+          onClick={() => onSelect(activity)}
+        />
+      ))}
     </main>
   );
 };

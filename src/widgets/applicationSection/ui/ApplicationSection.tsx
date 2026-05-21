@@ -8,7 +8,7 @@ import { ProgramCard } from '@/entities/program';
 import { type UserType } from '@/entities/user';
 import { CancelApplyModal } from '@/features/cancelApply';
 import { cn } from '@/shared/lib';
-import { Button } from '@/shared/ui';
+import { Button, CompletionMessage } from '@/shared/ui';
 
 interface ApplicationSectionProps {
   user: UserType | undefined;
@@ -21,36 +21,20 @@ const ApplicationSection = ({ user, application, activity }: ApplicationSectionP
 
   if (!user || user.role === 'UNAUTHENTICATED') {
     return (
-      <main
-        className={cn(
-          'flex min-h-[calc(100vh-6.25rem-11.3125rem)] flex-col items-center justify-center gap-2 bg-white',
-        )}
-      >
-        <h1 className={cn('text-brand-primary text-[3rem] font-bold')}>
-          로그인이 필요한 기능입니다
-        </h1>
-        <p className={cn('text-secondary-slate text-[1.5rem]')}>
-          학과 체험 신청 조회는 로그인이 필요한 기능입니다. 로그인 후 이용해주세요
-        </p>
-      </main>
+      <CompletionMessage
+        title="로그인이 필요한 기능입니다"
+        description="학과 체험 신청 조회는 로그인이 필요한 기능입니다. 로그인 후 이용해주세요"
+      />
     );
   }
 
   if (!application) {
     return (
-      <main
-        className={cn(
-          'flex min-h-[calc(100vh-6.25rem-11.3125rem)] flex-col items-center justify-center gap-2 bg-white',
-        )}
-      >
-        <h1 className={cn('text-brand-primary text-[3rem] font-bold')}>
-          학과 체험을 아직 신청하지 않았습니다
-        </h1>
-        <p className={cn('text-secondary-slate text-[1.5rem]')}>
-          학과 체험을 아직 신청하지 않은 상태입니다. 학과 체험을 신청하거나 로그인된 계정을
-          확인해주세요.
-        </p>
-      </main>
+      <CompletionMessage
+        title="학과 체험을 아직 신청하지 않았습니다"
+        description="학과 체험을 아직 신청하지 않은 상태입니다. 학과 체험을 신청하거나 로그인된 계정을
+          확인해주세요."
+      />
     );
   }
 
@@ -72,10 +56,11 @@ const ApplicationSection = ({ user, application, activity }: ApplicationSectionP
               </p>
             </div>
             <ProgramCard
-              title={activity.name}
-              content={[activity.description]}
-              date={activity.activityDate}
-              personnel={activity.maxApplicant}
+              name={activity.name}
+              description={activity.description}
+              activityDate={activity.activityDate}
+              maxApplicant={activity.maxApplicant}
+              currentApplicant={activity.currentApplicant}
               disableHover
             />
           </section>
