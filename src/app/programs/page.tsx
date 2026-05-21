@@ -1,12 +1,9 @@
-import { cookies } from 'next/headers';
-
 import { getActivityList } from '@/entities/activity';
 import getMyApplication from '@/entities/application/api/getMyApplication';
 import getMyInfo from '@/entities/user/api/getMyInfo';
 import { ProgramsPage } from '@/views/programs';
 
 const Programs = async () => {
-  await cookies();
   const result = await getActivityList();
   const user = await getMyInfo();
   const isLoggedIn = !!user && user.role !== 'UNAUTHENTICATED';
