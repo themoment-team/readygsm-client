@@ -4,8 +4,7 @@ import getMyInfo from '@/entities/user/api/getMyInfo';
 import { ProgramsPage } from '@/views/programs';
 
 const Programs = async () => {
-  const result = await getActivityList();
-  const user = await getMyInfo();
+  const [result, user] = await Promise.all([getActivityList(), getMyInfo()]);
   const isLoggedIn = !!user && user.role !== 'UNAUTHENTICATED';
 
   const application = isLoggedIn ? await getMyApplication(user.id) : undefined;
