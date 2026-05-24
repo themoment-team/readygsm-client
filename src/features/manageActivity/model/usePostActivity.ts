@@ -4,9 +4,11 @@ import { revalidateActivityList } from '@/entities/activity/api/revalidateActivi
 import { activityQueryKeys } from '@/entities/activity/model/useGetActivityList';
 import { activityUrl, post } from '@/shared/api';
 
-import type { toActivityReqDto } from './types';
+import type { toActivityBaseReqDto, toActivityFirstCreateReqDto } from './types';
 
-type ActivityReqDto = ReturnType<typeof toActivityReqDto>;
+type ActivityReqDto =
+  | ReturnType<typeof toActivityFirstCreateReqDto>
+  | ReturnType<typeof toActivityBaseReqDto>;
 
 const usePostActivityMutation = () => {
   const queryClient = useQueryClient();

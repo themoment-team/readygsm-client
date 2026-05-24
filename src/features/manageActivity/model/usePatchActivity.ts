@@ -4,9 +4,9 @@ import { revalidateActivityList } from '@/entities/activity/api/revalidateActivi
 import { activityQueryKeys } from '@/entities/activity/model/useGetActivityList';
 import { activityUrl, patch } from '@/shared/api';
 
-import type { toActivityReqDto } from './types';
+import type { toActivityBaseReqDto } from './types';
 
-type ActivityReqDto = ReturnType<typeof toActivityReqDto>;
+type ActivityReqDto = ReturnType<typeof toActivityBaseReqDto>;
 
 const usePatchActivityMutation = (id: number) => {
   const queryClient = useQueryClient();
