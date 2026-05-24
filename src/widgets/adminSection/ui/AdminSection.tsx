@@ -33,6 +33,7 @@ const AdminSection = ({ activities }: AdminSectionProps) => {
             <ActivityCard
               key={activity.id}
               activity={activity}
+              currentApplicant={activity.currentApplicant}
               className={cn('min-h-44 hover:border-[#7C91A9]')}
               actions={
                 <>
@@ -62,7 +63,7 @@ const AdminSection = ({ activities }: AdminSectionProps) => {
               'border-border-variant flex min-h-44 w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border bg-white px-6 py-5 transition-colors duration-200 hover:border-[#7C91A9] hover:bg-[#EFF4FF]',
             )}
           >
-            <p className={cn('text-secondary-slate text-sm')}>프로젝트 등록</p>
+            <p className={cn('text-secondary-slate text-sm')}>학과체험 등록</p>
             <Plus className={cn('text-secondary-slate size-6')} />
           </button>
         </div>
