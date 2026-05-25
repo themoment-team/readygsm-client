@@ -14,6 +14,9 @@ export const utilityUrl = {
 export const activityUrl = {
   getActivityList: () => '/v1/activity',
   getActivityById: (id: number) => `/v1/activity/${id}`,
+  postActivity: () => '/v1/activity/admin',
+  patchActivity: (id: number) => `/v1/activity/admin/${id}`,
+  deleteActivity: (id: number) => `/v1/activity/admin/${id}`,
 } as const;
 
 export const applicationUrl = {

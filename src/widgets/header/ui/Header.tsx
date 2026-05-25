@@ -25,8 +25,8 @@ const Header = () => {
   const { data: user } = useGetMyInfo();
   const { mutate: signOut } = usePostSignOut();
 
-  const isAdmin = pathname.startsWith('/admin');
   const isAdminRole = checkIsAdmin(user?.role);
+  const isAdmin = pathname.startsWith('/admin') && isAdminRole;
   const links = isAdmin ? NAV_LINKS.admin : NAV_LINKS.client;
 
   const handleSignOut = () => {

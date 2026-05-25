@@ -1,19 +1,12 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { UserRoleType } from '@/entities/user';
-import { ApiResponseType, patch, utilityUrl } from '@/shared/api';
+import { patch, utilityUrl } from '@/shared/api';
 
-interface PatchUserRoleParamsType {
-  email: string;
-  role: UserRoleType;
-}
+import type { UserRoleFormType } from './types';
 
 const usePatchUserRoleMutation = () =>
   useMutation({
-    mutationFn: ({ email, role }: PatchUserRoleParamsType) =>
-      patch<ApiResponseType<string>>(utilityUrl.patchUserRole(), undefined, {
-        params: { email, role },
-      }),
+    mutationFn: (dto: UserRoleFormType) => patch(utilityUrl.patchUserRole(), dto),
   });
 
 export const usePatchUserRole = () => {
