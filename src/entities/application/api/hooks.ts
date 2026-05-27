@@ -2,6 +2,16 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { type ApiResponseType, applicationUrl, del, get, post } from '@/shared/api';
 
+export const useDownloadApplicationExcel = () =>
+  useMutation({
+    mutationFn: async (activityId: number) => {
+      const response = await get<ApiResponseType<string>>(applicationUrl.getExcel(activityId));
+      const link = document.createElement('a');
+      link.href = response.data;
+      link.click();
+    },
+  });
+
 import type { ApplicationType, PostApplicationMutationInput } from '../model/types';
 
 export const applicationQueryKeys = {
