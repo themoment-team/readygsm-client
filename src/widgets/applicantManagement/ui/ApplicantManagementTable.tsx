@@ -5,9 +5,9 @@ import { useState } from 'react';
 import {
   type ApplicationType,
   useDeleteAdminApplication,
+  useDownloadApplicationExcel,
   useGetAdminApplications,
 } from '@/entities/application';
-import { type ApiResponseType, applicationUrl, get } from '@/shared/api';
 import { cn } from '@/shared/lib';
 import { Button, ConfirmModal } from '@/shared/ui';
 
@@ -25,6 +25,7 @@ const ApplicantManagementTable = ({ activityId }: ApplicantManagementTableProps)
 
   const { data: applications = [] } = useGetAdminApplications(activityId);
   const { mutate: deleteApplication, isPending } = useDeleteAdminApplication();
+  const { mutate: downloadExcel } = useDownloadApplicationExcel();
 
   const handleDeleteClick = (id: number) => setSelectedId(id);
   const handleCloseModal = () => setSelectedId(null);
@@ -33,12 +34,9 @@ const ApplicantManagementTable = ({ activityId }: ApplicantManagementTableProps)
     deleteApplication(selectedId, { onSuccess: handleCloseModal });
   };
 
-  const handleExcelDownload = async () => {
+  const handleExcelDownload = () => {
     if (activityId === null) return;
-    const response = await get<ApiResponseType<string>>(applicationUrl.getExcel(activityId));
-    const link = document.createElement('a');
-    link.href = response.data;
-    link.click();
+    downloadExcel(activityId);
   };
 
   const isEmpty = applications.length === 0;
