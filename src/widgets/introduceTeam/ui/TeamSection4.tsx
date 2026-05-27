@@ -10,14 +10,14 @@ import { cn } from '@/shared/lib';
 const GITHUB_URL = 'https://github.com';
 
 const ALLOWED_IDS = new Set([
-  'seoxeon09',
+  's2yeons',
   'yeondon125',
   'junjuny0227',
   'h-0y28',
   'LeeSangHyeok0731',
   'snowykte0426',
   'wwwcomcomcomcom',
-  'ZaMan-O',
+  'ZaMan0806',
   'hongjm0912',
   'KIEYU5',
 ]);
