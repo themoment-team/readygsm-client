@@ -59,7 +59,7 @@ const ApplicantManagementTable = ({ activityId }: ApplicantManagementTableProps)
       </div>
 
       {isEmpty ? (
-        <div className={cn('flex min-h-[480px] w-full flex-1 items-center justify-center')}>
+        <div className={cn('flex min-h-120 w-full flex-1 items-center justify-center')}>
           <p
             className={cn(
               'text-center text-xl font-semibold tracking-[-0.0375rem] whitespace-nowrap text-[#656e82]',
@@ -70,7 +70,7 @@ const ApplicantManagementTable = ({ activityId }: ApplicantManagementTableProps)
         </div>
       ) : (
         <div className={cn('overflow-x-auto rounded-lg border border-[#e4e4e7] bg-white')}>
-          <div className={cn('min-w-[800px]')}>
+          <div className={cn('min-w-200')}>
             {/* 테이블 헤더 */}
             <div className={cn('flex items-stretch border-b border-[#e4e4e7]')}>
               {TABLE_HEADERS.map((header, index) => (

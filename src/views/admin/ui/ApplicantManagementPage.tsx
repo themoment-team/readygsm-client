@@ -16,7 +16,7 @@ const ApplicantManagementPage = () => {
   const effectiveActivityId = selectedActivityId ?? minId;
 
   return (
-    <div className={cn('flex min-h-screen w-full px-[3rem]')}>
+    <div className={cn('flex min-h-screen w-full px-12')}>
       {/* 사이드바 */}
       <aside className={cn('w-55 shrink-0 px-4 py-10')}>
         <ApplicantManagementSidebar
