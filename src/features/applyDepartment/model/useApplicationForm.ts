@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 import { usePostApplication } from '@/entities/application';
 
@@ -42,7 +43,13 @@ export const useApplicationForm = (activityId: number, userId: number, onSuccess
         phoneNumber: data.phone,
         familyPhoneNumber: data.guardianPhone,
       },
-      { onSuccess },
+      {
+        onSuccess: () => {
+          toast.success('학과 체험 신청이 완료되었습니다.');
+          onSuccess?.();
+        },
+        onError: () => toast.error('신청 중 오류가 발생했습니다.'),
+      },
     );
   });
 
