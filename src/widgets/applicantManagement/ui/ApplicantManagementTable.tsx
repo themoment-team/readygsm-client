@@ -3,45 +3,27 @@
 import { useState } from 'react';
 
 import {
-  type AdminApplicationType,
+  type ApplicationType,
   useDeleteAdminApplication,
   useGetAdminApplications,
 } from '@/entities/application';
+import { type ApiResponseType, applicationUrl, get } from '@/shared/api';
 import { cn } from '@/shared/lib';
 import { Button, ConfirmModal } from '@/shared/ui';
 
+interface ApplicantManagementTableProps {
+  activityId: number | null;
+}
+
 const TABLE_HEADERS = ['신청한 학과 체험', '이름', '전화번호', '학교명', '학번', ''];
 
-const formatStudentId = ({ grade, classNumber, number }: AdminApplicationType) =>
+const formatStudentId = ({ grade, classNumber, number }: ApplicationType) =>
   `${grade}${classNumber}${number.toString().padStart(2, '0')}`;
 
-const downloadCsv = (applications: AdminApplicationType[]) => {
-  const headers = ['신청한 학과 체험', '이름', '전화번호', '학교명', '학번'];
-  const rows = applications.map((app) => [
-    app.activityName,
-    app.name,
-    app.phoneNumber,
-    app.schoolName,
-    formatStudentId(app),
-  ]);
-
-  const csvContent = [headers, ...rows]
-    .map((row) => row.map((cell) => `"${cell}"`).join(','))
-    .join('\n');
-
-  const blob = new Blob(['﻿' + csvContent], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = '신청자_목록.csv';
-  link.click();
-  URL.revokeObjectURL(url);
-};
-
-const ApplicantManagementTable = () => {
+const ApplicantManagementTable = ({ activityId }: ApplicantManagementTableProps) => {
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
-  const { data: applications = [] } = useGetAdminApplications();
+  const { data: applications = [] } = useGetAdminApplications(activityId);
   const { mutate: deleteApplication, isPending } = useDeleteAdminApplication();
 
   const handleDeleteClick = (id: number) => setSelectedId(id);
@@ -51,20 +33,28 @@ const ApplicantManagementTable = () => {
     deleteApplication(selectedId, { onSuccess: handleCloseModal });
   };
 
+  const handleExcelDownload = async () => {
+    if (activityId === null) return;
+    const response = await get<ApiResponseType<string>>(applicationUrl.getExcel(activityId));
+    const link = document.createElement('a');
+    link.href = response.data;
+    link.click();
+  };
+
   const isEmpty = applications.length === 0;
 
   return (
-    <div className={cn('flex w-full flex-col gap-8')}>
+    <div className={cn('flex flex-col gap-8')}>
       <h1 className={cn('text-neutral-dark text-[1.875rem] leading-9 font-semibold')}>
         전체 신청자 관리
       </h1>
 
-      <div className={cn('flex w-full items-center justify-end')}>
+      <div className={cn('flex items-center justify-end')}>
         <Button
           variant="outlinePrimary"
           size="sm"
-          onClick={() => downloadCsv(applications)}
-          disabled={isEmpty}
+          onClick={handleExcelDownload}
+          disabled={activityId === null}
         >
           엑셀 형식으로 출력
         </Button>
@@ -81,7 +71,7 @@ const ApplicantManagementTable = () => {
           </p>
         </div>
       ) : (
-        <div className={cn('w-full overflow-x-auto rounded-lg border border-[#e4e4e7] bg-white')}>
+        <div className={cn('overflow-x-auto rounded-lg border border-[#e4e4e7] bg-white')}>
           <div className={cn('min-w-[800px]')}>
             {/* 테이블 헤더 */}
             <div className={cn('flex items-stretch border-b border-[#e4e4e7]')}>
@@ -116,7 +106,7 @@ const ApplicantManagementTable = () => {
                   )}
                 >
                   <span className={cn('text-neutral-dark text-center text-sm')}>
-                    {app.activityName}
+                    {app.activityId}
                   </span>
                 </div>
 
