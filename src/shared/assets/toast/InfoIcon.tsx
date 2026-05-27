@@ -1,4 +1,8 @@
-const InfoIcon = () => (
+interface InfoIconProps {
+  fill?: string;
+}
+
+const InfoIcon = ({ fill = '#16A34A' }: InfoIconProps) => (
   <svg
     width="1.375rem"
     height="1.375rem"
@@ -6,7 +10,7 @@ const InfoIcon = () => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <rect width="22" height="22" rx="11" fill="#16A34A" />
+    <rect width="22" height="22" rx="11" fill={fill} />
     <circle cx="10.25" cy="6.75" r="0.75" fill="#FDFDFD" stroke="#FDFDFD" />
     <path
       d="M9.5 10H11V16.5M11 16.5H9M11 16.5H13"
