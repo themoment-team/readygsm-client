@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
 import { useQueryClient } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 
 import { usePostSignOut } from '@/entities/auth';
 import { checkIsAdmin, useGetMyInfo, userQueryKeys } from '@/entities/user';
@@ -33,6 +34,7 @@ const Header = () => {
     signOut(undefined, {
       onSuccess: () => {
         queryClient.removeQueries({ queryKey: userQueryKeys.getMyInfo() });
+        toast.success('로그아웃 되었습니다.');
         router.replace('/');
       },
     });

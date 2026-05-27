@@ -19,3 +19,5 @@ export {
   MergeIcon,
 } from './techIcon';
 export { default as TheMomentIcon } from './TheMomentIcon';
+export { default as CloseIcon } from './toast/CloseIcon';
+export { default as InfoIcon } from './toast/InfoIcon';

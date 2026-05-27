@@ -5,6 +5,7 @@ import { useEffect, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { useQueryClient } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 
 import { getRedirectUri, type OAuthProviderType, usePostAuth } from '@/entities/auth';
 import { checkIsAdmin, userQueryKeys, type UserType } from '@/entities/user';
@@ -34,6 +35,7 @@ export const useOauthCallback = () => {
       {
         onSuccess: async () => {
           sessionStorage.removeItem('oauth_provider');
+          toast.success('로그인 되었습니다.');
           const returnUrl = sessionStorage.getItem('oauth_return_url') ?? '/';
           sessionStorage.removeItem('oauth_return_url');
           try {
@@ -54,6 +56,7 @@ export const useOauthCallback = () => {
         onError: () => {
           sessionStorage.removeItem('oauth_provider');
           sessionStorage.removeItem('oauth_return_url');
+          toast.error('로그인에 실패했습니다.');
           router.replace('/');
         },
       },
