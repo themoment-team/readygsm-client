@@ -4,10 +4,10 @@ import { useState } from 'react';
 
 import {
   type ApplicationType,
-  useDeleteAdminApplication,
   useDownloadApplicationExcel,
   useGetAdminApplications,
 } from '@/entities/application';
+import { useDeleteApplicant } from '@/features/manageApplicant';
 import { cn } from '@/shared/lib';
 import { Button, ConfirmModal } from '@/shared/ui';
 
@@ -24,7 +24,7 @@ const ApplicantManagementTable = ({ activityId }: ApplicantManagementTableProps)
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
   const { data: applications = [] } = useGetAdminApplications(activityId);
-  const { mutate: deleteApplication, isPending } = useDeleteAdminApplication();
+  const { mutate: deleteApplication, isPending } = useDeleteApplicant();
   const { mutate: downloadExcel } = useDownloadApplicationExcel();
 
   const handleDeleteClick = (id: number) => setSelectedId(id);

@@ -1,21 +1,12 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { type ApiResponseType, applicationUrl, del, get, post } from '@/shared/api';
-
-export const useDownloadApplicationExcel = () =>
-  useMutation({
-    mutationFn: async (activityId: number) => {
-      const response = await get<ApiResponseType<string>>(applicationUrl.getExcel(activityId));
-      const link = document.createElement('a');
-      link.href = response.data;
-      link.click();
-    },
-  });
+import { type ApiResponseType, applicationUrl, get, post } from '@/shared/api';
 
 import type { ApplicationType, PostApplicationMutationInput } from '../model/types';
 
 export const applicationQueryKeys = {
   getMyApplication: (userId: number) => ['application', 'my', userId] as const,
+  allAdminApplications: () => ['application', 'admin', 'list'] as const,
   getAllApplications: (activityId: number) =>
     ['application', 'admin', 'list', { activityId }] as const,
 } as const;
@@ -49,15 +40,12 @@ export const useGetAdminApplications = (activityId: number | null) =>
     enabled: activityId !== null,
   });
 
-export const useDeleteAdminApplication = () => {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: (id: number) => del<void>(applicationUrl.deleteApplication(id)),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['application', 'admin', 'list'],
-      });
+export const useDownloadApplicationExcel = () =>
+  useMutation({
+    mutationFn: async (activityId: number) => {
+      const response = await get<ApiResponseType<string>>(applicationUrl.getExcel(activityId));
+      const link = document.createElement('a');
+      link.href = response.data;
+      link.click();
     },
   });
-};
