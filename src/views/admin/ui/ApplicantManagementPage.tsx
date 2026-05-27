@@ -7,7 +7,7 @@ import { ApplicantManagementTable } from '@/widgets/applicantManagement';
 import { ApplicantManagementSidebar } from '@/widgets/applicantManagementSidebar';
 
 const ApplicantManagementPage = () => {
-  const [selectedActivityId, setSelectedActivityId] = useState<number | null>(null);
+  const [selectedActivityId, setSelectedActivityId] = useState<number | null>(1);
 
   return (
     <div className={cn('flex min-h-screen w-full px-[3rem]')}>
@@ -20,7 +20,7 @@ const ApplicantManagementPage = () => {
       </aside>
 
       {/* 본문 */}
-      <main className={cn('flex max-w-[80rem] flex-1 flex-col p-8')}>
+      <main className={cn('flex max-w-7xl flex-1 flex-col p-8')}>
         <ApplicantManagementTable activityId={selectedActivityId} />
       </main>
     </div>
