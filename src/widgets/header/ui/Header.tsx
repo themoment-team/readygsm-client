@@ -45,7 +45,7 @@ const Header = () => {
   const handleMenuClose = () => setIsMenuOpen(false);
 
   return (
-    <header className={cn('relative w-full bg-white')}>
+    <header className={cn('sticky top-0 z-50 w-full bg-white')}>
       <div
         className={cn(
           'mx-auto flex h-25 max-w-480 items-center justify-between',
@@ -112,13 +112,18 @@ const Header = () => {
       </div>
 
       {isMenuOpen && (
-        <div
-          className={cn(
-            'border-border-variant absolute top-full left-0 z-50 w-full border-t bg-white lg:hidden',
-          )}
-        >
-          <div className={cn('mx-auto flex max-w-480 flex-col px-8 py-6')}>
-            <nav className={cn('flex flex-col gap-6')}>
+        <>
+          <div
+            className={cn('fixed inset-x-0 top-25 bottom-0 z-40 lg:hidden')}
+            onClick={handleMenuClose}
+          />
+          <div
+            className={cn(
+              'fixed top-25 right-0 bottom-0 z-40 bg-white lg:hidden',
+              'inline-flex flex-col items-end pt-9 pr-6 pb-34.25 pl-12.75',
+            )}
+          >
+            <div className={cn('flex flex-col items-end gap-12')}>
               {links.map((link) => {
                 const isActive =
                   link.href === '/' ? pathname === '/' : pathname.startsWith(link.href);
@@ -129,17 +134,20 @@ const Header = () => {
                     href={link.href}
                     onClick={handleMenuClose}
                     className={cn(
-                      'text-2xl leading-[120%] font-semibold transition-colors',
+                      'relative flex flex-col items-center text-2xl leading-[120%] font-semibold transition-colors',
                       isActive ? 'text-neutral-dark' : 'text-soft-gray',
                     )}
                   >
                     {link.label}
+                    <span
+                      className={cn(
+                        'bg-brand-primary absolute -bottom-2 h-1 rounded-lg transition-[width] duration-300 ease-in-out',
+                        isActive ? 'w-5' : 'w-0',
+                      )}
+                    />
                   </Link>
                 );
               })}
-            </nav>
-
-            <div className={cn('mt-8 flex flex-col gap-3')}>
               {user ? (
                 <Button
                   onClick={() => {
@@ -174,7 +182,7 @@ const Header = () => {
               )}
             </div>
           </div>
-        </div>
+        </>
       )}
 
       <LoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />
