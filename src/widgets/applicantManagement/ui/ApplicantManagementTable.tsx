@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import { useGetActivityList } from '@/entities/activity';
 import {
   type ApplicationType,
   useDownloadApplicationExcel,
@@ -24,6 +25,8 @@ const ApplicantManagementTable = ({ activityId }: ApplicantManagementTableProps)
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
   const { data: applications = [] } = useGetAdminApplications(activityId);
+  const { data: activityList } = useGetActivityList();
+  const activities = activityList?.data ?? [];
   const { mutate: deleteApplication, isPending } = useDeleteApplicant();
   const { mutate: downloadExcel } = useDownloadApplicationExcel();
 
@@ -104,7 +107,7 @@ const ApplicantManagementTable = ({ activityId }: ApplicantManagementTableProps)
                   )}
                 >
                   <span className={cn('text-neutral-dark text-center text-sm')}>
-                    {app.activityId}
+                    {activities.find((act) => act.id === app.activityId)?.name ?? app.activityId}
                   </span>
                 </div>
 
