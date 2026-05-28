@@ -23,7 +23,8 @@ const Header = () => {
   const pathname = usePathname();
   const router = useRouter();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [menuOpenPathname, setMenuOpenPathname] = useState<string | null>(null);
+  const isMenuOpen = menuOpenPathname === pathname;
 
   const queryClient = useQueryClient();
   const { data: user } = useGetMyInfo();
@@ -43,7 +44,7 @@ const Header = () => {
     });
   };
 
-  const handleMenuClose = () => setIsMenuOpen(false);
+  const handleMenuClose = () => setMenuOpenPathname(null);
 
   const getIsActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname.startsWith(href);
@@ -94,7 +95,7 @@ const Header = () => {
         </div>
 
         <button
-          onClick={() => setIsMenuOpen((prev) => !prev)}
+          onClick={() => setMenuOpenPathname(isMenuOpen ? null : pathname)}
           className={cn('flex items-center justify-center lg:hidden')}
           aria-label={isMenuOpen ? '메뉴 닫기' : '메뉴 열기'}
         >
