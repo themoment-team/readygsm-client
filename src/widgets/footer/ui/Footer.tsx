@@ -7,44 +7,22 @@ const Footer = () => {
   const CURRENT_YEAR = new Date().getFullYear();
 
   return (
-    <footer
-      className={cn(
-        'flex',
-        'w-full',
-        'items-center',
-        'justify-center',
-        'bg-gray-50',
-        'px-80',
-        'py-[1.3438rem]',
-        // 'md:px-10',
-        // 'lg:px-15',
-        // 'xl:px-20',
-        // 'fhd:px-80',
-      )}
-    >
+    <footer className={cn('bg-ghost-white flex w-full items-center justify-center')}>
       <div
         className={cn(
-          'flex',
-          'w-full',
-          'flex-col',
-          'items-start',
-          'gap-10',
-          'md:flex-row',
-          'md:items-center',
-          'md:justify-between',
-          'md:gap-2',
+          'flex w-full flex-col items-start gap-10',
+          'px-12 py-15',
+          'lg:flex-row lg:items-center lg:justify-between lg:gap-2 lg:px-20 lg:py-5',
+          'min-[1440px]:max-w-360',
         )}
       >
         <FooterGSMLogo />
 
-        <div className={cn('flex', 'flex-col', 'items-start', 'gap-4', 'md:items-end')}>
-          <div className={cn('flex', 'flex-col', 'items-start', 'gap-2', 'md:items-end')}>
+        <div className={cn('flex w-full flex-col items-end gap-4', 'lg:w-auto')}>
+          <div className={cn('flex w-full flex-col items-end gap-2', 'lg:w-auto')}>
             <p
               className={cn(
-                'text-[1.125rem]/[1.6875rem]',
-                'font-normal',
-                'text-slate-600',
-                'md:text-right',
+                'text-neutral-slate text-right text-[1.125rem]/[1.6875rem] font-normal',
               )}
             >
               ©{CURRENT_YEAR} Copyright 광주소프트웨어마이스터고등학교{' '}
@@ -52,12 +30,12 @@ const Footer = () => {
               ALL RIGHTS RESERVED.
             </p>
 
-            <div className={cn('flex', 'flex-col', 'gap-6', 'md:flex-row')}>
+            <div className={cn('flex flex-wrap justify-end gap-6')}>
               {LINKS.map(({ text, link }) => (
                 <a
                   key={text}
                   href={link}
-                  className={cn('text-[1.125rem]/[1.6875rem]', 'font-bold', 'text-slate-600')}
+                  className={cn('text-[1.125rem]/[1.6875rem]', 'font-bold', 'text-neutral-slate')}
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -67,14 +45,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <p
-            className={cn(
-              'text-[0.875rem]/[1.25rem]',
-              'font-normal',
-              'text-dark-utility',
-              'md:text-right',
-            )}
-          >
+          <p className={cn('text-dark-utility text-right text-[0.875rem]/[1.25rem] font-normal')}>
             우) 62423 광주광역시 광산구 상무대로 312
             <br />
             교무실 062)949-6800(08:30~16:30) 행정실 062)949-6806(08:30~16:30)
