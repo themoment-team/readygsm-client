@@ -118,7 +118,7 @@ const Header = () => {
           />
           <div
             className={cn(
-              'fixed top-25 right-0 bottom-0 z-40 bg-white lg:hidden',
+              'fixed top-25 right-0 bottom-0 z-40 overflow-y-auto bg-white lg:hidden',
               'inline-flex flex-col items-end pt-9 pr-6 pb-34.25 pl-12.75',
             )}
           >
