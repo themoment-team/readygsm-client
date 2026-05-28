@@ -43,11 +43,15 @@ export const useGetAdminApplications = (activityId: number | null) =>
 export const useDownloadApplicationExcel = () =>
   useMutation({
     mutationFn: async (activityId: number) => {
-      const response = await get<ApiResponseType<string>>(applicationUrl.getExcel(activityId));
+      const blob = await get<Blob>(applicationUrl.getExcel(activityId), { responseType: 'blob' });
+
+      const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
-      link.href = response.data;
+      link.href = url;
+      link.download = 'applications.xlsx';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+      URL.revokeObjectURL(url);
     },
   });
