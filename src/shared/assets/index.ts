@@ -3,6 +3,7 @@ export { default as BottomArrow } from './BottomArrow';
 export { default as CheckIcon } from './CheckIcon';
 export { default as GoogleIcon } from './GoogleIcon';
 export { default as GSMTitle } from './GSMTitle';
+export { default as HamburgerIcon } from './HamburgerIcon';
 export { default as KakaoIcon } from './KakaoIcon';
 export { default as Logo } from './Logo';
 export { default as SearchIcon } from './SearchIcon';
