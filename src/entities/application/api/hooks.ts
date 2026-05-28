@@ -46,6 +46,8 @@ export const useDownloadApplicationExcel = () =>
       const response = await get<ApiResponseType<string>>(applicationUrl.getExcel(activityId));
       const link = document.createElement('a');
       link.href = response.data;
+      document.body.appendChild(link);
       link.click();
+      document.body.removeChild(link);
     },
   });
