@@ -113,7 +113,7 @@ const Header = () => {
       {isMenuOpen && (
         <>
           <div
-            className={cn('fixed inset-x-0 top-25 bottom-0 z-40 lg:hidden')}
+            className={cn('fixed inset-x-0 top-25 bottom-0 z-40 bg-black/20 lg:hidden')}
             onClick={handleMenuClose}
           />
           <div
