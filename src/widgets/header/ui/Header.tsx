@@ -17,6 +17,7 @@ import { cn } from '@/shared/lib';
 import { Button, buttonVariants } from '@/shared/ui';
 
 import { NAV_LINKS } from '../model/navigation';
+import NavLink from './NavLink';
 
 const Header = () => {
   const pathname = usePathname();
@@ -44,6 +45,9 @@ const Header = () => {
 
   const handleMenuClose = () => setIsMenuOpen(false);
 
+  const getIsActive = (href: string) =>
+    href === '/' ? pathname === '/' : pathname.startsWith(href);
+
   return (
     <header className={cn('sticky top-0 z-50 w-full bg-white')}>
       <div
@@ -61,28 +65,15 @@ const Header = () => {
         </Link>
 
         <nav className={cn('hidden items-center gap-12 lg:flex')}>
-          {links.map((link) => {
-            const isActive = link.href === '/' ? pathname === '/' : pathname.startsWith(link.href);
-
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  'relative flex flex-col items-center text-2xl leading-[120%] font-semibold transition-colors',
-                  isActive ? 'text-neutral-dark' : 'text-soft-gray hover:text-dark-utility',
-                )}
-              >
-                {link.label}
-                <span
-                  className={cn(
-                    'bg-brand-primary absolute -bottom-2 h-1 rounded-lg transition-[width] duration-300 ease-in-out',
-                    isActive ? 'w-5' : 'w-0',
-                  )}
-                />
-              </Link>
-            );
-          })}
+          {links.map((link) => (
+            <NavLink
+              key={link.href}
+              href={link.href}
+              label={link.label}
+              isActive={getIsActive(link.href)}
+              withHover
+            />
+          ))}
         </nav>
 
         <div className={cn('hidden items-center gap-4 lg:flex')}>
@@ -124,30 +115,15 @@ const Header = () => {
             )}
           >
             <div className={cn('flex flex-col items-end gap-12')}>
-              {links.map((link) => {
-                const isActive =
-                  link.href === '/' ? pathname === '/' : pathname.startsWith(link.href);
-
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={handleMenuClose}
-                    className={cn(
-                      'relative flex flex-col items-center text-2xl leading-[120%] font-semibold transition-colors',
-                      isActive ? 'text-neutral-dark' : 'text-soft-gray',
-                    )}
-                  >
-                    {link.label}
-                    <span
-                      className={cn(
-                        'bg-brand-primary absolute -bottom-2 h-1 rounded-lg transition-[width] duration-300 ease-in-out',
-                        isActive ? 'w-5' : 'w-0',
-                      )}
-                    />
-                  </Link>
-                );
-              })}
+              {links.map((link) => (
+                <NavLink
+                  key={link.href}
+                  href={link.href}
+                  label={link.label}
+                  isActive={getIsActive(link.href)}
+                  onClick={handleMenuClose}
+                />
+              ))}
               {user ? (
                 <Button
                   onClick={() => {
