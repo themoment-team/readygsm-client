@@ -131,7 +131,7 @@ const ApplicationForm = ({ activityId, userId, onSuccess }: ApplicationFormProps
                   <SelectValue placeholder="반을 선택해주세요" />
                 </SelectTrigger>
                 <SelectContent>
-                  {Array.from({ length: 4 }, (_, i) => (
+                  {Array.from({ length: 20 }, (_, i) => (
                     <SelectItem key={i + 1} value={String(i + 1)}>
                       {i + 1}반
                     </SelectItem>

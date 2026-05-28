@@ -4,7 +4,13 @@ export const ApplicationFormSchema = z
   .object({
     name: z.string().min(1, { error: '정확한 이름을 입력해주세요' }),
     grade: z.enum(['1', '2', '3']),
-    classNum: z.enum(['1', '2', '3', '4']),
+    classNum: z.string().refine(
+      (v) => {
+        const n = Number(v);
+        return Number.isInteger(n) && n >= 1 && n <= 20;
+      },
+      { message: '반을 선택해주세요' },
+    ),
     number: z
       .string()
       .min(1, { error: '번호를 입력해주세요' })
