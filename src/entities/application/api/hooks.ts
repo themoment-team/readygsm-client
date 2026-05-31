@@ -6,6 +6,9 @@ import type { ApplicationType, PostApplicationMutationInput } from '../model/typ
 
 export const applicationQueryKeys = {
   getMyApplication: (userId: number) => ['application', 'my', userId] as const,
+  allAdminApplications: () => ['application', 'admin', 'list'] as const,
+  getAllApplications: (activityId: number) =>
+    ['application', 'admin', 'list', { activityId }] as const,
 } as const;
 
 export const useGetMyApplication = (userId: number, enabled = true) =>
@@ -26,4 +29,29 @@ export const usePostApplication = () =>
       post<ApiResponseType<ApplicationType>>(applicationUrl.postApplication(), body, {
         params: { userId, activityId },
       }),
+  });
+
+export const useGetAdminApplications = (activityId: number | null) =>
+  useQuery({
+    queryKey: applicationQueryKeys.getAllApplications(activityId ?? 0),
+    queryFn: () =>
+      get<ApiResponseType<ApplicationType[]>>(applicationUrl.getAllApplications(activityId!)),
+    select: (res) => res.data,
+    enabled: activityId !== null,
+  });
+
+export const useDownloadApplicationExcel = () =>
+  useMutation({
+    mutationFn: async (activityId: number) => {
+      const blob = await get<Blob>(applicationUrl.getExcel(activityId), { responseType: 'blob' });
+
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'applications.xlsx';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    },
   });

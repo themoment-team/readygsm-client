@@ -22,4 +22,7 @@ export const activityUrl = {
 export const applicationUrl = {
   getMyApplication: () => '/v1/application/my',
   postApplication: () => '/v1/application/apply',
+  getAllApplications: (id: number) => `/v1/application/admin/applications?activityId=${id}`,
+  deleteApplication: (id: number) => `/v1/application/admin/cancel/${id}`,
+  getExcel: (id: number) => `/v1/application/admin/excel?activityId=${id}`,
 } as const;
