@@ -1,4 +1,4 @@
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 
 import { type ApiResponseType, applicationUrl } from '@/shared/api';
 
@@ -7,8 +7,11 @@ import type { ApplicationType } from '../model/types';
 const getMyApplication = async (userId: number): Promise<ApplicationType | undefined> => {
   try {
     const cookieStore = await cookies();
+    const headerStore = await headers();
+    const host = headerStore.get('host');
+    const proto = headerStore.get('x-forwarded-proto') ?? 'http';
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}${applicationUrl.getMyApplication()}?userId=${userId}`,
+      `${proto}://${host}/api${applicationUrl.getMyApplication()}?userId=${userId}`,
       {
         headers: { Cookie: cookieStore.toString() },
         cache: 'no-store',
