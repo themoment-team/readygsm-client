@@ -28,6 +28,7 @@ import {
   type ActivityFirstCreateFormType,
   toActivityBaseReqDto,
   toActivityFirstCreateReqDto,
+  toActivityPatchReqDto,
   toFormValues,
 } from '../model/types';
 import { usePatchActivity } from '../model/usePatchActivity';
@@ -75,8 +76,8 @@ const ActivityFormView = ({ mode, activity, isFirstActivity }: ActivityFormViewP
   const handleBaseSubmit = (values: ActivityBaseFormType) => {
     if (mode === 'create') {
       postActivity(toActivityBaseReqDto(values), { onSuccess: handleSuccess });
-    } else {
-      patchActivity(toActivityBaseReqDto(values), { onSuccess: handleSuccess });
+    } else if (activity) {
+      patchActivity(toActivityPatchReqDto(values, activity), { onSuccess: handleSuccess });
     }
   };
 

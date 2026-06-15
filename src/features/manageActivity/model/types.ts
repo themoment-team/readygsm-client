@@ -43,6 +43,12 @@ const toBaseFields = (values: ActivityBaseFormType) => ({
 
 export const toActivityBaseReqDto = (values: ActivityBaseFormType) => toBaseFields(values);
 
+export const toActivityPatchReqDto = (values: ActivityBaseFormType, activity: ActivityType) => ({
+  ...toBaseFields(values),
+  registrationStartAt: activity.registrationStartAt,
+  registrationEndAt: activity.registrationEndAt,
+});
+
 export const toActivityFirstCreateReqDto = (values: ActivityFirstCreateFormType) => {
   const currentYear = new Date().getFullYear();
   return {
