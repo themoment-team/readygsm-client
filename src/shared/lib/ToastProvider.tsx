@@ -17,6 +17,7 @@ const ToastProvider = () => (
     position="top-right"
     icon={({ type }) => <InfoIcon fill={ICON_FILL_BY_TYPE[type] ?? '#16A34A'} />}
     closeButton={<CloseIcon />}
+    pauseOnHover={false}
   />
 );
 
