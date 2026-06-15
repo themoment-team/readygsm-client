@@ -8,3 +8,4 @@ export * from './input';
 export * from './Modal';
 export * from './SectionHeader';
 export * from './select';
+export * from './ViewportGuard';

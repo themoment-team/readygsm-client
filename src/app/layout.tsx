@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 
 import { cn, TanStackProvider, ToastProvider } from '@/shared/lib';
 import { pretendard } from '@/shared/styles';
+import { ViewportGuard } from '@/shared/ui';
 import { Footer } from '@/widgets/footer';
 import { Header } from '@/widgets/header';
 
@@ -21,9 +22,11 @@ const RootLayout = ({
     <html lang="ko">
       <body className={pretendard.className}>
         <TanStackProvider>
-          <Header />
-          <div className={cn('flex-1')}>{children}</div>
-          <Footer />
+          <ViewportGuard>
+            <Header />
+            <div className={cn('flex-1')}>{children}</div>
+            <Footer />
+          </ViewportGuard>
           <ToastProvider />
         </TanStackProvider>
       </body>
