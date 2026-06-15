@@ -57,13 +57,13 @@ const RootLayout = ({
 }>) => {
   return (
     <html lang="ko">
-      <head>
+      <body className={pretendard.className}>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteJsonLd).replace(/</g, '\\u003c'),
+          }}
         />
-      </head>
-      <body className={pretendard.className}>
         <TanStackProvider>
           <ViewportGuard>
             <Header />
