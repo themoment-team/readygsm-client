@@ -1,26 +1,19 @@
-'use client';
-
 import { ReactNode } from 'react';
 
 import Image from 'next/image';
 
-import { useMediaQuery } from '@/shared/hooks';
 import { cn } from '@/shared/lib';
-
-const UNSUPPORTED_VIEWPORT_QUERY = '(max-width: 1023px)';
 
 interface ViewportGuardProps {
   children: ReactNode;
 }
 
 const ViewportGuard = ({ children }: ViewportGuardProps) => {
-  const isUnsupportedViewport = useMediaQuery(UNSUPPORTED_VIEWPORT_QUERY);
-
-  if (isUnsupportedViewport) {
-    return (
+  return (
+    <>
       <div
         className={cn(
-          'bg-pure-white fixed inset-0 z-50 flex flex-col items-center justify-center gap-7',
+          'bg-pure-white fixed inset-0 z-50 flex flex-col items-center justify-center gap-7 lg:hidden',
         )}
       >
         <Image
@@ -37,10 +30,9 @@ const ViewportGuard = ({ children }: ViewportGuardProps) => {
           바랍니다.
         </p>
       </div>
-    );
-  }
-
-  return <>{children}</>;
+      <div className={cn('hidden lg:contents')}>{children}</div>
+    </>
+  );
 };
 
 export { ViewportGuard };
