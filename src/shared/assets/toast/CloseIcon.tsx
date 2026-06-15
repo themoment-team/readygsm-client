@@ -6,6 +6,9 @@ interface CloseIconProps {
 
 const CloseIcon = ({ closeToast }: CloseIconProps) => (
   <svg
+    role="button"
+    tabIndex={0}
+    aria-label="닫기"
     width="1.5rem"
     height="1.5rem"
     viewBox="0 0 24 24"
@@ -15,6 +18,13 @@ const CloseIcon = ({ closeToast }: CloseIconProps) => (
     onClick={(event) => {
       event.stopPropagation();
       closeToast?.(true);
+    }}
+    onKeyDown={(event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        event.stopPropagation();
+        closeToast?.(true);
+      }
     }}
   >
     <path
