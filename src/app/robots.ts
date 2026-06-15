@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-const SITE_URL = 'https://www.ready.hellogsm.kr';
+import { SITE_URL } from '@/shared/lib';
 
 const robots = (): MetadataRoute.Robots => ({
   rules: {
