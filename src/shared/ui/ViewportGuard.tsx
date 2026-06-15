@@ -24,7 +24,7 @@ const ViewportGuard = ({ children }: ViewportGuardProps) => {
         )}
       >
         <Image
-          src="/images/pcRecommendMascot.png"
+          src="/images/readygsm.png"
           alt=""
           width={150}
           height={158}
