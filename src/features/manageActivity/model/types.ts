@@ -41,12 +41,13 @@ const toBaseFields = (values: ActivityBaseFormType) => ({
   activityEndTime: `${pad(values.activityEndHour)}:${pad(values.activityEndMinute)}`,
 });
 
-export const toActivityBaseReqDto = (values: ActivityBaseFormType) => toBaseFields(values);
-
-export const toActivityPatchReqDto = (values: ActivityBaseFormType, activity: ActivityType) => ({
+export const toActivityWithRegistrationReqDto = (
+  values: ActivityBaseFormType,
+  registration: Pick<ActivityType, 'registrationStartAt' | 'registrationEndAt'>,
+) => ({
   ...toBaseFields(values),
-  registrationStartAt: activity.registrationStartAt,
-  registrationEndAt: activity.registrationEndAt,
+  registrationStartAt: registration.registrationStartAt,
+  registrationEndAt: registration.registrationEndAt,
 });
 
 export const toActivityFirstCreateReqDto = (values: ActivityFirstCreateFormType) => {
