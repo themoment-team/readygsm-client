@@ -61,6 +61,12 @@ const ProgramCard = ({
       <p className={cn('text-secondary-slate mt-2 text-[0.875rem] leading-[1.4] font-normal')}>
         {activityDate}
       </p>
+
+      {reservePersonnel <= 0 && (
+        <p className={cn('text-error-red mt-2 text-[0.875rem] leading-[1.4] font-normal')}>
+          예비 신청의 경우, 신청이 확정되지 않으면 확정 안내 문자가 발송되지 않을 수 있습니다.
+        </p>
+      )}
     </section>
   );
 };
