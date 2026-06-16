@@ -47,9 +47,9 @@ export const useApplicationForm = (activityId: number, userId: number, onSuccess
         familyPhoneNumber: data.guardianPhone,
       },
       {
-        onSuccess: () => {
+        onSuccess: async () => {
           queryClient.invalidateQueries({ queryKey: activityQueryKeys.getActivityList() });
-          revalidateActivityList();
+          await revalidateActivityList();
           toast.success('학과 체험 신청이 완료되었습니다.');
           onSuccess?.();
         },

@@ -11,9 +11,9 @@ const useDeleteApply = (userId: number, activityId: number) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: () => del(cancelApplyUrl.deleteApply(), { params: { userId, activityId } }),
-    onSuccess: () => {
+    onSuccess: async () => {
       queryClient.invalidateQueries({ queryKey: activityQueryKeys.getActivityList() });
-      revalidateActivityList();
+      await revalidateActivityList();
     },
   });
 };

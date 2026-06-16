@@ -9,10 +9,10 @@ export const useDeleteApplicant = () => {
 
   return useMutation({
     mutationFn: (id: number) => del<void>(applicationUrl.deleteApplication(id)),
-    onSuccess: () => {
+    onSuccess: async () => {
       queryClient.invalidateQueries({ queryKey: applicationQueryKeys.allAdminApplications() });
       queryClient.invalidateQueries({ queryKey: activityQueryKeys.getActivityList() });
-      revalidateActivityList();
+      await revalidateActivityList();
     },
   });
 };
