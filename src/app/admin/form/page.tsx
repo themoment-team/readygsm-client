@@ -3,8 +3,11 @@ import { ActivityFormView } from '@/features/manageActivity';
 
 const AdminFormPage = async () => {
   const response = await getActivityList();
-  const isFirstActivity = !response?.data?.length;
-  const firstActivity = response?.data?.[0];
+
+  if (!response) throw new Error('학과 체험 목록을 불러오는데 실패했습니다.');
+
+  const isFirstActivity = !response.data?.length;
+  const firstActivity = response.data?.[0];
   const registrationPeriod = firstActivity
     ? {
         registrationStartAt: firstActivity.registrationStartAt,
