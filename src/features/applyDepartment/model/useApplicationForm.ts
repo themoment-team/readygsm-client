@@ -1,15 +1,18 @@
 import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
+import { activityQueryKeys, revalidateActivityList } from '@/entities/activity';
 import { usePostApplication } from '@/entities/application';
 
 import { ApplicationFormSchema, type ApplicationFormType } from './schema';
 
 export const useApplicationForm = (activityId: number, userId: number, onSuccess?: () => void) => {
   const [isSchoolModalOpen, setIsSchoolModalOpen] = useState(false);
+  const queryClient = useQueryClient();
   const { mutate: postApplication } = usePostApplication();
 
   const form = useForm<ApplicationFormType>({
@@ -45,6 +48,8 @@ export const useApplicationForm = (activityId: number, userId: number, onSuccess
       },
       {
         onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: activityQueryKeys.getActivityList() });
+          revalidateActivityList();
           toast.success('학과 체험 신청이 완료되었습니다.');
           onSuccess?.();
         },
