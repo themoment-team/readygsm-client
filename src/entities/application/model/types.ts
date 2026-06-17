@@ -9,6 +9,7 @@ export interface ApplicationType {
   schoolName: string;
   phoneNumber: string;
   familyPhoneNumber: string;
+  isReserve: boolean;
 }
 
 export interface PostApplicationRequestType {

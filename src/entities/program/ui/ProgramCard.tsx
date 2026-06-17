@@ -6,6 +6,7 @@ interface ProgramCardProps extends Pick<
   'name' | 'description' | 'activityDate' | 'maxApplicant' | 'currentApplicant'
 > {
   isSelected?: boolean | undefined;
+  isReserved?: boolean;
   disableHover?: boolean;
   onClick?: () => void;
 }
@@ -17,10 +18,12 @@ const ProgramCard = ({
   maxApplicant,
   currentApplicant,
   isSelected,
+  isReserved,
   disableHover = false,
   onClick,
 }: ProgramCardProps) => {
   const reservePersonnel = maxApplicant - currentApplicant;
+  const showReserveWarning = isReserved !== undefined ? isReserved : reservePersonnel <= 0;
 
   return (
     <section
@@ -50,7 +53,7 @@ const ProgramCard = ({
             isSelected ? 'text-[#2563EB]' : 'text-neutral-dark',
           )}
         >
-          {reservePersonnel > 0 ? `${currentApplicant}/${maxApplicant}` : '예비 신청'}
+          {showReserveWarning ? '예비 신청' : `${currentApplicant}/${maxApplicant}`}
         </p>
       </header>
 
@@ -61,6 +64,12 @@ const ProgramCard = ({
       <p className={cn('text-secondary-slate mt-2 text-[0.875rem] leading-[1.4] font-normal')}>
         {activityDate}
       </p>
+
+      {showReserveWarning && (
+        <p className={cn('text-error-red mt-2 text-[0.875rem] leading-[1.4] font-normal')}>
+          예비 신청의 경우, 신청이 확정되지 않으면 확정 안내 문자가 발송되지 않을 수 있습니다.
+        </p>
+      )}
     </section>
   );
 };
