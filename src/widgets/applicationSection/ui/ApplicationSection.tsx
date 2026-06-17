@@ -56,6 +56,7 @@ const ApplicationSection = ({ user, application, activity }: ApplicationSectionP
               activityDate={activity.activityDate}
               maxApplicant={activity.maxApplicant}
               currentApplicant={activity.currentApplicant}
+              isReserved={application.isReserve}
               disableHover
             />
           </section>
