@@ -40,7 +40,7 @@ const ProgramsPage = ({ activities, isLoggedIn, application, userId }: ProgramsP
   return (
     <div
       className={cn(
-        'mx-auto flex w-155.5 flex-col gap-9 py-9 xl:h-[calc(100vh-6.25rem)] xl:w-7xl xl:flex-row xl:justify-center',
+        'mx-auto flex w-155.5 flex-col gap-9 py-9 xl:min-h-[calc(100vh-6.25rem)] xl:w-7xl xl:flex-row xl:justify-center',
       )}
     >
       <div className={cn('flex flex-col gap-5')}>
