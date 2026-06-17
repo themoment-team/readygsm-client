@@ -1,7 +1,7 @@
 'use server';
 
-import { revalidateTag } from 'next/cache';
+import { updateTag } from 'next/cache';
 
 export const revalidateActivityList = async () => {
-  revalidateTag('activity-list', 'default');
+  updateTag('activity-list');
 };
