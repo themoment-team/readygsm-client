@@ -24,7 +24,8 @@ const formatStudentId = ({ grade, classNumber, number }: ApplicationType) =>
 const ApplicantManagementTable = ({ activityId }: ApplicantManagementTableProps) => {
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
-  const { data: applications = [] } = useGetAdminApplications(activityId);
+  const { data: allApplications = [] } = useGetAdminApplications(activityId);
+  const applications = allApplications.filter((a) => !a.isReserve);
   const { data: activityList } = useGetActivityList();
   const activities = activityList?.data ?? [];
   const { mutate: deleteApplication, isPending } = useDeleteApplicant();
