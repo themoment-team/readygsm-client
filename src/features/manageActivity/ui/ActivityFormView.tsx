@@ -26,8 +26,8 @@ import {
   type ActivityBaseFormType,
   ActivityFirstCreateFormSchema,
   type ActivityFirstCreateFormType,
-  toActivityBaseReqDto,
   toActivityFirstCreateReqDto,
+  toActivityWithRegistrationReqDto,
   toFormValues,
 } from '../model/types';
 import { usePatchActivity } from '../model/usePatchActivity';
@@ -37,6 +37,7 @@ interface ActivityFormViewProps {
   mode: 'create' | 'edit';
   activity?: ActivityType;
   isFirstActivity?: boolean;
+  registrationPeriod?: Pick<ActivityType, 'registrationStartAt' | 'registrationEndAt'>;
 }
 
 const CURRENT_YEAR = new Date().getFullYear();
@@ -44,7 +45,12 @@ const YEARS = Array.from({ length: 5 }, (_, i) => CURRENT_YEAR + i - 1);
 const MONTHS = Array.from({ length: 12 }, (_, i) => i + 1);
 const DAYS = Array.from({ length: 31 }, (_, i) => i + 1);
 
-const ActivityFormView = ({ mode, activity, isFirstActivity }: ActivityFormViewProps) => {
+const ActivityFormView = ({
+  mode,
+  activity,
+  isFirstActivity,
+  registrationPeriod,
+}: ActivityFormViewProps) => {
   const router = useRouter();
   const { postActivity, isPending: isCreating } = usePostActivity();
   const { patchActivity, isPending: isEditing } = usePatchActivity(activity?.id ?? 0);
@@ -73,10 +79,14 @@ const ActivityFormView = ({ mode, activity, isFirstActivity }: ActivityFormViewP
   };
 
   const handleBaseSubmit = (values: ActivityBaseFormType) => {
-    if (mode === 'create') {
-      postActivity(toActivityBaseReqDto(values), { onSuccess: handleSuccess });
-    } else {
-      patchActivity(toActivityBaseReqDto(values), { onSuccess: handleSuccess });
+    if (mode === 'create' && registrationPeriod) {
+      postActivity(toActivityWithRegistrationReqDto(values, registrationPeriod), {
+        onSuccess: handleSuccess,
+      });
+    } else if (activity) {
+      patchActivity(toActivityWithRegistrationReqDto(values, activity), {
+        onSuccess: handleSuccess,
+      });
     }
   };
 
