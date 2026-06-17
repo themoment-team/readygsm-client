@@ -1,7 +1,9 @@
+import { SyntheticEvent } from 'react';
+
 import { cn } from '@/shared/lib';
 
 interface CloseIconProps {
-  closeToast?: (dismiss?: boolean) => void;
+  closeToast?: (e: SyntheticEvent) => void;
 }
 
 const CloseIcon = ({ closeToast }: CloseIconProps) => (
@@ -17,13 +19,13 @@ const CloseIcon = ({ closeToast }: CloseIconProps) => (
     className={cn('Toastify__Close-Button', 'cursor-pointer')}
     onClick={(event) => {
       event.stopPropagation();
-      closeToast?.(true);
+      closeToast?.(event);
     }}
     onKeyDown={(event) => {
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
         event.stopPropagation();
-        closeToast?.(true);
+        closeToast?.(event);
       }
     }}
   >
