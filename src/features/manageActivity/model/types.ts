@@ -54,7 +54,7 @@ export const toActivityFirstCreateReqDto = (values: ActivityFirstCreateFormType)
   const currentYear = new Date().getFullYear();
   return {
     ...toBaseFields(values),
-    registrationStartAt: `${currentYear}-${pad(values.registrationStartMonth)}-${pad(values.registrationStartDay)}T00:00:00`,
+    registrationStartAt: `${currentYear}-${pad(values.registrationStartMonth)}-${pad(values.registrationStartDay)}T08:00:00`,
     registrationEndAt: `${currentYear}-${pad(values.registrationEndMonth)}-${pad(values.registrationEndDay)}T23:59:59`,
   };
 };
