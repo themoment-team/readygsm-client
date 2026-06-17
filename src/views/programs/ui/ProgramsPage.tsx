@@ -19,6 +19,15 @@ const ProgramsPage = ({ activities, isLoggedIn, application, userId }: ProgramsP
   const [selectedActivity, setSelectedActivity] = useState<ActivityType | null>(null);
   const [isApplicationCompleted, setIsApplicationCompleted] = useState(false);
 
+  if (activities.length === 0) {
+    return (
+      <CompletionMessage
+        title="학과 체험 신청 기간이 아닙니다"
+        description="학과 체험 신청 기간은 9월 16일부터 22일까지 입니다."
+      />
+    );
+  }
+
   if (!isLoggedIn) {
     return (
       <CompletionMessage
