@@ -53,8 +53,15 @@ const Header = () => {
 
   const handleMenuClose = () => setMenuOpenPathname(null);
 
-  const getIsActive = (href: string) =>
-    href === '/' ? pathname === '/' : pathname.startsWith(href);
+  const getIsActive = (href: string) => {
+    const matchingLinks = links.filter(
+      (link) => pathname === link.href || pathname.startsWith(link.href + '/'),
+    );
+    const mostSpecific = matchingLinks.reduce((a, b) => (b.href.length > a.href.length ? b : a), {
+      href: '',
+    });
+    return mostSpecific.href === href;
+  };
 
   return (
     <header className={cn('sticky top-0 z-50 w-full bg-white')}>
