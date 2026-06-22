@@ -21,7 +21,11 @@ interface ApplicationSectionProps {
 const ApplicationSection = ({ user, application, activity }: ApplicationSectionProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const isPeriodEnded = activity ? new Date() > new Date(activity.registrationEndAt) : false;
+  const [isPeriodEnded] = useState(() =>
+    typeof window !== 'undefined' && activity
+      ? new Date() > new Date(activity.registrationEndAt)
+      : false,
+  );
 
   const handleCancelClick = () => {
     if (isPeriodEnded) {
