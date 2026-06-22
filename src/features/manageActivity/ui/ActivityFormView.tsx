@@ -45,7 +45,7 @@ const YEARS = Array.from({ length: 5 }, (_, i) => CURRENT_YEAR + i - 1);
 const MONTHS = Array.from({ length: 12 }, (_, i) => i + 1);
 const DAYS = Array.from({ length: 31 }, (_, i) => i + 1);
 const HOURS = Array.from({ length: 24 }, (_, i) => i);
-const MINUTES = Array.from({ length: 60 }, (_, i) => i);
+const MINUTES = Array.from({ length: 6 }, (_, i) => i * 10);
 
 const ActivityFormView = ({
   mode,
