@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 
+import { toast } from 'react-toastify';
+
 import { type ActivityType } from '@/entities/activity';
 import { type ApplicationType } from '@/entities/application';
 import { ProgramCard } from '@/entities/program';
@@ -18,6 +20,16 @@ interface ApplicationSectionProps {
 
 const ApplicationSection = ({ user, application, activity }: ApplicationSectionProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const isPeriodEnded = activity ? new Date() > new Date(activity.registrationEndAt) : false;
+
+  const handleCancelClick = () => {
+    if (isPeriodEnded) {
+      toast.error('학과체험 신청 취소 기간이 아닙니다.');
+      return;
+    }
+    setIsModalOpen(true);
+  };
 
   if (!user || user.role === 'UNAUTHENTICATED') {
     return (
@@ -110,7 +122,12 @@ const ApplicationSection = ({ user, application, activity }: ApplicationSectionP
           </div>
         </section>
 
-        <Button variant="outlineDanger" size="full" onClick={() => setIsModalOpen(true)}>
+        <Button
+          variant="outlineDanger"
+          size="full"
+          onClick={handleCancelClick}
+          className={cn(isPeriodEnded && 'cursor-not-allowed opacity-50 hover:bg-transparent')}
+        >
           학과 체험 취소
         </Button>
       </div>
