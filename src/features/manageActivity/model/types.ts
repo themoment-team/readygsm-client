@@ -10,10 +10,10 @@ const baseActivityFields = {
   activityYear: z.string().min(1, '년도를 선택해주세요'),
   activityMonth: z.string().min(1, '월을 선택해주세요'),
   activityDay: z.string().min(1, '일을 선택해주세요'),
-  activityStartHour: z.string().min(1, '시를 입력해주세요'),
-  activityStartMinute: z.string().min(1, '분을 입력해주세요'),
-  activityEndHour: z.string().min(1, '시를 입력해주세요'),
-  activityEndMinute: z.string().min(1, '분을 입력해주세요'),
+  activityStartHour: z.string().min(1, '시를 선택해주세요'),
+  activityStartMinute: z.string().min(1, '분을 선택해주세요'),
+  activityEndHour: z.string().min(1, '시를 선택해주세요'),
+  activityEndMinute: z.string().min(1, '분을 선택해주세요'),
 };
 
 export const ActivityBaseFormSchema = z.object(baseActivityFields);
@@ -72,9 +72,9 @@ export const toFormValues = (activity: ActivityType): ActivityBaseFormType => {
     activityYear: actYear,
     activityMonth: String(parseInt(actMonth, 10)),
     activityDay: String(parseInt(actDay, 10)),
-    activityStartHour: startHour,
-    activityStartMinute: startMinute,
-    activityEndHour: endHour,
-    activityEndMinute: endMinute,
+    activityStartHour: String(parseInt(startHour, 10)),
+    activityStartMinute: String(parseInt(startMinute, 10)),
+    activityEndHour: String(parseInt(endHour, 10)),
+    activityEndMinute: String(parseInt(endMinute, 10)),
   };
 };
