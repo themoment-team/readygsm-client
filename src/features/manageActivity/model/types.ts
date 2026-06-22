@@ -72,9 +72,9 @@ export const toFormValues = (activity: ActivityType): ActivityBaseFormType => {
     activityYear: actYear,
     activityMonth: String(parseInt(actMonth, 10)),
     activityDay: String(parseInt(actDay, 10)),
-    activityStartHour: String(parseInt(startHour, 10)),
-    activityStartMinute: String(parseInt(startMinute, 10)),
-    activityEndHour: String(parseInt(endHour, 10)),
-    activityEndMinute: String(parseInt(endMinute, 10)),
+    activityStartHour: startHour ? String(parseInt(startHour, 10)) : '',
+    activityStartMinute: startMinute ? String(parseInt(startMinute, 10)) : '',
+    activityEndHour: endHour ? String(parseInt(endHour, 10)) : '',
+    activityEndMinute: endMinute ? String(parseInt(endMinute, 10)) : '',
   };
 };

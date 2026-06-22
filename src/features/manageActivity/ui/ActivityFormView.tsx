@@ -151,7 +151,7 @@ const ActivityFormView = ({
               render={({ field }) => (
                 <Select value={field.value ?? ''} onValueChange={field.onChange}>
                   <SelectTrigger
-                    className={cn('flex-1', formErrors.activityYear && 'border-error-red')}
+                    className={cn('w-full flex-1', formErrors.activityYear && 'border-error-red')}
                   >
                     <SelectValue placeholder="년도 입력" />
                   </SelectTrigger>
@@ -174,7 +174,7 @@ const ActivityFormView = ({
               render={({ field }) => (
                 <Select value={field.value ?? ''} onValueChange={field.onChange}>
                   <SelectTrigger
-                    className={cn('flex-1', formErrors.activityMonth && 'border-error-red')}
+                    className={cn('w-full flex-1', formErrors.activityMonth && 'border-error-red')}
                   >
                     <SelectValue placeholder="월 입력" />
                   </SelectTrigger>
@@ -197,7 +197,7 @@ const ActivityFormView = ({
               render={({ field }) => (
                 <Select value={field.value ?? ''} onValueChange={field.onChange}>
                   <SelectTrigger
-                    className={cn('flex-1', formErrors.activityDay && 'border-error-red')}
+                    className={cn('w-full flex-1', formErrors.activityDay && 'border-error-red')}
                   >
                     <SelectValue placeholder="일 입력" />
                   </SelectTrigger>
@@ -225,7 +225,10 @@ const ActivityFormView = ({
               render={({ field }) => (
                 <Select value={field.value ?? ''} onValueChange={field.onChange}>
                   <SelectTrigger
-                    className={cn('flex-1', formErrors.activityStartHour && 'border-error-red')}
+                    className={cn(
+                      'w-full flex-1',
+                      formErrors.activityStartHour && 'border-error-red',
+                    )}
                   >
                     <SelectValue placeholder="시 선택" />
                   </SelectTrigger>
@@ -248,7 +251,10 @@ const ActivityFormView = ({
               render={({ field }) => (
                 <Select value={field.value ?? ''} onValueChange={field.onChange}>
                   <SelectTrigger
-                    className={cn('flex-1', formErrors.activityStartMinute && 'border-error-red')}
+                    className={cn(
+                      'w-full flex-1',
+                      formErrors.activityStartMinute && 'border-error-red',
+                    )}
                   >
                     <SelectValue placeholder="분 선택" />
                   </SelectTrigger>
@@ -276,7 +282,10 @@ const ActivityFormView = ({
               render={({ field }) => (
                 <Select value={field.value ?? ''} onValueChange={field.onChange}>
                   <SelectTrigger
-                    className={cn('flex-1', formErrors.activityEndHour && 'border-error-red')}
+                    className={cn(
+                      'w-full flex-1',
+                      formErrors.activityEndHour && 'border-error-red',
+                    )}
                   >
                     <SelectValue placeholder="시 선택" />
                   </SelectTrigger>
@@ -299,7 +308,10 @@ const ActivityFormView = ({
               render={({ field }) => (
                 <Select value={field.value ?? ''} onValueChange={field.onChange}>
                   <SelectTrigger
-                    className={cn('flex-1', formErrors.activityEndMinute && 'border-error-red')}
+                    className={cn(
+                      'w-full flex-1',
+                      formErrors.activityEndMinute && 'border-error-red',
+                    )}
                   >
                     <SelectValue placeholder="분 선택" />
                   </SelectTrigger>
