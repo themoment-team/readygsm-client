@@ -44,6 +44,15 @@ const CURRENT_YEAR = new Date().getFullYear();
 const YEARS = Array.from({ length: 5 }, (_, i) => CURRENT_YEAR + i - 1);
 const MONTHS = Array.from({ length: 12 }, (_, i) => i + 1);
 const DAYS = Array.from({ length: 31 }, (_, i) => i + 1);
+const HOURS = Array.from({ length: 24 }, (_, i) => i);
+const MINUTES = Array.from({ length: 6 }, (_, i) => i * 10);
+
+const getMinuteOptions = (value?: string) => {
+  const numVal = value !== undefined && value !== '' ? Number(value) : NaN;
+  return !isNaN(numVal) && !MINUTES.includes(numVal)
+    ? [...MINUTES, numVal].sort((a, b) => a - b)
+    : MINUTES;
+};
 
 const ActivityFormView = ({
   mode,
@@ -142,7 +151,7 @@ const ActivityFormView = ({
               render={({ field }) => (
                 <Select value={field.value ?? ''} onValueChange={field.onChange}>
                   <SelectTrigger
-                    className={cn('flex-1', formErrors.activityYear && 'border-error-red')}
+                    className={cn('w-full flex-1', formErrors.activityYear && 'border-error-red')}
                   >
                     <SelectValue placeholder="년도 입력" />
                   </SelectTrigger>
@@ -165,7 +174,7 @@ const ActivityFormView = ({
               render={({ field }) => (
                 <Select value={field.value ?? ''} onValueChange={field.onChange}>
                   <SelectTrigger
-                    className={cn('flex-1', formErrors.activityMonth && 'border-error-red')}
+                    className={cn('w-full flex-1', formErrors.activityMonth && 'border-error-red')}
                   >
                     <SelectValue placeholder="월 입력" />
                   </SelectTrigger>
@@ -188,7 +197,7 @@ const ActivityFormView = ({
               render={({ field }) => (
                 <Select value={field.value ?? ''} onValueChange={field.onChange}>
                   <SelectTrigger
-                    className={cn('flex-1', formErrors.activityDay && 'border-error-red')}
+                    className={cn('w-full flex-1', formErrors.activityDay && 'border-error-red')}
                   >
                     <SelectValue placeholder="일 입력" />
                   </SelectTrigger>
@@ -210,46 +219,114 @@ const ActivityFormView = ({
 
         <FormField label="체험 시작 시간">
           <div className={cn('flex gap-2')}>
-            <Input
-              {...form.register('activityStartHour')}
-              placeholder="시를 입력해주세요"
-              type="number"
-              min={0}
-              max={23}
-              className={cn('flex-1')}
-              error={!!formErrors.activityStartHour}
+            <Controller
+              name="activityStartHour"
+              control={form.control}
+              render={({ field }) => (
+                <Select value={field.value ?? ''} onValueChange={field.onChange}>
+                  <SelectTrigger
+                    className={cn(
+                      'w-full flex-1',
+                      formErrors.activityStartHour && 'border-error-red',
+                    )}
+                  >
+                    <SelectValue placeholder="시 선택" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>시 선택</SelectLabel>
+                      {HOURS.map((h) => (
+                        <SelectItem key={h} value={String(h)}>
+                          {h}시
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              )}
             />
-            <Input
-              {...form.register('activityStartMinute')}
-              placeholder="분을 입력해주세요"
-              type="number"
-              min={0}
-              max={59}
-              className={cn('flex-1')}
-              error={!!formErrors.activityStartMinute}
+            <Controller
+              name="activityStartMinute"
+              control={form.control}
+              render={({ field }) => (
+                <Select value={field.value ?? ''} onValueChange={field.onChange}>
+                  <SelectTrigger
+                    className={cn(
+                      'w-full flex-1',
+                      formErrors.activityStartMinute && 'border-error-red',
+                    )}
+                  >
+                    <SelectValue placeholder="분 선택" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>분 선택</SelectLabel>
+                      {getMinuteOptions(field.value).map((m) => (
+                        <SelectItem key={m} value={String(m)}>
+                          {m}분
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              )}
             />
           </div>
         </FormField>
 
         <FormField label="체험 종료 시간">
           <div className={cn('flex gap-2')}>
-            <Input
-              {...form.register('activityEndHour')}
-              placeholder="시를 입력해주세요"
-              type="number"
-              min={0}
-              max={23}
-              className={cn('flex-1')}
-              error={!!formErrors.activityEndHour}
+            <Controller
+              name="activityEndHour"
+              control={form.control}
+              render={({ field }) => (
+                <Select value={field.value ?? ''} onValueChange={field.onChange}>
+                  <SelectTrigger
+                    className={cn(
+                      'w-full flex-1',
+                      formErrors.activityEndHour && 'border-error-red',
+                    )}
+                  >
+                    <SelectValue placeholder="시 선택" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>시 선택</SelectLabel>
+                      {HOURS.map((h) => (
+                        <SelectItem key={h} value={String(h)}>
+                          {h}시
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              )}
             />
-            <Input
-              {...form.register('activityEndMinute')}
-              placeholder="분을 입력해주세요"
-              type="number"
-              min={0}
-              max={59}
-              className={cn('flex-1')}
-              error={!!formErrors.activityEndMinute}
+            <Controller
+              name="activityEndMinute"
+              control={form.control}
+              render={({ field }) => (
+                <Select value={field.value ?? ''} onValueChange={field.onChange}>
+                  <SelectTrigger
+                    className={cn(
+                      'w-full flex-1',
+                      formErrors.activityEndMinute && 'border-error-red',
+                    )}
+                  >
+                    <SelectValue placeholder="분 선택" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>분 선택</SelectLabel>
+                      {getMinuteOptions(field.value).map((m) => (
+                        <SelectItem key={m} value={String(m)}>
+                          {m}분
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              )}
             />
           </div>
         </FormField>
