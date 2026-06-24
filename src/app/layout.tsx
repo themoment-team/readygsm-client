@@ -60,7 +60,9 @@ const RootLayout = ({
 }>) => {
   return (
     <html lang="ko">
-      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID!} />
+      {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+      )}
       <body className={pretendard.className}>
         <script
           type="application/ld+json"
