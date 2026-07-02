@@ -44,6 +44,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     images: ['/images/opengraph-image.png'],
   },
+  verification: {
+    google: 'vdWefvqjIbTnZs7zhDUSD1kwC',
+  },
 };
 
 const websiteJsonLd = {
