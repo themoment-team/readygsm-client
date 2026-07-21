@@ -14,9 +14,9 @@ export const metadata: Metadata = {
 
 const Programs = async () => {
   const [result, user] = await Promise.all([getActivityList(), getMyInfo()]);
-  const isLoggedIn = !!user && user.role !== 'UNAUTHENTICATED';
+  const canFetchApplication = !!user && user.role !== 'UNAUTHENTICATED';
 
-  const application = isLoggedIn ? await getMyApplication(user.id) : undefined;
+  const application = canFetchApplication ? await getMyApplication(user.id) : undefined;
 
   return (
     <ProgramsPage activities={result?.data ?? []} application={!!application} userId={user?.id} />
