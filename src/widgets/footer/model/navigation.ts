@@ -13,6 +13,6 @@ export const LINKS = [
   },
   {
     text: '찾아오시는길',
-    link: 'https://gsm.gen.hs.kr:453/sub/page.php?page_code=help_07',
+    link: 'https://gsm.gen.hs.kr:453/sub/page.php?page_code=info_07',
   },
 ] as const;
