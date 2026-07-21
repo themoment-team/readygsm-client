@@ -17,12 +17,7 @@ const Programs = async () => {
   const application = isLoggedIn ? await getMyApplication(user.id) : undefined;
 
   return (
-    <ProgramsPage
-      activities={result?.data ?? []}
-      isLoggedIn={isLoggedIn}
-      application={!!application}
-      userId={user?.id}
-    />
+    <ProgramsPage activities={result?.data ?? []} application={!!application} userId={user?.id} />
   );
 };
 

@@ -10,12 +10,11 @@ import { HomeProgramSection } from '@/widgets/homeProgramSection';
 
 interface ProgramsPageProps {
   activities: ActivityType[];
-  isLoggedIn: boolean;
   application: boolean;
   userId?: number;
 }
 
-const ProgramsPage = ({ activities, isLoggedIn, application, userId }: ProgramsPageProps) => {
+const ProgramsPage = ({ activities, application, userId }: ProgramsPageProps) => {
   const [selectedActivity, setSelectedActivity] = useState<ActivityType | null>(null);
   const [isApplicationCompleted, setIsApplicationCompleted] = useState(false);
 
@@ -24,15 +23,6 @@ const ProgramsPage = ({ activities, isLoggedIn, application, userId }: ProgramsP
       <CompletionMessage
         title="학과 체험 신청 기간이 아닙니다"
         description="학과 체험 신청 기간은 9월 16일부터 22일까지 입니다."
-      />
-    );
-  }
-
-  if (!isLoggedIn) {
-    return (
-      <CompletionMessage
-        title="로그인이 필요한 기능입니다"
-        description="학과 체험 신청은 로그인이 필요한 기능입니다. 로그인 후 이용해주세요"
       />
     );
   }
