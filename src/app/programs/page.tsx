@@ -12,12 +12,16 @@ export const metadata: Metadata = {
 
 const Programs = async () => {
   const [result, user] = await Promise.all([getActivityList(), getMyInfo()]);
-  const canFetchApplication = !!user && user.role !== 'UNAUTHENTICATED';
+  const isLoggedIn = !!user && user.role !== 'UNAUTHENTICATED';
 
-  const application = canFetchApplication ? await getMyApplication(user.id) : undefined;
+  const application = isLoggedIn ? await getMyApplication(user.id) : undefined;
 
   return (
-    <ProgramsPage activities={result?.data ?? []} application={!!application} userId={user?.id} />
+    <ProgramsPage
+      activities={result?.data ?? []}
+      application={!!application}
+      userId={isLoggedIn ? user.id : undefined}
+    />
   );
 };
 
