@@ -1,6 +1,8 @@
 import getActivityList from '@/entities/activity/api/getActivityList';
 import { ActivityFormView } from '@/features/manageActivity';
 
+export const dynamic = 'force-dynamic';
+
 const AdminFormPage = async () => {
   const response = await getActivityList();
 
