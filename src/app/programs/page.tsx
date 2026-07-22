@@ -19,9 +19,8 @@ const Programs = async () => {
   return (
     <ProgramsPage
       activities={result?.data ?? []}
-      isLoggedIn={isLoggedIn}
       application={!!application}
-      userId={user?.id}
+      userId={isLoggedIn ? user.id : undefined}
     />
   );
 };
