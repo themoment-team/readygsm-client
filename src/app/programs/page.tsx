@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 
 import { getActivityList } from '@/entities/activity';
+
+export const dynamic = 'force-dynamic';
 import getMyApplication from '@/entities/application/api/getMyApplication';
 import getMyInfo from '@/entities/user/api/getMyInfo';
 import { ProgramsPage } from '@/views/programs';
