@@ -1,16 +1,20 @@
 # themoment-ai-harness-sync 동기화 설정
-# 이 레포는 Next.js/TypeScript, Claude Code만 사용하므로 claude 그룹만 동기화하고
-# Kotlin/Java/Docker/DB 스키마 등 백엔드 전용 스킬·에이전트는 제외합니다.
+# 이 레포는 Next.js/TypeScript 프론트엔드이므로 위키의 "프론트엔드(TypeScript)" 예시를 따름
+# (https://github.com/themoment-team/themoment-ai-harness-sync/wiki/Per-Repo-Config)
+# 훅(dispatcher/settings)은 opt-in이며, 켜면 이 레포의 커스텀 .claude/hooks·settings.json을
+# 덮어쓰므로 별도 확인 후 활성화한다.
 groups:
   - claude
+  - codex
 
 overrides:
   claude/skills/kotest-guide: false
   claude/skills/kotlin-spring-arch: false
-  claude/skills/java-spring-arch: false
-  claude/skills/docker: false
+  claude/skills/migration-guide: false
   claude/skills/database-schema: false
-  claude/agents/kotlin-convention-validator: false
-  claude/agents/kotlin-test-fixer: false
+  codex/skills/kotest-guide: false
+  codex/skills/kotlin-spring-arch: false
+  codex/skills/migration-guide: false
+  codex/skills/database-schema: false
 
 language: ko
