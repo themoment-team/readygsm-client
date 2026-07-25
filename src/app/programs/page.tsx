@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { getActivityList } from '@/entities/activity';
+import { getActivityArchiveList, getActivityList } from '@/entities/activity';
 
 export const dynamic = 'force-dynamic';
 import getMyApplication from '@/entities/application/api/getMyApplication';
@@ -13,7 +13,11 @@ export const metadata: Metadata = {
 };
 
 const Programs = async () => {
-  const [result, user] = await Promise.all([getActivityList(), getMyInfo()]);
+  const [result, user, archivedActivities] = await Promise.all([
+    getActivityList(),
+    getMyInfo(),
+    getActivityArchiveList().catch(() => []),
+  ]);
   const isLoggedIn = !!user && user.role !== 'UNAUTHENTICATED';
 
   const application = isLoggedIn ? await getMyApplication(user.id) : undefined;
@@ -21,6 +25,7 @@ const Programs = async () => {
   return (
     <ProgramsPage
       activities={result?.data ?? []}
+      archivedActivities={archivedActivities}
       application={!!application}
       userId={isLoggedIn ? user.id : undefined}
     />

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { ActivityType } from '@/entities/activity';
+import { ProgramCard } from '@/entities/program';
 import { LoginModal } from '@/features/auth';
 import { cn } from '@/shared/lib';
 import { CompletionMessage } from '@/shared/ui';
@@ -13,11 +14,17 @@ import { HomeProgramSection } from '@/widgets/homeProgramSection';
 
 interface ProgramsPageProps {
   activities: ActivityType[];
+  archivedActivities: ActivityType[];
   application: boolean;
   userId?: number;
 }
 
-const ProgramsPage = ({ activities, application, userId }: ProgramsPageProps) => {
+const ProgramsPage = ({
+  activities,
+  archivedActivities,
+  application,
+  userId,
+}: ProgramsPageProps) => {
   const [selectedActivity, setSelectedActivity] = useState<ActivityType | null>(null);
   const [isApplicationCompleted, setIsApplicationCompleted] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -33,6 +40,30 @@ const ProgramsPage = ({ activities, application, userId }: ProgramsPageProps) =>
   };
 
   if (activities.length === 0) {
+    if (archivedActivities.length > 0) {
+      return (
+        <div className={cn('mx-auto flex w-155.5 flex-col gap-9 py-9')}>
+          <div>
+            <p className={cn('text-[1.5rem] font-bold')}>학과 체험 신청 기간이 아닙니다</p>
+            <p className={cn('text-[0.875rem]')}>지난 학과 체험 프로그램을 소개해드립니다.</p>
+          </div>
+          <div className={cn('flex flex-col items-center gap-4')}>
+            {archivedActivities.map((activity) => (
+              <ProgramCard
+                key={activity.id}
+                name={activity.name}
+                description={activity.description}
+                activityDate={activity.activityDate}
+                maxApplicant={activity.maxApplicant}
+                currentApplicant={activity.currentApplicant}
+                disableHover
+              />
+            ))}
+          </div>
+        </div>
+      );
+    }
+
     return (
       <CompletionMessage
         title="학과 체험 신청 기간이 아닙니다"
