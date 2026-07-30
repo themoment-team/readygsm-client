@@ -1,3 +1,4 @@
+import { cn } from '@/shared/lib';
 import {
   HomeSection1,
   HomeSection2,
@@ -8,12 +9,20 @@ import {
 
 const HomePage = () => {
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center gap-4">
+    <div className={cn('mx-auto flex w-full max-w-480 flex-col')}>
       <HomeSection1 />
-      <HomeSection2 />
-      <HomeSection3 />
-      <HomeSection4 />
-      <HomeSection5 />
+      <div
+        className={cn(
+          'bg-pure-white relative z-10 -mt-45 flex flex-col gap-60 rounded-t-3xl px-20 pt-20 pb-[10.6875rem]',
+        )}
+      >
+        <div className={cn('flex flex-col gap-20')}>
+          <HomeSection2 />
+          <HomeSection3 />
+          <HomeSection4 />
+        </div>
+        <HomeSection5 />
+      </div>
     </div>
   );
 };
