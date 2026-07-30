@@ -1,4 +1,5 @@
 import { cn } from '@/shared/lib';
+import { buttonVariants } from '@/shared/ui';
 
 import SectionLabel from './SectionLabel';
 
@@ -15,6 +16,14 @@ const HomeSection5 = () => {
           </span>
         </h2>
       </div>
+      <a
+        href="https://www.hellogsm.kr"
+        target="_blank"
+        rel="noreferrer"
+        className={cn(buttonVariants({ variant: 'default', size: 'pill' }), 'w-125')}
+      >
+        Hello, GSM으로
+      </a>
     </section>
   );
 };
