@@ -13,7 +13,7 @@ const HomePage = () => {
       <HomeSection1 />
       <div
         className={cn(
-          'bg-pure-white relative z-10 -mt-45 flex flex-col gap-60 rounded-t-3xl px-20 pt-20 pb-[10.6875rem]',
+          'bg-pure-white relative z-10 -mt-45 flex flex-col gap-60 rounded-t-[1.5rem] px-20 pt-20 pb-[10.6875rem]',
         )}
       >
         <div className={cn('flex flex-col gap-20')}>
