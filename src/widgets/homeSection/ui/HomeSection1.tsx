@@ -2,12 +2,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { cn } from '@/shared/lib';
-import { buttonVariants } from '@/shared/ui';
+import { AnimateOnView, buttonVariants } from '@/shared/ui';
 
 const HomeSection1 = () => {
   return (
     <section className={cn('flex w-full flex-col')}>
-      <div className={cn('flex flex-col items-center gap-[3.875rem]')}>
+      <AnimateOnView className={cn('flex flex-col items-center gap-[3.875rem]')}>
         <Image
           src="/images/home-wordmark.svg"
           alt="광주소프트웨어마이스터고"
@@ -29,8 +29,10 @@ const HomeSection1 = () => {
         >
           학과 체험 신청하기
         </Link>
-      </div>
-      <div className={cn('relative mt-[12.6875rem] h-125 w-full overflow-hidden rounded-[1.5rem]')}>
+      </AnimateOnView>
+      <AnimateOnView
+        className={cn('relative mt-[12.6875rem] h-125 w-full overflow-hidden rounded-[1.5rem]')}
+      >
         <Image
           src="/images/home-band.png"
           alt=""
@@ -38,7 +40,7 @@ const HomeSection1 = () => {
           priority
           className={cn('object-cover object-center')}
         />
-      </div>
+      </AnimateOnView>
     </section>
   );
 };

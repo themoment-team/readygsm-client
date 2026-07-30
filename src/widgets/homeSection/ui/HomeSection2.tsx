@@ -1,19 +1,20 @@
 import Image from 'next/image';
 
 import { cn } from '@/shared/lib';
+import { AnimateOnView } from '@/shared/ui';
 
 import SectionLabel from './SectionLabel';
 
 const HomeSection2 = () => {
   return (
     <section className={cn('flex w-full flex-col gap-12')}>
-      <div className={cn('flex flex-col gap-4')}>
+      <AnimateOnView className={cn('flex flex-col gap-4')}>
         <SectionLabel label="Curriculum" />
         <h2 className={cn('text-neutral-dark text-[4rem] leading-[1.5] font-bold')}>
           학교 · 학과 소개와 <span className={cn('text-brand-primary')}>교육과정</span>
         </h2>
-      </div>
-      <div className={cn('flex w-full items-start gap-12')}>
+      </AnimateOnView>
+      <AnimateOnView delay={200} className={cn('flex w-full items-start gap-12')}>
         <div
           className={cn('relative h-[40.375rem] w-175 shrink-0 overflow-hidden rounded-[1.5rem]')}
         >
@@ -47,7 +48,7 @@ const HomeSection2 = () => {
             </p>
           </div>
         </div>
-      </div>
+      </AnimateOnView>
     </section>
   );
 };
