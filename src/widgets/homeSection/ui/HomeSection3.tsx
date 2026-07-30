@@ -1,4 +1,7 @@
+import Link from 'next/link';
+
 import { cn } from '@/shared/lib';
+import { buttonVariants } from '@/shared/ui';
 
 import { journeySteps } from '../model/journeySteps';
 import JourneyRail from './JourneyRail';
@@ -26,6 +29,14 @@ const HomeSection3 = () => {
               <p className={cn('text-[1.25rem] leading-[1.5] font-normal text-[#70757e]')}>
                 {step.description}
               </p>
+              {step.cta && (
+                <Link
+                  href={step.cta.href}
+                  className={cn(buttonVariants({ variant: 'default', size: 'pillSm' }), 'w-full')}
+                >
+                  {step.cta.label}
+                </Link>
+              )}
             </div>
           ))}
         </div>

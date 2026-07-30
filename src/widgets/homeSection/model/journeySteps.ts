@@ -3,6 +3,10 @@ export interface JourneyStepType {
   label: string;
   title: string;
   description: string;
+  cta?: {
+    label: string;
+    href: string;
+  };
 }
 
 export const journeySteps: JourneyStepType[] = [
@@ -40,5 +44,9 @@ export const journeySteps: JourneyStepType[] = [
     title: '고민되시나요?',
     description:
       "'내가 정말 개발자가 적성일까?' 고민된다면 학과 체험에서 여러분의 가능성을 만나보세요. 목록은 로그인 없이 둘러볼 수 있고, 신청은 로그인 후 진행됩니다.",
+    cta: {
+      label: '학과 체험 신청',
+      href: '/programs',
+    },
   },
 ];
