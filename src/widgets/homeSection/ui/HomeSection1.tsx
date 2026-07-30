@@ -1,6 +1,8 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { cn } from '@/shared/lib';
+import { buttonVariants } from '@/shared/ui';
 
 const HomeSection1 = () => {
   return (
@@ -20,6 +22,12 @@ const HomeSection1 = () => {
           <span className={cn('text-brand-primary')}>마이스터(Meister)</span>의 길
         </span>
       </h1>
+      <Link
+        href="/programs"
+        className={cn(buttonVariants({ variant: 'default', size: 'pill' }), 'w-125')}
+      >
+        학과 체험 신청하기
+      </Link>
     </section>
   );
 };
