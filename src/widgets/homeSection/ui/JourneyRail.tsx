@@ -30,7 +30,7 @@ const JourneyRail = () => {
     <div
       aria-hidden
       className={cn(
-        'text-brand-primary absolute inset-y-0 left-[10.3125rem] flex w-[2.1875rem] flex-col items-center gap-10 py-12 2xl:left-[9.5625rem]',
+        'text-brand-primary absolute inset-y-0 left-[10.3125rem] hidden w-[2.1875rem] flex-col items-center gap-10 py-12 xl:flex 2xl:left-[9.5625rem]',
         'drop-shadow-[0_0.25rem_0.625rem_rgba(0,5,28,0.08)]',
       )}
     >

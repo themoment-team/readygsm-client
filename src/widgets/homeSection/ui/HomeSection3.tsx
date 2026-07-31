@@ -10,7 +10,7 @@ const HomeSection3 = () => {
   return (
     <section className={cn('relative flex w-full')}>
       <JourneyRail />
-      <div className={cn('flex min-w-0 flex-1 flex-col gap-18 pl-[42.2%] 2xl:pl-187')}>
+      <div className={cn('flex min-w-0 flex-1 flex-col gap-18 xl:pl-[42.2%] 2xl:pl-187')}>
         <AnimateOnView>
           <h2 className={cn('text-neutral-dark text-[3rem] leading-[1.5] font-bold')}>
             <span className={cn('block')}>처음이여도 걱정하지 마세요.</span>
