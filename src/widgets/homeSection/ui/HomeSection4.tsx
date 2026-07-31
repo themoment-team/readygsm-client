@@ -9,11 +9,7 @@ const HomeSection4 = () => {
   return (
     <section className={cn('w-full')}>
       <AnimateOnView className={cn('flex items-start gap-12')}>
-        <div
-          className={cn(
-            'relative aspect-[427/394] shrink-0 self-stretch overflow-hidden rounded-[1.5rem]',
-          )}
-        >
+        <div className={cn('relative w-90 shrink-0 self-stretch overflow-hidden rounded-[1.5rem]')}>
           <Image src="/images/home-pride.png" alt="" fill className={cn('object-cover')} />
         </div>
         <div className={cn('flex flex-1 flex-col gap-12')}>
