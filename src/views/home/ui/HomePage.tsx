@@ -20,7 +20,9 @@ const HomePage = async () => {
       <HomeSection1 start={start} end={end} />
       <div
         className={cn(
-          'bg-pure-white relative z-10 -mt-45 flex flex-col gap-60 rounded-t-[1.5rem] px-20 pt-20 pb-[10.6875rem]',
+          'bg-pure-white relative z-10 flex flex-col gap-60 rounded-t-[1.5rem] pb-[10.6875rem]',
+          '-mt-[22.9375rem] px-9 pt-[2.4375rem]',
+          'xl:-mt-45 xl:px-20 xl:pt-20',
         )}
       >
         <div className={cn('flex flex-col gap-20')}>
