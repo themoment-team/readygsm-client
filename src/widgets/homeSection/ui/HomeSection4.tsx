@@ -8,11 +8,16 @@ import SectionLabel from './SectionLabel';
 const HomeSection4 = () => {
   return (
     <section className={cn('w-full')}>
-      <AnimateOnView className={cn('flex items-start gap-12')}>
-        <div className={cn('relative w-90 shrink-0 self-stretch overflow-hidden rounded-[1.5rem]')}>
+      <AnimateOnView className={cn('relative xl:flex xl:items-start xl:gap-12')}>
+        <div
+          className={cn(
+            'absolute top-0 right-0 h-83 w-90 overflow-hidden rounded-[1.5rem]',
+            'xl:static xl:h-auto xl:shrink-0 xl:self-stretch',
+          )}
+        >
           <Image src="/images/home-pride.png" alt="" fill className={cn('object-cover')} />
         </div>
-        <div className={cn('flex flex-1 flex-col gap-12')}>
+        <div className={cn('flex flex-col gap-12 pt-53 xl:flex-1 xl:pt-0')}>
           <div className={cn('flex flex-col gap-4')}>
             <SectionLabel label="Pride" />
             <h2 className={cn('text-neutral-dark text-[4rem] leading-[1.5] font-bold')}>
