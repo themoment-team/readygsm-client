@@ -10,7 +10,7 @@ const HomeSection3 = () => {
   return (
     <section className={cn('relative flex w-full')}>
       <JourneyRail />
-      <div className={cn('flex flex-1 flex-col gap-18 pl-187')}>
+      <div className={cn('flex min-w-0 flex-1 flex-col gap-18 pl-[42.2%] 2xl:pl-187')}>
         <AnimateOnView>
           <h2 className={cn('text-neutral-dark text-[3rem] leading-[1.5] font-bold')}>
             <span className={cn('block')}>처음이여도 걱정하지 마세요.</span>
@@ -19,7 +19,7 @@ const HomeSection3 = () => {
             </span>
           </h2>
         </AnimateOnView>
-        <div className={cn('flex w-150 flex-col gap-12')}>
+        <div className={cn('flex w-full max-w-150 flex-col gap-12')}>
           {journeySteps.map((step) => (
             <AnimateOnView key={step.number} className={cn('flex flex-col gap-6')}>
               <div className={cn('text-neutral-dark flex flex-col gap-2 font-bold')}>
