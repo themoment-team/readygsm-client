@@ -30,7 +30,7 @@ const HomeSection1 = ({ start, end }: HomeSection1Props) => {
 
   return (
     <section className={cn('flex w-full flex-col')}>
-      <AnimateOnView className={cn('flex flex-col items-center gap-[3.875rem]')}>
+      <AnimateOnView className={cn('flex flex-col items-center gap-6 lg:gap-[3.875rem]')}>
         <Image
           src="/images/home-wordmark.svg"
           alt="광주소프트웨어마이스터고"
@@ -41,15 +41,19 @@ const HomeSection1 = ({ start, end }: HomeSection1Props) => {
           className={cn('h-auto w-full')}
         />
         <div
-          className={cn('text-neutral-dark flex flex-col items-center gap-4 text-center xl:gap-6')}
+          className={cn(
+            'text-neutral-dark flex flex-col items-center gap-2 text-center lg:gap-4 xl:gap-6',
+          )}
         >
-          <h1 className={cn('text-[3rem] leading-[1.2] font-bold xl:text-[4.5rem]')}>
+          <h1
+            className={cn('text-[1.5rem] leading-[1.2] font-bold lg:text-[3rem] xl:text-[4.5rem]')}
+          >
             <span className={cn('block')}>단순한 개발자를 넘어 세상을 바꾸는</span>
             <span className={cn('block')}>
               <span className={cn('text-brand-primary')}>마이스터(Meister)</span>의 길
             </span>
           </h1>
-          <p className={cn('text-[1rem] leading-[1.4] font-medium')}>
+          <p className={cn('text-[0.75rem] leading-[1.4] font-medium lg:text-[1rem]')}>
             학과 체험 접수 기간 : {activityPeriod}
           </p>
         </div>
@@ -57,7 +61,7 @@ const HomeSection1 = ({ start, end }: HomeSection1Props) => {
           href="/programs"
           className={cn(
             buttonVariants({ variant: 'default', size: 'pillSm' }),
-            'w-95',
+            'lg:w-95',
             'xl:h-17 xl:w-125 xl:text-[1.25rem] xl:font-semibold',
           )}
         >
@@ -66,7 +70,8 @@ const HomeSection1 = ({ start, end }: HomeSection1Props) => {
       </AnimateOnView>
       <AnimateOnView
         className={cn(
-          'relative mt-[6.9375rem] h-125 w-full overflow-hidden rounded-[1.5rem] xl:mt-[12.6875rem]',
+          'relative mt-[2.375rem] h-125 w-full overflow-hidden rounded-[1.5rem]',
+          'lg:mt-[6.9375rem] xl:mt-[12.6875rem]',
         )}
       >
         <Image
