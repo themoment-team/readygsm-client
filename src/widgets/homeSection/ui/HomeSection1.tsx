@@ -40,8 +40,10 @@ const HomeSection1 = ({ start, end }: HomeSection1Props) => {
           unoptimized
           className={cn('h-auto w-full')}
         />
-        <div className={cn('text-neutral-dark flex flex-col items-center gap-6 text-center')}>
-          <h1 className={cn('text-[4.5rem] leading-[1.2] font-bold')}>
+        <div
+          className={cn('text-neutral-dark flex flex-col items-center gap-4 text-center xl:gap-6')}
+        >
+          <h1 className={cn('text-[3rem] leading-[1.2] font-bold xl:text-[4.5rem]')}>
             <span className={cn('block')}>단순한 개발자를 넘어 세상을 바꾸는</span>
             <span className={cn('block')}>
               <span className={cn('text-brand-primary')}>마이스터(Meister)</span>의 길
@@ -53,13 +55,19 @@ const HomeSection1 = ({ start, end }: HomeSection1Props) => {
         </div>
         <Link
           href="/programs"
-          className={cn(buttonVariants({ variant: 'default', size: 'pill' }), 'w-125')}
+          className={cn(
+            buttonVariants({ variant: 'default', size: 'pillSm' }),
+            'w-95',
+            'xl:h-17 xl:w-125 xl:text-[1.25rem] xl:font-semibold',
+          )}
         >
           학과 체험 신청하기
         </Link>
       </AnimateOnView>
       <AnimateOnView
-        className={cn('relative mt-[12.6875rem] h-125 w-full overflow-hidden rounded-[1.5rem]')}
+        className={cn(
+          'relative mt-[6.9375rem] h-125 w-full overflow-hidden rounded-[1.5rem] xl:mt-[12.6875rem]',
+        )}
       >
         <Image
           src="/images/home-band.png"
