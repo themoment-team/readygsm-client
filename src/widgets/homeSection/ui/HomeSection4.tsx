@@ -12,7 +12,7 @@ const HomeSection4 = () => {
         <div
           className={cn(
             'absolute top-0 right-0 h-83 w-90 overflow-hidden rounded-[1.5rem]',
-            'xl:static xl:h-auto xl:shrink-0 xl:self-stretch',
+            'xl:relative xl:h-auto xl:shrink-0 xl:self-stretch',
           )}
         >
           <Image src="/images/home-pride.png" alt="" fill className={cn('object-cover')} />
