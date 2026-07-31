@@ -7,23 +7,33 @@ import SectionLabel from './SectionLabel';
 
 const HomeSection2 = () => {
   return (
-    <section className={cn('flex w-full flex-col gap-12')}>
+    <section className={cn('flex w-full flex-col gap-6 lg:gap-12')}>
       <AnimateOnView className={cn('flex flex-col gap-4')}>
         <SectionLabel label="Curriculum" />
-        <h2 className={cn('text-neutral-dark text-[4rem] leading-[1.5] font-bold')}>
+        <h2
+          className={cn('text-neutral-dark text-[1.5rem] leading-[1.5] font-bold lg:text-[4rem]')}
+        >
           학교 · 학과 소개와 <span className={cn('text-brand-primary')}>교육과정</span>
         </h2>
       </AnimateOnView>
-      <AnimateOnView delay={200} className={cn('flex w-full items-start gap-12')}>
+      <AnimateOnView
+        delay={200}
+        className={cn('flex w-full flex-col items-start gap-6 lg:flex-row lg:gap-12')}
+      >
         <div
           className={cn(
-            'relative aspect-[350/323] w-[26.8125rem] shrink-0 overflow-hidden rounded-[1.5rem] xl:w-175',
+            'relative aspect-square w-full overflow-hidden rounded-[1.5rem]',
+            'lg:aspect-[350/323] lg:w-[26.8125rem] lg:shrink-0 xl:w-175',
           )}
         >
           <Image src="/images/home-curriculum.png" alt="" fill className={cn('object-cover')} />
         </div>
-        <div className={cn('flex min-w-0 flex-1 flex-col justify-center gap-9')}>
-          <p className={cn('text-neutral-dark text-[1.25rem] leading-[1.5] font-bold')}>
+        <div className={cn('flex w-full min-w-0 flex-1 flex-col justify-center gap-9')}>
+          <p
+            className={cn(
+              'text-neutral-dark text-[0.875rem] leading-[1.5] font-bold lg:text-[1.25rem]',
+            )}
+          >
             GSM은 이론에 머무르지 않습니다. 소프트웨어, IoT, AI를 현장 실무 중심으로 배우고, 국내외
             캠프와 국제 교류를 통해 세상을 보는 눈까지 함께 키우는 소프트웨어 마이스터고입니다.
             우리는 학생 한 명 한 명을 &apos;현장에서 통하는 개발자&apos;로 성장시키는 것을 목표로
@@ -31,7 +41,8 @@ const HomeSection2 = () => {
           </p>
           <div
             className={cn(
-              'flex flex-col gap-6 text-[1rem] leading-[1.5] font-normal text-[#70757e]',
+              'flex flex-col gap-6 text-[0.8125rem] leading-[1.5] font-normal text-[#70757e]',
+              'lg:text-[1rem]',
             )}
           >
             <p>
