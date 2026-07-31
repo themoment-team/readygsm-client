@@ -21,7 +21,7 @@ const HomeSection3 = () => {
             </span>
           </h2>
         </AnimateOnView>
-        <div className={cn('flex w-full max-w-150 flex-col gap-6 lg:gap-12')}>
+        <div className={cn('flex w-full flex-col gap-6 lg:max-w-150 lg:gap-12')}>
           {journeySteps.map((step) => (
             <AnimateOnView key={step.number} className={cn('flex flex-col gap-4 lg:gap-6')}>
               <div className={cn('text-neutral-dark flex flex-col gap-2 font-bold')}>
