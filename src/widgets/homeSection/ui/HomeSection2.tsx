@@ -16,11 +16,13 @@ const HomeSection2 = () => {
       </AnimateOnView>
       <AnimateOnView delay={200} className={cn('flex w-full items-start gap-12')}>
         <div
-          className={cn('relative h-[40.375rem] w-175 shrink-0 overflow-hidden rounded-[1.5rem]')}
+          className={cn(
+            'relative h-[40.375rem] w-[54.6875%] shrink-0 overflow-hidden rounded-[1.5rem] xl:w-175',
+          )}
         >
           <Image src="/images/home-curriculum.png" alt="" fill className={cn('object-cover')} />
         </div>
-        <div className={cn('flex flex-1 flex-col justify-center gap-9')}>
+        <div className={cn('flex min-w-0 flex-1 flex-col justify-center gap-9')}>
           <p className={cn('text-neutral-dark text-[1.25rem] leading-[1.5] font-bold')}>
             GSM은 이론에 머무르지 않습니다. 소프트웨어, IoT, AI를 현장 실무 중심으로 배우고, 국내외
             캠프와 국제 교류를 통해 세상을 보는 눈까지 함께 키우는 소프트웨어 마이스터고입니다.
