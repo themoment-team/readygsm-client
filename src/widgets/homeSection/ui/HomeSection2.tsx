@@ -17,7 +17,7 @@ const HomeSection2 = () => {
       <AnimateOnView delay={200} className={cn('flex w-full items-start gap-12')}>
         <div
           className={cn(
-            'relative h-[40.375rem] w-[54.6875%] shrink-0 overflow-hidden rounded-[1.5rem] xl:w-175',
+            'relative aspect-[350/323] w-[26.8125rem] shrink-0 overflow-hidden rounded-[1.5rem] xl:w-175',
           )}
         >
           <Image src="/images/home-curriculum.png" alt="" fill className={cn('object-cover')} />
