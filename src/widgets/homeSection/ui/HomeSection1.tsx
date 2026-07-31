@@ -4,7 +4,30 @@ import Link from 'next/link';
 import { cn } from '@/shared/lib';
 import { AnimateOnView, buttonVariants } from '@/shared/ui';
 
-const HomeSection1 = () => {
+const KO_DAYS = ['일', '월', '화', '수', '목', '금', '토'] as const;
+
+const formatKoreanPeriod = (start: string, end: string): string => {
+  const formatDateTime = (value: string) => {
+    const date = new Date(value);
+    const hours = date.getHours();
+    const period = hours < 12 ? '오전' : '오후';
+    const hour = hours % 12 === 0 ? 12 : hours % 12;
+
+    return `${date.getFullYear()}. ${date.getMonth() + 1}. ${date.getDate()}. (${KO_DAYS[date.getDay()]}) ${period} ${hour}시`;
+  };
+
+  return `${formatDateTime(start)} ~ ${formatDateTime(end)}`;
+};
+
+interface HomeSection1Props {
+  start?: string;
+  end?: string;
+}
+
+const HomeSection1 = ({ start, end }: HomeSection1Props) => {
+  const activityPeriod =
+    start && end ? formatKoreanPeriod(start, end) : '접수 기간 정보가 없습니다.';
+
   return (
     <section className={cn('flex w-full flex-col')}>
       <AnimateOnView className={cn('flex flex-col items-center gap-[3.875rem]')}>
@@ -17,12 +40,17 @@ const HomeSection1 = () => {
           unoptimized
           className={cn('h-auto w-full')}
         />
-        <h1 className={cn('text-neutral-dark text-center text-[4.5rem] leading-[1.2] font-bold')}>
-          <span className={cn('block')}>단순한 개발자를 넘어 세상을 바꾸는</span>
-          <span className={cn('block')}>
-            <span className={cn('text-brand-primary')}>마이스터(Meister)</span>의 길
-          </span>
-        </h1>
+        <div className={cn('text-neutral-dark flex flex-col items-center gap-6 text-center')}>
+          <h1 className={cn('text-[4.5rem] leading-[1.2] font-bold')}>
+            <span className={cn('block')}>단순한 개발자를 넘어 세상을 바꾸는</span>
+            <span className={cn('block')}>
+              <span className={cn('text-brand-primary')}>마이스터(Meister)</span>의 길
+            </span>
+          </h1>
+          <p className={cn('text-[1rem] leading-[1.4] font-medium')}>
+            학과 체험 접수 기간 : {activityPeriod}
+          </p>
+        </div>
         <Link
           href="/programs"
           className={cn(buttonVariants({ variant: 'default', size: 'pill' }), 'w-125')}
