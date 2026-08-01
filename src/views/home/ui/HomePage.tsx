@@ -22,7 +22,7 @@ const HomePage = async () => {
         className={cn(
           'bg-pure-white relative z-10 flex flex-col rounded-t-[1.5rem]',
           '-mt-86 gap-20 px-4 pt-4 pb-25',
-          'lg:-mt-[22.9375rem] lg:gap-60 lg:px-9 lg:pt-[2.4375rem] lg:pb-[10.6875rem]',
+          'lg:-mt-91.75 lg:gap-60 lg:px-9 lg:pt-9.75 lg:pb-42.75',
           'xl:-mt-45 xl:px-20 xl:pt-20',
         )}
       >
