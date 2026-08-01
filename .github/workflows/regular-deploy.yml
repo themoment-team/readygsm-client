@@ -8,14 +8,13 @@ on:
 permissions:
   contents: read
   pull-requests: write
-  repository-projects: write
 
 jobs:
   create-pr:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -28,7 +27,7 @@ jobs:
       - name: Check for changes between develop and main
         id: check_changes
         run: |
-          if git diff --quiet origin/main..origin/develop; then
+          if [ "$(git rev-list --count origin/main..origin/develop)" -eq 0 ]; then
             echo "has_changes=false" >> $GITHUB_OUTPUT
             echo "No changes between develop and main"
           else
@@ -55,9 +54,16 @@ jobs:
         if: steps.check_changes.outputs.has_changes == 'true' && steps.check_pr.outputs.pr_exists == 'false'
         id: create_pr
         run: |
+          COMMITS=$(git log origin/main..origin/develop --oneline --no-merges)
+
           PR_BODY=$(cat <<EOF
           ### 개요 💡
           develop 브랜치의 내용을 main 브랜치에 반영합니다.
+
+          ### 변경 사항 📋
+          \`\`\`
+          $COMMITS
+          \`\`\`
           EOF
           )
 
@@ -74,12 +80,12 @@ jobs:
 
       - name: Success Discord Notification
         uses: sarisia/actions-status-discord@v1.15.5
-        if: success()
+        if: steps.create_pr.outcome == 'success'
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
           title: '✅ 정기 배포 PR 생성 성공'
           status: success
-          content: '정기 배포 PR이 성공적으로 생성되었습니다.'
+          content: ${{ steps.create_pr.outputs.pull-request-url }}
           username: readygsm-client bot
           color: 0x4CAF50
 
