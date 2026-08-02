@@ -2,39 +2,27 @@ import Link from 'next/link';
 
 import { cn } from '@/shared/lib';
 
-type NavLinkSizeType = 'sm' | 'lg';
-
 interface NavLinkProps {
   href: string;
   label: string;
   isActive: boolean;
   onClick?: () => void;
   withHover?: boolean;
-  size?: NavLinkSizeType;
 }
 
-const NavLink = ({
-  href,
-  label,
-  isActive,
-  onClick,
-  withHover = false,
-  size = 'lg',
-}: NavLinkProps) => (
+const NavLink = ({ href, label, isActive, onClick, withHover = false }: NavLinkProps) => (
   <Link
     href={href}
     onClick={onClick}
     className={cn(
-      'relative flex flex-col items-center leading-[120%] font-semibold transition-colors',
-      size === 'sm' ? 'text-base' : 'text-2xl',
+      'relative flex flex-col items-center px-[0.21875rem] text-base leading-[120%] font-semibold whitespace-nowrap transition-colors',
       isActive ? 'text-neutral-dark' : cn('text-soft-gray', withHover && 'hover:text-dark-utility'),
     )}
   >
     {label}
     <span
       className={cn(
-        'bg-brand-primary absolute h-1 rounded-lg transition-[width] duration-300 ease-in-out',
-        size === 'sm' ? '-bottom-1' : '-bottom-2',
+        'bg-brand-primary absolute -bottom-1 h-1 rounded-lg transition-[width] duration-300 ease-in-out',
         isActive ? 'w-5' : 'w-0',
       )}
     />
