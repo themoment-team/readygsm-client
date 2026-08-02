@@ -81,29 +81,29 @@ const ApplicationSection = ({ user, application, activity }: ApplicationSectionP
           </section>
         )}
 
-        <section className={cn('flex flex-col gap-4')}>
+        <section className={cn('flex flex-col gap-5 lg:gap-4')}>
           <SectionHeader
             title="신청자 정보"
             description="학과 체험을 신청한 사람의 정보를 불러옵니다."
           />
           <div className={cn('border-border-variant w-full rounded-lg border bg-white px-6 py-5')}>
-            <div className={cn('grid grid-cols-2 gap-4')}>
+            <div className={cn('grid grid-cols-1 gap-4 lg:grid-cols-2')}>
               <dl className={cn('flex flex-col gap-4')}>
                 <div className={cn('flex gap-4')}>
-                  <dt className={cn('text-secondary-slate w-14 shrink-0 text-sm')}>이름</dt>
+                  <dt className={cn('text-secondary-slate w-14 shrink-0 text-xs lg:text-sm')}>이름</dt>
                   <dd className={cn('text-neutral-dark text-sm font-medium')}>
                     {application.name}
                   </dd>
                 </div>
                 <div className={cn('flex gap-4')}>
-                  <dt className={cn('text-secondary-slate w-14 shrink-0 text-sm')}>학번</dt>
+                  <dt className={cn('text-secondary-slate w-14 shrink-0 text-xs lg:text-sm')}>학번</dt>
                   <dd className={cn('text-neutral-dark text-sm font-medium')}>
                     {application.grade}학년 {application.classNumber}반{' '}
                     {String(application.number).padStart(2, '0')}번
                   </dd>
                 </div>
                 <div className={cn('flex gap-4')}>
-                  <dt className={cn('text-secondary-slate w-14 shrink-0 text-sm')}>학교명</dt>
+                  <dt className={cn('text-secondary-slate w-14 shrink-0 text-xs lg:text-sm')}>학교명</dt>
                   <dd className={cn('text-neutral-dark text-sm font-medium')}>
                     {application.schoolName}
                   </dd>
@@ -111,13 +111,13 @@ const ApplicationSection = ({ user, application, activity }: ApplicationSectionP
               </dl>
               <dl className={cn('flex flex-col gap-4')}>
                 <div className={cn('flex gap-4')}>
-                  <dt className={cn('text-secondary-slate w-24 shrink-0 text-sm')}>전화번호</dt>
+                  <dt className={cn('text-secondary-slate w-24 shrink-0 text-xs whitespace-nowrap lg:text-sm')}>전화번호</dt>
                   <dd className={cn('text-neutral-dark text-sm font-medium')}>
                     {application.phoneNumber}
                   </dd>
                 </div>
                 <div className={cn('flex gap-4')}>
-                  <dt className={cn('text-secondary-slate w-24 shrink-0 text-sm')}>
+                  <dt className={cn('text-secondary-slate w-24 shrink-0 text-xs whitespace-nowrap lg:text-sm')}>
                     보호자 전화번호
                   </dt>
                   <dd className={cn('text-neutral-dark text-sm font-medium')}>
