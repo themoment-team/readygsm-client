@@ -1,7 +1,5 @@
-import type { ActivityType } from '@/entities/activity';
+import { type ActivityType, MAX_RESERVE_APPLICANT } from '@/entities/activity';
 import { cn } from '@/shared/lib';
-
-const MAX_RESERVE_APPLICANT = 3;
 
 interface ProgramCardProps extends Pick<
   ActivityType,
