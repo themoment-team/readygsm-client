@@ -1,5 +1,16 @@
-const Logo = () => (
-  <svg width="44" height="42" viewBox="0 0 44 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+import { cn } from '@/shared/lib';
+
+interface LogoProps {
+  className?: string;
+}
+
+const Logo = ({ className }: LogoProps) => (
+  <svg
+    viewBox="0 0 44 42"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={cn('h-7 w-7.25 shrink-0', className)}
+  >
     <path
       d="M42.4545 21C46.4545 33.5 33.0525 42 21.4545 42C9.85653 42 -2.54553 31.5 0.454505 21C0.454505 9.40202 9.85653 0 21.4545 0C33.0525 0 42.4545 9.40202 42.4545 21Z"
       fill="var(--brand-accent)"
