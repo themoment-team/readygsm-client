@@ -13,7 +13,7 @@ const Footer = () => {
           'flex w-full flex-col items-start gap-3.25',
           'px-6 py-15',
           'lg:flex-row lg:items-center lg:justify-between lg:gap-2 lg:px-20 lg:py-5',
-          'min-[1440px]:max-w-360',
+          'xl:max-w-360',
         )}
       >
         <FooterGSMLogo />
@@ -25,8 +25,8 @@ const Footer = () => {
                 'text-neutral-slate text-right text-[1.125rem]/[1.6875rem] font-normal',
               )}
             >
-              ©{CURRENT_YEAR} Copyright 광주소프트웨어마이스터고등학교{' '}
-              <br className={cn('sm:hidden')} />
+              ©{CURRENT_YEAR} Copyright <br className={cn('lg:hidden')} />
+              광주소프트웨어마이스터고등학교 <br className={cn('lg:hidden')} />
               ALL RIGHTS RESERVED.
             </p>
 
@@ -48,9 +48,11 @@ const Footer = () => {
           <p className={cn('text-dark-utility text-right text-[0.875rem]/[1.25rem] font-normal')}>
             우) 62423 광주광역시 광산구 상무대로 312
             <br />
-            교무실 062)949-6800(08:30~16:30) 행정실 062)949-6806(08:30~16:30)
+            교무실 062)949-6800(08:30~16:30) <br className={cn('lg:hidden')} />
+            행정실 062)949-6806(08:30~16:30)
             <br />
-            팩스 062)941-7545 당직실 062)949-6899(평일야간, 휴일)
+            팩스 062)941-7545 <br className={cn('lg:hidden')} />
+            당직실 062)949-6899(평일야간, 휴일)
           </p>
         </div>
       </div>
