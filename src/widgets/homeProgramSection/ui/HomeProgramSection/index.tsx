@@ -16,7 +16,7 @@ const HomeProgramSection = ({
   onSelect,
 }: HomeProgramSectionProps) => {
   return (
-    <main className={cn('flex flex-col items-center justify-center gap-4 bg-white')}>
+    <main className={cn('flex w-full flex-col items-center justify-center gap-4 bg-white')}>
       {activities.map((activity) => (
         <ProgramCard
           key={activity.id}
