@@ -1,12 +1,15 @@
 import type { ActivityType } from '@/entities/activity';
 import { cn } from '@/shared/lib';
 
+const MAX_RESERVE_APPLICANT = 3;
+
 interface ProgramCardProps extends Pick<
   ActivityType,
   'name' | 'description' | 'activityDate' | 'maxApplicant' | 'currentApplicant'
 > {
   isSelected?: boolean | undefined;
   isReserved?: boolean;
+  reserveOrder?: number | null;
   disableHover?: boolean;
   onClick?: () => void;
 }
@@ -19,24 +22,34 @@ const ProgramCard = ({
   currentApplicant,
   isSelected,
   isReserved,
+  reserveOrder,
   disableHover = false,
   onClick,
 }: ProgramCardProps) => {
-  const reservePersonnel = maxApplicant - currentApplicant;
-  const showReserveWarning = isReserved !== undefined ? isReserved : reservePersonnel <= 0;
+  const reserveApplicant = Math.max(currentApplicant - maxApplicant, 0);
+  const isReserveFull = reserveApplicant >= MAX_RESERVE_APPLICANT;
+  const isApplyDisabled = isReserved === undefined && isReserveFull;
+  const showReserveWarning =
+    isReserved !== undefined ? isReserved : currentApplicant >= maxApplicant;
+  const reserveBadgeText =
+    isReserved && reserveOrder != null ? `예비신청 ${reserveOrder}번` : '예비 신청';
 
   return (
     <section
       className={cn(
         'w-155.5 max-w-155.5 rounded-lg border bg-white px-6 py-5',
-        !disableHover && 'cursor-pointer transition-colors duration-200 hover:bg-[#EFF4FF]',
-        isSelected === true
-          ? 'border-[#2563EB]'
-          : isSelected === false
-            ? 'opacity-50'
-            : cn('border-border-variant', !disableHover && 'hover:border-[#7C91A9]'),
+        !disableHover &&
+          !isApplyDisabled &&
+          'cursor-pointer transition-colors duration-200 hover:bg-[#EFF4FF]',
+        isApplyDisabled
+          ? 'border-border-variant cursor-not-allowed opacity-50'
+          : isSelected === true
+            ? 'border-[#2563EB]'
+            : isSelected === false
+              ? 'opacity-50'
+              : cn('border-border-variant', !disableHover && 'hover:border-[#7C91A9]'),
       )}
-      onClick={onClick}
+      onClick={isApplyDisabled ? undefined : onClick}
     >
       <header className={cn('flex items-center justify-between')}>
         <h2
@@ -53,11 +66,19 @@ const ProgramCard = ({
             isSelected ? 'text-[#2563EB]' : 'text-neutral-dark',
           )}
         >
-          {showReserveWarning ? '예비 신청' : `${currentApplicant}/${maxApplicant}`}
+          {isApplyDisabled
+            ? '신청불가'
+            : showReserveWarning
+              ? reserveBadgeText
+              : `${currentApplicant}/${maxApplicant}`}
         </p>
       </header>
 
-      <p className={cn('text-secondary-slate mt-2 text-[0.875rem] leading-[1.4] font-normal')}>
+      <p
+        className={cn(
+          'text-secondary-slate mt-2 text-[0.875rem] leading-[1.4] font-normal whitespace-pre-line',
+        )}
+      >
         {description}
       </p>
 
@@ -65,10 +86,16 @@ const ProgramCard = ({
         {activityDate}
       </p>
 
-      {showReserveWarning && (
+      {isApplyDisabled ? (
         <p className={cn('text-error-red mt-2 text-[0.875rem] leading-[1.4] font-normal')}>
-          예비 신청의 경우, 신청이 확정되지 않으면 확정 안내 문자가 발송되지 않을 수 있습니다.
+          예비신청 정원 마감으로 신청이 불가합니다
         </p>
+      ) : (
+        showReserveWarning && (
+          <p className={cn('text-error-red mt-2 text-[0.875rem] leading-[1.4] font-normal')}>
+            예비 신청의 경우, 신청이 확정되지 않으면 확정 안내 문자가 발송되지 않을 수 있습니다.
+          </p>
+        )
       )}
     </section>
   );
