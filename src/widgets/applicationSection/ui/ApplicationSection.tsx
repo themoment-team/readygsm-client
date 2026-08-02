@@ -56,12 +56,14 @@ const ApplicationSection = ({ user, application, activity }: ApplicationSectionP
   return (
     <main
       className={cn(
-        'flex min-h-[calc(100vh-6.25rem-11.3125rem)] flex-col items-center bg-white px-4 py-12',
+        'flex flex-col items-center bg-white',
+        'min-h-111.25 px-6 py-12',
+        'lg:min-h-[calc(100vh-6.25rem-11.3125rem)] lg:px-4',
       )}
     >
       <div className={cn('flex w-full max-w-155.5 flex-col gap-9')}>
         {activity && (
-          <section className={cn('flex flex-col gap-4')}>
+          <section className={cn('flex flex-col gap-5 lg:gap-4')}>
             <SectionHeader
               title="신청한 학과 체험 정보"
               description="로그인된 계정으로 신청된 학과 체험을 확인할 수 있습니다."
