@@ -63,8 +63,9 @@ const Header = () => {
     <header className={cn('sticky top-0 z-50 w-full bg-white')}>
       <div
         className={cn(
-          'mx-auto flex h-25 max-w-480 items-center justify-between',
-          'px-8',
+          'mx-auto flex max-w-480 items-center justify-between',
+          'h-18.75 px-6',
+          'lg:h-25',
           isAdminRole && !isAdmin
             ? 'lg:px-12 xl:px-20 2xl:pr-[6.69rem] 2xl:pl-80'
             : 'lg:px-12 xl:px-20 2xl:px-80',
@@ -116,12 +117,12 @@ const Header = () => {
       {isMenuOpen && (
         <>
           <div
-            className={cn('fixed inset-x-0 top-25 bottom-0 z-40 bg-black/20 lg:hidden')}
+            className={cn('fixed inset-x-0 top-18.75 bottom-0 z-40 bg-black/20 lg:hidden')}
             onClick={handleMenuClose}
           />
           <div
             className={cn(
-              'fixed top-25 right-0 bottom-0 z-40 overflow-y-auto bg-white lg:hidden',
+              'fixed top-18.75 right-0 bottom-0 z-40 overflow-y-auto bg-white lg:hidden',
               'inline-flex flex-col items-end pt-9 pr-6 pb-34.25 pl-12.75',
             )}
           >

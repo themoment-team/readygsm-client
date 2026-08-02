@@ -1,59 +1,52 @@
-import {
-  AndroidIcon,
-  BackendIcon,
-  CloudIcon,
-  CodeIcon,
-  DesignIcon,
-  GitIcon,
-  IOSIcon,
-  LinkIcon,
-  MergeIcon,
-} from '@/shared/assets/';
+import Link from 'next/link';
+
 import { cn } from '@/shared/lib';
-import { AnimateOnView } from '@/shared/ui';
+import { AnimateOnView, buttonVariants } from '@/shared/ui';
+
+import { journeySteps } from '../model/journeySteps';
+import JourneyRail from './JourneyRail';
 
 const HomeSection3 = () => {
   return (
-    <div className={cn('flex flex-col justify-center pt-[10.56rem] xl:w-7xl xl:pt-[23.06rem]')}>
-      <section className={cn('flex flex-col items-start gap-9')}>
+    <section className={cn('relative flex w-full')}>
+      <JourneyRail />
+      <div className={cn('flex min-w-0 flex-1 flex-col gap-12 lg:gap-18 xl:pl-[42.2%] 2xl:pl-187')}>
         <AnimateOnView>
-          <p className={cn('text-neutral-dark w-232 text-[2.25rem] leading-normal font-bold')}>
-            책 속 이론이 아닌
-            <br />
-            현장의 실전을 배우는 진짜 소프트웨어 교육
-          </p>
+          <h2 className={cn('text-neutral-dark text-2xl leading-normal font-bold lg:text-5xl')}>
+            <span className={cn('block')}>처음이여도 걱정하지 마세요.</span>
+            <span className={cn('block')}>
+              우리 대다수가 <span className={cn('text-brand-primary')}>처음이었습니다.</span>
+            </span>
+          </h2>
         </AnimateOnView>
-        <AnimateOnView>
-          <div className={cn('flex items-center gap-0.5')}>
-            <span
-              className={cn(
-                'bg-brand-primary px-1 text-[1.75rem] leading-[1.2] font-semibold text-white',
+        <div className={cn('flex w-full flex-col gap-6 lg:max-w-150 lg:gap-12')}>
+          {journeySteps.map((step) => (
+            <AnimateOnView key={step.number} className={cn('flex flex-col gap-4 lg:gap-6')}>
+              <div className={cn('text-neutral-dark flex flex-col gap-2 font-bold')}>
+                <p className={cn('text-xs leading-normal lg:text-base')}>
+                  <span className={cn('text-brand-primary')}>{step.number}</span> - {step.label}
+                </p>
+                <p className={cn('text-base leading-normal lg:text-[2.5rem]')}>{step.title}</p>
+              </div>
+              <p className={cn('text-sm leading-normal font-normal text-[#70757e] lg:text-xl')}>
+                {step.description}
+              </p>
+              {step.cta && (
+                <Link
+                  href={step.cta.href}
+                  className={cn(
+                    buttonVariants({ variant: 'default', size: 'pillSm' }),
+                    'self-end lg:w-full',
+                  )}
+                >
+                  {step.cta.label}
+                </Link>
               )}
-            >
-              광주소프트웨어마이스터고
-            </span>
-            <span className={cn('text-neutral-dark text-[1.75rem] leading-[1.2] font-semibold')}>
-              가 여러분의 코드를 완성합니다
-            </span>
-          </div>
-        </AnimateOnView>
-        <AnimateOnView>
-          <div
-            className={cn('text-brand-primary flex flex-wrap items-center gap-[1.3125rem_2.25rem]')}
-          >
-            <GitIcon />
-            <MergeIcon />
-            <CodeIcon />
-            <LinkIcon />
-            <BackendIcon />
-            <DesignIcon />
-            <AndroidIcon />
-            <IOSIcon />
-            <CloudIcon />
-          </div>
-        </AnimateOnView>
-      </section>
-    </div>
+            </AnimateOnView>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 };
 

@@ -10,16 +10,16 @@ const Footer = () => {
     <footer className={cn('bg-ghost-white flex w-full items-center justify-center')}>
       <div
         className={cn(
-          'flex w-full flex-col items-start gap-10',
-          'px-12 py-15',
+          'flex w-full flex-col items-start gap-3.25',
+          'px-6 py-15',
           'lg:flex-row lg:items-center lg:justify-between lg:gap-2 lg:px-20 lg:py-5',
           'min-[1440px]:max-w-360',
         )}
       >
         <FooterGSMLogo />
 
-        <div className={cn('flex w-full flex-col items-end gap-4', 'lg:w-auto')}>
-          <div className={cn('flex w-full flex-col items-end gap-2', 'lg:w-auto')}>
+        <div className={cn('flex w-full flex-col items-end gap-10', 'lg:w-auto lg:gap-4')}>
+          <div className={cn('flex w-full flex-col items-end gap-10', 'lg:w-auto lg:gap-2')}>
             <p
               className={cn(
                 'text-neutral-slate text-right text-[1.125rem]/[1.6875rem] font-normal',
@@ -30,7 +30,7 @@ const Footer = () => {
               ALL RIGHTS RESERVED.
             </p>
 
-            <div className={cn('flex flex-wrap justify-end gap-6')}>
+            <div className={cn('flex flex-wrap justify-end gap-x-6 gap-y-1 lg:gap-6')}>
               {LINKS.map(({ text, link }) => (
                 <a
                   key={text}

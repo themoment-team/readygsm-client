@@ -10,7 +10,6 @@ import {
   ToastProvider,
 } from '@/shared/lib';
 import { pretendard } from '@/shared/styles';
-import { ViewportGuard } from '@/shared/ui';
 import { Footer } from '@/widgets/footer';
 import { Header } from '@/widgets/header';
 
@@ -74,11 +73,9 @@ const RootLayout = ({
           }}
         />
         <TanStackProvider>
-          <ViewportGuard>
-            <Header />
-            <div className={cn('flex-1')}>{children}</div>
-            <Footer />
-          </ViewportGuard>
+          <Header />
+          <div className={cn('flex-1')}>{children}</div>
+          <Footer />
           <ToastProvider />
         </TanStackProvider>
       </body>

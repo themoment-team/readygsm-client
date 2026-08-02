@@ -1,25 +1,22 @@
-'use client';
-
 import Image from 'next/image';
+import Link from 'next/link';
 
-import { BottomArrow, GSMTitle } from '@/shared/assets';
-import { cn, scrollToElement } from '@/shared/lib';
-import { AnimateOnView } from '@/shared/ui';
+import { cn } from '@/shared/lib';
+import { AnimateOnView, buttonVariants } from '@/shared/ui';
 
 const KO_DAYS = ['일', '월', '화', '수', '목', '금', '토'] as const;
 
 const formatKoreanPeriod = (start: string, end: string): string => {
-  const s = new Date(start);
-  const e = new Date(end);
+  const formatDateTime = (value: string) => {
+    const date = new Date(value);
+    const hours = date.getHours();
+    const period = hours < 12 ? '오전' : '오후';
+    const hour = hours % 12 === 0 ? 12 : hours % 12;
 
-  const formatDateTime = (d: Date) => {
-    const h = d.getHours();
-    const period = h < 12 ? '오전' : '오후';
-    const hour = h % 12 === 0 ? 12 : h % 12;
-    return `${d.getFullYear()}. ${d.getMonth() + 1}. ${d.getDate()}. (${KO_DAYS[d.getDay()]}) ${period} ${hour}시`;
+    return `${date.getFullYear()}. ${date.getMonth() + 1}. ${date.getDate()}. (${KO_DAYS[date.getDay()]}) ${period} ${hour}시`;
   };
 
-  return `학과 체험 접수 기간 : ${formatDateTime(s)} ~ ${formatDateTime(e)}`;
+  return `${formatDateTime(start)} ~ ${formatDateTime(end)}`;
 };
 
 interface HomeSection1Props {
@@ -29,71 +26,60 @@ interface HomeSection1Props {
 
 const HomeSection1 = ({ start, end }: HomeSection1Props) => {
   const activityPeriod =
-    start && end
-      ? formatKoreanPeriod(start, end)
-      : '학과 체험 접수 기간 : 접수 기간 정보가 없습니다.';
+    start && end ? formatKoreanPeriod(start, end) : '접수 기간 정보가 없습니다.';
 
-  const scrollToSection2 = () => {
-    scrollToElement('#homeSection2');
-  };
   return (
-    <section
-      className={cn(
-        'bg-neutral-dark relative flex h-[calc(100vh-6.25rem)] w-full flex-col items-center overflow-hidden pt-16',
-      )}
-    >
-      <div className={cn('absolute inset-0')}>
+    <section className={cn('flex w-full flex-col')}>
+      <AnimateOnView className={cn('flex flex-col items-center gap-6 lg:gap-15.5')}>
         <Image
-          src="/images/themoment.jpg"
+          src="/images/home-wordmark.svg"
+          alt="광주소프트웨어마이스터고"
+          width={1920}
+          height={165}
+          priority
+          unoptimized
+          className={cn('h-auto w-full')}
+        />
+        <div
+          className={cn(
+            'text-neutral-dark flex flex-col items-center gap-2 text-center lg:gap-4 xl:gap-6',
+          )}
+        >
+          <h1 className={cn('text-2xl leading-[1.2] font-bold lg:text-5xl xl:text-7xl')}>
+            <span className={cn('block')}>단순한 개발자를 넘어 세상을 바꾸는</span>
+            <span className={cn('block')}>
+              <span className={cn('text-brand-primary')}>마이스터(Meister)</span>의 길
+            </span>
+          </h1>
+          <p className={cn('text-xs leading-[1.4] font-medium lg:text-base')}>
+            학과 체험 접수 기간 : {activityPeriod}
+          </p>
+        </div>
+        <Link
+          href="/programs"
+          className={cn(
+            buttonVariants({ variant: 'default', size: 'pillSm' }),
+            'lg:w-95',
+            'xl:h-17 xl:w-125 xl:text-xl xl:font-semibold',
+          )}
+        >
+          학과 체험 신청하기
+        </Link>
+      </AnimateOnView>
+      <AnimateOnView
+        className={cn(
+          'relative mt-9.5 h-125 w-full overflow-hidden rounded-[1.5rem]',
+          'lg:mt-27.75 xl:mt-50.75',
+        )}
+      >
+        <Image
+          src="/images/home-band.png"
           alt=""
           fill
           priority
           className={cn('object-cover object-center')}
         />
-        <div
-          className={cn('absolute inset-0 backdrop-blur-[6.35px]')}
-          style={{
-            backgroundImage: `
-              linear-gradient(90deg, var(--neutral-dark) 0%, transparent 17.788%, transparent 81.25%, var(--neutral-dark) 100%),
-              linear-gradient(180deg, transparent 0%, rgba(41, 43, 47, 0.745) 60.577%, var(--neutral-dark) 100%)
-            `,
-          }}
-        />
-      </div>
-      <div
-        className={cn(
-          'relative z-10 flex w-232 flex-1 flex-col gap-[4.94rem] text-white xl:w-7xl xl:justify-between xl:gap-0',
-        )}
-      >
-        <AnimateOnView>
-          <GSMTitle />
-        </AnimateOnView>
-        <div className={cn('flex flex-col gap-[4.94rem] text-xl leading-[1.4] xl:gap-[7.12rem]')}>
-          <AnimateOnView className="flex flex-col gap-4">
-            <AnimateOnView delay={200}>
-              <div className={cn('text-5xl leading-normal font-bold')}>
-                <p>단순한 개발자를 넘어</p>
-                <p>
-                  세상을 바꾸는 <span className={cn('text-brand-primary')}>마이스터(Meister)</span>
-                  의 길
-                </p>
-              </div>
-            </AnimateOnView>
-            <p>{activityPeriod}</p>
-          </AnimateOnView>
-          <AnimateOnView>
-            <button
-              onClick={scrollToSection2}
-              className={cn('relative z-10 mb-12 flex cursor-pointer items-center gap-[0.88rem]')}
-            >
-              <p className={cn('text-center')}>스크롤 해서 더 알아보기</p>
-              <div className={cn('animate-bounce')}>
-                <BottomArrow />
-              </div>
-            </button>
-          </AnimateOnView>
-        </div>
-      </div>
+      </AnimateOnView>
     </section>
   );
 };

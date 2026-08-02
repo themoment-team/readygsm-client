@@ -3,74 +3,49 @@ import Image from 'next/image';
 import { cn } from '@/shared/lib';
 import { AnimateOnView } from '@/shared/ui';
 
-const awardGroups = [
-  {
-    title: '소프트웨어 분야 각종 대회 수상',
-    items: ['빛가람 에너지벨리', 'SW경진대회', '교육공공데이터 분석활용대회', 'AI 프론티어 챌린지'],
-    image: '/images/homeImage1.png',
-  },
-  {
-    title: '제 59회 전국기능경기대회 은탑 수상',
-    items: [
-      '모바일 로보틱스 금메달',
-      'IT 네트워크시스템 금메달',
-      '클라우드 컴퓨팅 은메달',
-      '사이버 보안 은메달',
-    ],
-    image: '/images/homeImage2.png',
-  },
-  {
-    title: '제 47회 국제기능올림픽대회 (프랑스) 수상',
-    items: ['모바일 로보틱스 금메달 및 은메달', '클라우드 컴퓨팅 금메달'],
-    image: '/images/homeImage3.png',
-  },
-];
+import SectionLabel from './SectionLabel';
 
 const HomeSection4 = () => {
   return (
-    <div className={cn('relative flex w-full flex-col items-center pt-40 xl:pt-90')}>
-      <div className={cn('absolute top-62.5 right-0 -z-10 flex flex-col gap-12 xl:top-90')}>
-        {awardGroups.map((group) => (
-          <AnimateOnView key={group.image}>
-            <Image
-              src={group.image}
-              alt={group.title}
-              width={459}
-              height={197}
-              className={cn('rounded-lg object-cover')}
-            />
-          </AnimateOnView>
-        ))}
-      </div>
-      <div
+    <section className={cn('w-full')}>
+      <AnimateOnView
         className={cn(
-          'fhd:gap-[22.38rem] flex w-232 flex-col items-start gap-9 xl:w-7xl xl:flex-row xl:gap-[9.12rem]',
+          'relative flex flex-col gap-12',
+          'lg:block',
+          'xl:flex xl:flex-row xl:items-start xl:gap-12',
         )}
       >
-        <h2 className={cn('text-neutral-dark shrink-0 text-4xl leading-normal font-bold')}>
-          <AnimateOnView>각종 대회 수상 경력</AnimateOnView>
-        </h2>
-        <div className={cn('flex w-151 flex-col gap-12')}>
-          {awardGroups.map((group) => (
-            <div key={group.title} className={cn('flex flex-col gap-2.5')}>
-              <h3 className={cn('text-brand-primary text-4xl leading-[1.2] font-bold')}>
-                <AnimateOnView>{group.title}</AnimateOnView>
-              </h3>
-              <ul className={cn('list-disc pl-9')}>
-                {group.items.map((item) => (
-                  <li
-                    key={item}
-                    className={cn('text-secondary-slate text-2xl leading-normal font-medium')}
-                  >
-                    <AnimateOnView>{item}</AnimateOnView>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+        <div
+          className={cn(
+            'relative aspect-[380/351] w-full overflow-hidden rounded-[1.5rem]',
+            'lg:absolute lg:top-0 lg:right-0 lg:aspect-auto lg:h-83 lg:w-90',
+            'xl:relative xl:h-auto xl:w-90 xl:shrink-0 xl:self-stretch',
+          )}
+        >
+          <Image src="/images/home-pride.png" alt="" fill className={cn('object-cover')} />
         </div>
-      </div>
-    </div>
+        <div className={cn('flex flex-col gap-12 lg:pt-53 xl:flex-1 xl:pt-0')}>
+          <div className={cn('flex flex-col gap-4')}>
+            <SectionLabel label="Pride" />
+            <h2
+              className={cn('text-neutral-dark text-2xl leading-normal font-bold lg:text-[4rem]')}
+            >
+              수상 경력
+            </h2>
+          </div>
+          <div className={cn('text-neutral-dark flex flex-col gap-6 font-bold')}>
+            <p className={cn('text-sm leading-normal lg:text-xl')}>
+              실력은 결과로 증명합니다. GSM 학생들은 소프트웨어 분야 각종 대회에서 꾸준히 수상하며
+              실력을 입증해 왔습니다. 제89회 전국기능경기대회 은상, 그리고 제47회
+              국제기능올림픽대회(프랑스) 수상까지
+            </p>
+            <p className={cn('text-brand-primary text-base leading-normal lg:text-[2rem]')}>
+              — 대한민국을 넘어 세계 무대에서 인정받은 실력입니다.
+            </p>
+          </div>
+        </div>
+      </AnimateOnView>
+    </section>
   );
 };
 
