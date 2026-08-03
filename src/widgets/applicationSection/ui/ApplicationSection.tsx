@@ -73,6 +73,7 @@ const ApplicationSection = ({ user, application, activity }: ApplicationSectionP
               maxApplicant={activity.maxApplicant}
               currentApplicant={activity.currentApplicant}
               isReserved={application.isReserve}
+              reserveOrder={application.reserveOrder}
               disableHover
             />
           </section>
