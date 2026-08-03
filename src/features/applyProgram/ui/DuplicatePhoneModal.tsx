@@ -1,3 +1,4 @@
+import { cn } from '@/shared/lib';
 import { Button, Modal } from '@/shared/ui';
 
 interface DuplicatePhoneModalProps {
@@ -6,7 +7,7 @@ interface DuplicatePhoneModalProps {
 }
 
 const DuplicatePhoneModal = ({ isOpen, onClose }: DuplicatePhoneModalProps) => (
-  <Modal isOpen={isOpen} onClose={onClose} className="w-120 px-6 py-5">
+  <Modal isOpen={isOpen} onClose={onClose} className={cn('w-full max-w-120 px-6 py-5')}>
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-2">
         <h2 className="text-neutral-dark text-2xl font-semibold">전화번호 중복</h2>
