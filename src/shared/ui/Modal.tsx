@@ -24,7 +24,7 @@ const Modal = ({ isOpen, onClose, children, className }: ModalProps) => {
 
   return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+      className={cn('fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-6')}
       onClick={onClose}
     >
       <div
