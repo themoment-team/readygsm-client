@@ -10,6 +10,7 @@ export interface ApplicationType {
   phoneNumber: string;
   familyPhoneNumber: string;
   isReserve: boolean;
+  reserveOrder: number | null;
 }
 
 export interface PostApplicationRequestType {
