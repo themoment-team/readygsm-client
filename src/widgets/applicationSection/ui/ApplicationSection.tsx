@@ -56,12 +56,14 @@ const ApplicationSection = ({ user, application, activity }: ApplicationSectionP
   return (
     <main
       className={cn(
-        'flex min-h-[calc(100vh-6.25rem-11.3125rem)] flex-col items-center bg-white px-4 py-12',
+        'flex flex-col items-center bg-white',
+        'min-h-111.25 px-6 py-12',
+        'lg:min-h-[calc(100vh-6.25rem-11.3125rem)] lg:px-4',
       )}
     >
       <div className={cn('flex w-full max-w-155.5 flex-col gap-9')}>
         {activity && (
-          <section className={cn('flex flex-col gap-4')}>
+          <section className={cn('flex flex-col gap-5 lg:gap-4')}>
             <SectionHeader
               title="신청한 학과 체험 정보"
               description="로그인된 계정으로 신청된 학과 체험을 확인할 수 있습니다."
@@ -79,29 +81,35 @@ const ApplicationSection = ({ user, application, activity }: ApplicationSectionP
           </section>
         )}
 
-        <section className={cn('flex flex-col gap-4')}>
+        <section className={cn('flex flex-col gap-5 lg:gap-4')}>
           <SectionHeader
             title="신청자 정보"
             description="학과 체험을 신청한 사람의 정보를 불러옵니다."
           />
           <div className={cn('border-border-variant w-full rounded-lg border bg-white px-6 py-5')}>
-            <div className={cn('grid grid-cols-2 gap-4')}>
+            <div className={cn('grid grid-cols-1 gap-4 lg:grid-cols-2')}>
               <dl className={cn('flex flex-col gap-4')}>
                 <div className={cn('flex gap-4')}>
-                  <dt className={cn('text-secondary-slate w-14 shrink-0 text-sm')}>이름</dt>
+                  <dt className={cn('text-secondary-slate w-14 shrink-0 text-xs lg:text-sm')}>
+                    이름
+                  </dt>
                   <dd className={cn('text-neutral-dark text-sm font-medium')}>
                     {application.name}
                   </dd>
                 </div>
                 <div className={cn('flex gap-4')}>
-                  <dt className={cn('text-secondary-slate w-14 shrink-0 text-sm')}>학번</dt>
+                  <dt className={cn('text-secondary-slate w-14 shrink-0 text-xs lg:text-sm')}>
+                    학번
+                  </dt>
                   <dd className={cn('text-neutral-dark text-sm font-medium')}>
                     {application.grade}학년 {application.classNumber}반{' '}
                     {String(application.number).padStart(2, '0')}번
                   </dd>
                 </div>
                 <div className={cn('flex gap-4')}>
-                  <dt className={cn('text-secondary-slate w-14 shrink-0 text-sm')}>학교명</dt>
+                  <dt className={cn('text-secondary-slate w-14 shrink-0 text-xs lg:text-sm')}>
+                    학교명
+                  </dt>
                   <dd className={cn('text-neutral-dark text-sm font-medium')}>
                     {application.schoolName}
                   </dd>
@@ -109,13 +117,23 @@ const ApplicationSection = ({ user, application, activity }: ApplicationSectionP
               </dl>
               <dl className={cn('flex flex-col gap-4')}>
                 <div className={cn('flex gap-4')}>
-                  <dt className={cn('text-secondary-slate w-24 shrink-0 text-sm')}>전화번호</dt>
+                  <dt
+                    className={cn(
+                      'text-secondary-slate w-24 shrink-0 text-xs whitespace-nowrap lg:text-sm',
+                    )}
+                  >
+                    전화번호
+                  </dt>
                   <dd className={cn('text-neutral-dark text-sm font-medium')}>
                     {application.phoneNumber}
                   </dd>
                 </div>
                 <div className={cn('flex gap-4')}>
-                  <dt className={cn('text-secondary-slate w-24 shrink-0 text-sm')}>
+                  <dt
+                    className={cn(
+                      'text-secondary-slate w-24 shrink-0 text-xs whitespace-nowrap lg:text-sm',
+                    )}
+                  >
                     보호자 전화번호
                   </dt>
                   <dd className={cn('text-neutral-dark text-sm font-medium')}>
