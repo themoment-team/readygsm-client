@@ -15,14 +15,14 @@ const NavLink = ({ href, label, isActive, onClick, withHover = false }: NavLinkP
     href={href}
     onClick={onClick}
     className={cn(
-      'relative flex flex-col items-center text-2xl leading-[120%] font-semibold transition-colors',
+      'relative flex flex-col items-center px-[0.21875rem] text-base leading-[120%] font-semibold whitespace-nowrap transition-colors',
       isActive ? 'text-neutral-dark' : cn('text-soft-gray', withHover && 'hover:text-dark-utility'),
     )}
   >
     {label}
     <span
       className={cn(
-        'bg-brand-primary absolute -bottom-2 h-1 rounded-lg transition-[width] duration-300 ease-in-out',
+        'bg-brand-primary absolute -bottom-1 h-1 rounded-lg transition-[width] duration-300 ease-in-out',
         isActive ? 'w-5' : 'w-0',
       )}
     />

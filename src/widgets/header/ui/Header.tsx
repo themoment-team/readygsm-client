@@ -65,7 +65,7 @@ const Header = () => {
         className={cn(
           'mx-auto flex max-w-480 items-center justify-between',
           'h-18.75 px-6',
-          'lg:h-25',
+          'lg:h-20 xl:h-16',
           isAdminRole && !isAdmin
             ? 'lg:px-12 xl:px-20 2xl:pr-[6.69rem] 2xl:pl-80'
             : 'lg:px-12 xl:px-20 2xl:px-80',
@@ -73,10 +73,12 @@ const Header = () => {
       >
         <Link href="/" className={cn('flex items-center gap-3')}>
           <Logo />
-          <span className={cn('text-neutral-dark text-[1.5rem] font-bold')}>Ready, GSM</span>
+          <span className={cn('text-neutral-dark text-2xl font-bold xl:text-base')}>
+            Ready, GSM
+          </span>
         </Link>
 
-        <nav className={cn('hidden items-center gap-12 lg:flex')}>
+        <nav className={cn('hidden items-center gap-12 xl:flex')}>
           {links.map((link) => (
             <NavLink
               key={link.href}
@@ -88,7 +90,7 @@ const Header = () => {
           ))}
         </nav>
 
-        <div className={cn('hidden items-center gap-4 lg:flex')}>
+        <div className={cn('hidden items-center gap-4 xl:flex')}>
           {user ? (
             <Button onClick={handleSignOut} variant="outlinePrimary" size="md">
               로그아웃
@@ -107,7 +109,7 @@ const Header = () => {
 
         <button
           onClick={() => setMenuOpenPathname(isMenuOpen ? null : pathname)}
-          className={cn('flex items-center justify-center lg:hidden')}
+          className={cn('flex items-center justify-center xl:hidden')}
           aria-label={isMenuOpen ? '메뉴 닫기' : '메뉴 열기'}
         >
           {isMenuOpen ? <X size={32} /> : <HamburgerIcon />}
@@ -117,13 +119,16 @@ const Header = () => {
       {isMenuOpen && (
         <>
           <div
-            className={cn('fixed inset-x-0 top-18.75 bottom-0 z-40 bg-black/20 lg:hidden')}
+            className={cn(
+              'fixed inset-x-0 top-18.75 bottom-0 z-40 bg-black/20 lg:top-20 xl:hidden',
+            )}
             onClick={handleMenuClose}
           />
           <div
             className={cn(
-              'fixed top-18.75 right-0 bottom-0 z-40 overflow-y-auto bg-white lg:hidden',
-              'inline-flex flex-col items-end pt-9 pr-6 pb-34.25 pl-12.75',
+              'fixed top-18.75 right-0 z-40 overflow-y-auto bg-white lg:top-20 xl:hidden',
+              'max-h-[calc(100dvh-4.6875rem)] lg:max-h-[calc(100dvh-5rem)]',
+              'inline-flex min-w-46.5 flex-col items-end pt-9 pr-6 pb-34.25',
             )}
           >
             <div className={cn('flex flex-col items-end gap-12')}>

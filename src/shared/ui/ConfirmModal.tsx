@@ -32,7 +32,11 @@ const ConfirmModal = ({
   cancelVariant = 'outlineDanger',
   isPending = false,
 }: ConfirmModalProps) => (
-  <Modal isOpen={isOpen} onClose={isPending ? undefined : onClose} className="w-120 px-6 py-5">
+  <Modal
+    isOpen={isOpen}
+    onClose={isPending ? undefined : onClose}
+    className={cn('w-full max-w-120 px-6 py-5')}
+  >
     <div className={cn('flex flex-col gap-6')}>
       <div className={cn('flex flex-col gap-2')}>
         <h2 className={cn('text-neutral-dark text-2xl font-semibold')}>{title}</h2>
