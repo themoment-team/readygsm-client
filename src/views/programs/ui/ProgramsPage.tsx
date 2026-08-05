@@ -42,10 +42,19 @@ const ProgramsPage = ({
   if (activities.length === 0) {
     if (archivedActivities.length > 0) {
       return (
-        <div className={cn('mx-auto flex w-155.5 flex-col gap-9 py-9')}>
-          <div>
-            <p className={cn('text-[1.5rem] font-bold')}>학과 체험 신청 기간이 아닙니다</p>
-            <p className={cn('text-[0.875rem]')}>지난 학과 체험 프로그램을 소개해드립니다.</p>
+        <div
+          className={cn(
+            'mx-auto flex w-full max-w-155.5 flex-col gap-12 px-6 py-6',
+            'lg:gap-9 lg:px-0 lg:py-9',
+          )}
+        >
+          <div className={cn('flex flex-col gap-2')}>
+            <p className={cn('text-neutral-dark text-[1.5rem] leading-[1.2] font-semibold')}>
+              학과 체험 신청 기간이 아닙니다
+            </p>
+            <p className={cn('text-secondary-slate text-[0.875rem] leading-[1.2]')}>
+              지난 학과 체험 프로그램을 소개해드립니다.
+            </p>
           </div>
           <div className={cn('flex flex-col items-center gap-4')}>
             {archivedActivities.map((activity) => (
@@ -85,15 +94,17 @@ const ProgramsPage = ({
     <>
       <div
         className={cn(
-          'mx-auto flex w-155.5 flex-col gap-9 py-9 xl:min-h-[calc(100vh-6.25rem)] xl:w-7xl xl:flex-row xl:justify-center',
+          'mx-auto flex w-full max-w-155.5 flex-col gap-12 px-6 py-6',
+          'lg:px-0 lg:py-9',
+          'xl:min-h-[calc(100vh-6.25rem)] xl:w-7xl xl:max-w-none xl:flex-row xl:justify-center xl:gap-9',
         )}
       >
-        <div className={cn('flex flex-col gap-5')}>
-          <div>
-            <p className={cn('text-[1.5rem] font-bold', selectedActivity && 'opacity-[0.5]')}>
+        <div className={cn('flex w-full flex-col gap-5 xl:w-155.5')}>
+          <div className={cn('flex flex-col gap-2', selectedActivity && 'opacity-[0.5]')}>
+            <p className={cn('text-neutral-dark text-[1.5rem] leading-[1.2] font-semibold')}>
               학과 체험 선택
             </p>
-            <p className={cn('text-[0.875rem]')}>
+            <p className={cn('text-secondary-slate text-[0.875rem] leading-[1.2]')}>
               신청 이후 선택한 체험을 변경할 수 없으니 신중히 선택해주세요.
             </p>
           </div>
@@ -104,10 +115,12 @@ const ProgramsPage = ({
           />
         </div>
         {selectedActivity && userId && (
-          <div className={cn('flex flex-col gap-5')}>
-            <div>
-              <p className={cn('text-[1.5rem] font-bold')}>체험 신청자 정보 작성</p>
-              <p className={cn('text-[0.875rem]')}>
+          <div className={cn('flex w-full flex-col gap-5 xl:w-155.5')}>
+            <div className={cn('flex flex-col gap-2')}>
+              <p className={cn('text-neutral-dark text-[1.5rem] leading-[1.2] font-semibold')}>
+                체험 신청자 정보 작성
+              </p>
+              <p className={cn('text-secondary-slate text-[0.875rem] leading-[1.2]')}>
                 신청 이후 정보 수정이 불가하니 정보를 정확히 입력해 주세요.
               </p>
             </div>
