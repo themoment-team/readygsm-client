@@ -70,7 +70,7 @@ const ApplicationForm = ({ activityId, userId, onSuccess }: ApplicationFormProps
   };
 
   return (
-    <form onSubmit={handleSubmit} className={cn('flex w-155.5 flex-col')}>
+    <form onSubmit={handleSubmit} className={cn('flex w-full flex-col')}>
       <SearchSchoolModal
         isOpen={isSchoolModalOpen}
         onClose={() => setIsSchoolModalOpen(false)}
@@ -104,11 +104,11 @@ const ApplicationForm = ({ activityId, userId, onSuccess }: ApplicationFormProps
               <Select value={field.value ?? ''} onValueChange={field.onChange}>
                 <SelectTrigger
                   className={cn(
-                    'w-auto flex-1',
+                    'w-auto min-w-0 flex-1 overflow-hidden',
                     errors.grade && 'border-error-red hover:border-error-red',
                   )}
                 >
-                  <SelectValue placeholder="학년을 선택해주세요" />
+                  <SelectValue placeholder="학년 선택" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="1">1학년</SelectItem>
@@ -125,11 +125,11 @@ const ApplicationForm = ({ activityId, userId, onSuccess }: ApplicationFormProps
               <Select value={field.value ?? ''} onValueChange={field.onChange}>
                 <SelectTrigger
                   className={cn(
-                    'w-auto flex-1',
+                    'w-auto min-w-0 flex-1 overflow-hidden',
                     errors.classNum && 'border-error-red hover:border-error-red',
                   )}
                 >
-                  <SelectValue placeholder="반을 선택해주세요" />
+                  <SelectValue placeholder="반 선택" />
                 </SelectTrigger>
                 <SelectContent>
                   {Array.from({ length: 20 }, (_, i) => (
@@ -142,10 +142,10 @@ const ApplicationForm = ({ activityId, userId, onSuccess }: ApplicationFormProps
             )}
           />
           <Input
-            placeholder="번호를 입력해주세요"
+            placeholder="번호 입력"
             error={!!errors.number}
             {...register('number')}
-            className={cn('flex-1')}
+            className={cn('min-w-0 flex-1')}
           />
         </div>
         <p className={cn('text-error-red min-h-4 text-xs leading-4 font-normal')}>

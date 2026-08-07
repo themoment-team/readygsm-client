@@ -65,7 +65,8 @@ const FaqSection = () => {
   return (
     <main
       className={cn(
-        'flex min-h-[calc(100vh-6.25rem-11.3125rem)] flex-col items-center bg-white px-4 pt-9 pb-12',
+        'flex min-h-[calc(100vh-6.25rem-11.3125rem)] flex-col items-center bg-white px-6 pt-6 pb-12',
+        'lg:px-4 lg:pt-9',
       )}
     >
       <div className={cn('w-full max-w-150')}>

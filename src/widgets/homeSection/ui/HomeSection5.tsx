@@ -1,35 +1,35 @@
-import Link from 'next/link';
-
 import { cn } from '@/shared/lib';
-import { AnimateOnView } from '@/shared/ui';
+import { AnimateOnView, buttonVariants } from '@/shared/ui';
+
+import SectionLabel from './SectionLabel';
 
 const HomeSection5 = () => {
   return (
-    <div
-      className={cn(
-        'text-neutral-dark flex w-232 flex-col justify-center gap-30 py-58 text-[2.25rem] leading-[2.7rem] font-bold xl:w-7xl xl:py-90',
-      )}
-    >
-      <AnimateOnView className={cn('flex flex-col gap-9')}>
-        <div>아직 잘 모르겠다면...</div>
-        <div>
-          <span className={cn('bg-brand-primary px-1 leading-[1.2] text-white')}>
-            광주소프트웨어마이스터고
+    <section className={cn('flex w-full flex-col gap-12 lg:items-end lg:gap-20')}>
+      <AnimateOnView className={cn('flex flex-col gap-4')}>
+        <SectionLabel label="More" />
+        <h2 className={cn('text-neutral-dark text-2xl leading-normal font-bold lg:text-[4rem]')}>
+          <span className={cn('block')}>GSM에 대해 더 알아보고 싶나요?</span>
+          <span className={cn('block')}>
+            입학 지원 서비스 <br className={cn('xl:hidden')} />
+            <span className={cn('text-brand-primary')}>Hello, GSM</span> 도 있습니다
           </span>
-          에서 학과 체험은 어떨까요?
-        </div>
+        </h2>
       </AnimateOnView>
-      <AnimateOnView className="flex flex-row gap-9">
-        <div>
-          내가 정말&nbsp;
-          <span className={cn('bg-brand-primary px-1 leading-[1.2] text-white')}>개발자</span>가
-          적성일까?
-        </div>
-        <Link href="/programs" className={cn('text-brand-primary cursor-pointer underline')}>
-          학과 체험을 통해 확인해보세요!
-        </Link>
+      <AnimateOnView delay={200} className={cn('flex justify-end')}>
+        <a
+          href="https://www.hellogsm.kr"
+          target="_blank"
+          rel="noreferrer"
+          className={cn(
+            buttonVariants({ variant: 'default', size: 'pillSm' }),
+            'lg:h-17 lg:w-125 lg:text-xl',
+          )}
+        >
+          Hello, GSM으로
+        </a>
       </AnimateOnView>
-    </div>
+    </section>
   );
 };
 
