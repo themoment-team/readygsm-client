@@ -12,8 +12,8 @@ const Footer = () => {
         className={cn(
           'flex w-full flex-col items-start gap-3.25',
           'px-6 py-15',
-          'lg:flex-row lg:items-center lg:justify-between lg:gap-2 lg:px-20 lg:py-5',
-          'xl:max-w-360',
+          'lg:flex-row lg:items-center lg:justify-between lg:gap-2 lg:px-12',
+          'xl:max-w-360 xl:px-20',
         )}
       >
         <FooterGSMLogo />
