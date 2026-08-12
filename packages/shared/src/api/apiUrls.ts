@@ -1,0 +1,28 @@
+export const authUrl = {
+  postAuth: (provider: string) => `/v1/auth/${provider}`,
+  postSignOut: () => '/v1/auth/logout',
+} as const;
+
+export const userUrl = {
+  getMyInfo: () => '/v1/user/me',
+} as const;
+
+export const utilityUrl = {
+  patchUserRole: () => '/v1/utility/user/role',
+} as const;
+
+export const activityUrl = {
+  getActivityList: () => '/v1/activity',
+  getActivityById: (id: number) => `/v1/activity/${id}`,
+  postActivity: () => '/v1/activity/admin',
+  patchActivity: (id: number) => `/v1/activity/admin/${id}`,
+  deleteActivity: (id: number) => `/v1/activity/admin/${id}`,
+} as const;
+
+export const applicationUrl = {
+  getMyApplication: () => '/v1/application/my',
+  postApplication: () => '/v1/application/apply',
+  getAllApplications: (id: number) => `/v1/application/admin/applications?activityId=${id}`,
+  deleteApplication: (id: number) => `/v1/application/admin/cancel/${id}`,
+  getExcel: (id: number) => `/v1/application/admin/excel?activityId=${id}`,
+} as const;
