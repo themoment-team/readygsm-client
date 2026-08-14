@@ -2,13 +2,12 @@ import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
-import { isAxiosError } from 'axios';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import { activityQueryKeys, revalidateActivityList } from '@/entities/activity';
 import { usePostApplication } from '@/entities/application';
-import type { ApiResponseType } from '@/shared/api';
+import { getApiErrorMessage, isClientApiError } from '@/shared/api';
 
 import { ApplicationFormSchema, type ApplicationFormType } from './schema';
 
@@ -56,13 +55,11 @@ export const useApplicationForm = (activityId: number, userId: number, onSuccess
           onSuccess?.();
         },
         onError: async (error) => {
-          if (isAxiosError<ApiResponseType<null>>(error) && error.response?.status === 409) {
+          if (isClientApiError(error)) {
             queryClient.invalidateQueries({ queryKey: activityQueryKeys.getActivityList() });
             await revalidateActivityList();
-            toast.error(error.response.data.message);
-            return;
           }
-          toast.error('신청 중 오류가 발생했습니다.');
+          toast.error(getApiErrorMessage(error, '신청 중 오류가 발생했습니다.'));
         },
       },
     );
