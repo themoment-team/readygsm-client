@@ -1,0 +1,47 @@
+groups:
+  - claude
+  - codex
+
+overrides:
+  # 스킬 — 워크플로(git-commit, write-pr, planning, resolve-reviews, systematic-debugging, security-checklist, test)만 유지
+  claude/skills/api-design: false
+  claude/skills/database-schema: false
+  claude/skills/docker: false
+  claude/skills/java-spring-arch: false
+  claude/skills/kotest-guide: false
+  claude/skills/kotlin-spring-arch: false
+  claude/skills/migration-guide: false
+  claude/skills/the-sdk: false
+  codex/skills/api-design: false
+  codex/skills/database-schema: false
+  codex/skills/docker: false
+  codex/skills/java-spring-arch: false
+  codex/skills/kotest-guide: false
+  codex/skills/kotlin-spring-arch: false
+  codex/skills/migration-guide: false
+  codex/skills/the-sdk: false
+
+  # 에이전트 — web-researcher만 유지
+  claude/agents/contradiction-finder: false
+  claude/agents/kotlin-convention-validator: false
+  claude/agents/doc-polisher: false
+  claude/agents/prompt-polisher: false
+  claude/agents/kotlin-test-fixer: false
+  codex/agents/contradiction-finder: false
+  codex/agents/kotlin-convention-validator: false
+  codex/agents/doc-polisher: false
+  codex/agents/prompt-polisher: false
+  codex/agents/kotlin-test-fixer: false
+
+  # 훅 — 필수(dispatcher + settings/hooks-json) + prettier, eslint
+  claude/hooks/dispatcher: true
+  claude/settings: true
+  claude/hooks/prettier: true
+  claude/hooks/eslint: true
+  codex/hooks/dispatcher: true
+  codex/hooks-json: true
+  codex/hooks/prettier: true
+  codex/hooks/eslint: true
+
+# PR 설정 — 팀 공용어 한국어
+language: ko

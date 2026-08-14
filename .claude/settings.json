@@ -1,26 +1,52 @@
 {
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "includeGitInstructions": false,
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch",
+      "Bash(./gradlew *)",
+      "Bash(git diff*)",
+      "Bash(git status)",
+      "Bash(git log*)",
+      "Bash(git add*)",
+      "Bash(git commit*)",
+      "Bash(git branch*)",
+      "Bash(git checkout*)",
+      "Bash(git rev-parse*)"
+    ]
+  },
   "hooks": {
     "PreToolUse": [
       {
-        "matcher": "Bash|Write",
+        "matcher": "Bash",
         "hooks": [
           {
             "type": "command",
-            "command": "bash .claude/hooks/preToolUse.sh \"$CLAUDE_TOOL_NAME\" \"$CLAUDE_TOOL_INPUT\""
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/preToolUse.sh"
           }
         ]
       }
     ],
     "PostToolUse": [
       {
-        "matcher": "Write|Edit",
+        "matcher": "Edit|Write",
         "hooks": [
           {
             "type": "command",
-            "command": "bash .claude/hooks/postToolUse.sh \"$CLAUDE_TOOL_NAME\" \"$CLAUDE_TOOL_INPUT\""
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/postToolUse.sh"
           }
         ]
       }
     ]
-  }
+  },
+  "enabledPlugins": {
+    "claude-hud@claude-hud": true,
+    "context7@claude-plugins-official": true
+  },
+  "language": "korean",
+  "effortLevel": "high"
 }
