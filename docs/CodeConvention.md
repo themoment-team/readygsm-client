@@ -2,16 +2,25 @@
 
 ## 🏗️ 프로젝트 구조
 
+### 모노레포 구조
+
+pnpm + Turborepo 모노레포로, `apps/client`(공개 사이트)와 `apps/admin`(관리자), 두 앱이 공통으로 쓰는 `packages/shared`로 구성됩니다.
+
 ### Feature-Sliced Design (FSD) 아키텍처
 
+각 앱(`apps/client`, `apps/admin`)은 아래 구조를 따르며, 두 앱이 함께 쓰는 코드는 `packages/shared`에 둡니다.
+
 ```
-src/
+apps/{client,admin}/src/
 ├── app/         # Next.js 라우팅, layout, metadata
 ├── views/       # 페이지 컴포넌트 (여러 위젯 조합)
 ├── widgets/     # 독립적인 복합 UI 컴포넌트 블록
 ├── features/    # 기능 단위 로직 (인증 등)
-├── entities/    # 비즈니스 엔티티 (타입, 스키마, 유틸)
-└── shared/      # 공유 유틸리티, 훅, 스타일
+└── entities/    # 이 앱 전용 비즈니스 엔티티 (타입, 스키마, 유틸)
+
+packages/shared/src/
+├── entities/    # 두 앱이 함께 쓰는 엔티티 (activity, application)
+├── api/ ui/ lib/ hooks/ assets/ styles/ types/  # 공유 유틸리티, 훅, 스타일
 ```
 
 > 📚 **학습 자료**
