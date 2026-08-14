@@ -1,0 +1,25 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+import { activityUrl, patch } from '@shared/api';
+import { revalidateActivityList } from '@shared/entities/activity/api/revalidateActivityList';
+import { activityQueryKeys } from '@shared/entities/activity/model/useGetActivityList';
+
+import type { toActivityWithRegistrationReqDto } from './types';
+
+type ActivityReqDto = ReturnType<typeof toActivityWithRegistrationReqDto>;
+
+const usePatchActivityMutation = (id: number) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (dto: ActivityReqDto) => patch(activityUrl.patchActivity(id), dto),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: activityQueryKeys.getActivityList() });
+      revalidateActivityList();
+    },
+  });
+};
+
+export const usePatchActivity = (id: number) => {
+  const { mutate: patchActivity, isPending } = usePatchActivityMutation(id);
+  return { patchActivity, isPending };
+};

@@ -8,45 +8,67 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
+Run from the repo root — scripts fan out to each app via [Turborepo](https://turborepo.com/):
+
 ```bash
-pnpm dev          # Start development server
+pnpm dev          # Start development server(s)
 pnpm build        # Production build
 pnpm lint         # Run ESLint
 pnpm lint:fix     # Run ESLint with auto-fix
-pnpm format       # Run Prettier
+pnpm format       # Run Prettier (repo-wide)
 pnpm format:check # Check formatting without writing
 ```
 
 Pre-commit hooks (Husky + lint-staged) run ESLint and Prettier automatically on `*.ts` and `*.tsx` files.
 
-## Architecture: Feature-Sliced Design (FSD)
+## Monorepo Structure
 
-The project strictly follows [Feature-Sliced Design](https://feature-sliced.design/). Layers must only import from layers below them — cross-layer imports at the same level are forbidden.
+This is a pnpm + Turborepo monorepo with two Next.js apps and one shared package:
 
 ```
-src/
+apps/
+├── client/   # Public site — program experience & info session applications
+└── admin/    # Admin dashboard — activity/applicant management (entire app is auth-gated)
+packages/
+└── shared/   # Cross-app code: shared/* layer + entities used by both apps (activity, application)
+```
+
+- `apps/admin` gates **every route** via `apps/admin/src/middleware.ts` (checks `role === 'ADMIN' | 'ROOT'` against `/v1/user/me`, rewrites to `/not-found` otherwise). `apps/client` has no such middleware.
+- ESLint, Prettier, Husky, lint-staged, and TypeScript are shared root-level devDependencies; each app/package only declares its own runtime/build deps (e.g. Next.js, React) and its own `eslint.config.mjs` / `tsconfig.json`.
+- Each app imports shared code via the `@shared/*` path alias (maps to `packages/shared/src/*`), and its own code via `@/*`. `packages/shared` is consumed as TS source directly (no build step) — each app's `next.config.ts` lists it under `transpilePackages`.
+- Adding code to `packages/shared` should only happen when it's genuinely needed by both apps — don't move something there speculatively.
+- `NEXT_PUBLIC_API_BASE_URL` and other env vars live in each app's own `.env.local` (e.g. `apps/client/.env.local`, `apps/admin/.env.local`), not the repo root.
+- Tailwind's `@import 'tailwindcss'` must stay in each app's own `src/app/globals.css` (never in `packages/shared`) — Tailwind v4's automatic class-usage scanning is rooted at that import, so moving it into the shared package would stop it from seeing each app's `src/**`. The shared design tokens/theme live in `packages/shared/src/styles/theme.css`, imported by each app's `globals.css`.
+- Tailwind's automatic scanning is also **local to each app's own directory** — it does not reach into `packages/shared` by default. Because of this, each app's `globals.css` also has an explicit `@source '../../../../packages/shared/src';`. If a class is used only inside `packages/shared` (not also verbatim in the consuming app), it silently won't be generated unless this `@source` line exists. If you add a new app, add this same `@source` line to its `globals.css` too.
+
+## Architecture: Feature-Sliced Design (FSD)
+
+Each app strictly follows [Feature-Sliced Design](https://feature-sliced.design/). Layers must only import from layers below them — cross-layer imports at the same level are forbidden.
+
+```
+apps/{client,admin}/src/
 ├── app/       # Next.js routing, layouts, metadata, providers
 ├── views/     # Page-level components (compose widgets)
 ├── widgets/   # Standalone composite UI blocks
 ├── features/  # Feature-scoped logic (auth, forms, etc.)
-├── entities/  # Business entities: types, schemas, API hooks, UI
-└── shared/    # Shared utilities, hooks, styles, base components
+├── entities/  # Business entities local to this app: types, schemas, API hooks, UI
+└── (no local shared/ layer — cross-app shared code lives in packages/shared, see above)
 ```
 
-**Import direction (strict):** `app` → `views` → `widgets` → `features` → `entities` → `shared`
+**Import direction (strict):** `app` → `views` → `widgets` → `features` → `entities` → `shared` (`@shared/*`)
 
 Each layer folder uses barrel exports via `index.ts`.
 
 ## Tech Stack
 
-| Category      | Library                                                                        |
-| ------------- | ------------------------------------------------------------------------------ |
-| Framework     | Next.js (React 19, TypeScript 5)                                               |
-| Data fetching | TanStack React Query 5                                                         |
-| HTTP          | Axios (wrapped — use `get`, `post`, `patch`, `put`, `del` from `@/shared/api`) |
-| Forms         | React Hook Form + Zod                                                          |
-| Styling       | Tailwind CSS 4, `cn()` utility (`clsx` + `tailwind-merge`)                     |
-| Font          | Pretendard (local WOFF2, loaded via Next.js font loader)                       |
+| Category      | Library                                                                       |
+| ------------- | ----------------------------------------------------------------------------- |
+| Framework     | Next.js (React 19, TypeScript 5)                                              |
+| Data fetching | TanStack React Query 5                                                        |
+| HTTP          | Axios (wrapped — use `get`, `post`, `patch`, `put`, `del` from `@shared/api`) |
+| Forms         | React Hook Form + Zod                                                         |
+| Styling       | Tailwind CSS 4, `cn()` utility (`clsx` + `tailwind-merge`)                    |
+| Font          | Pretendard (local WOFF2, loaded via Next.js font loader)                      |
 
 API requests are proxied: the Next.js config rewrites `/api/*` to `NEXT_PUBLIC_API_BASE_URL`.
 
@@ -95,7 +117,7 @@ export default Example;
 - Tailwind CSS only; 모든 `className`에 예외 없이 `cn()`을 사용하세요 (조건부 클래스 없이도 포함).
 - Use CVA (`class-variance-authority`) for components with multiple variants
 - Tailwind arbitrary value에서 `px` 단위를 사용하지 마세요 — Tailwind spacing scale 또는 `rem`/`em` 사용.
-- 색상은 `src/shared/styles/globals.css`에 선언된 CSS 변수를 우선 사용하세요. 해당 변수가 없는 경우에만 hex 값 사용 허용.
+- 색상은 `packages/shared/src/styles/theme.css`에 선언된 CSS 변수를 우선 사용하세요. 해당 변수가 없는 경우에만 hex 값 사용 허용.
   - 예: `text-brand-primary`, `bg-surface-container`, `border-border-variant`
   - 주요 변수: `brand-primary`, `brand-accent`, `neutral-dark`, `deep-black`, `neutral-slate`, `cool-neutral`, `secondary-slate`, `soft-gray`, `base-fill`, `surface-container`, `pure-white`, `error-red` 등
 
@@ -122,8 +144,9 @@ export const exampleUrl = {
 1. React imports
 2. Next.js imports
 3. External libraries
-4. Internal (`@/`) imports
-5. Relative imports
+4. Shared package (`@shared/`) imports
+5. Internal (`@/`) imports
+6. Relative imports
 
 ## Claude 행동 규칙
 
