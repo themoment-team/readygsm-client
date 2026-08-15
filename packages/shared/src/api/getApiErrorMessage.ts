@@ -1,17 +1,14 @@
-import { isAxiosError } from 'axios';
+import { type AxiosError, isAxiosError } from 'axios';
 
 import type { ApiResponseType } from './types';
 
-const getResponseStatus = (error: unknown) =>
-  isAxiosError(error) ? error.response?.status : undefined;
-
-export const isClientApiError = (error: unknown) => {
-  const status = getResponseStatus(error);
+export const isClientApiError = (error: unknown): error is AxiosError<ApiResponseType<null>> => {
+  const status = isAxiosError(error) ? error.response?.status : undefined;
   return status !== undefined && status >= 400 && status < 500;
 };
 
 export const getApiErrorMessage = (error: unknown, fallbackMessage: string) => {
-  if (!isAxiosError<ApiResponseType<null>>(error) || !isClientApiError(error)) {
+  if (!isClientApiError(error)) {
     return fallbackMessage;
   }
 
