@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 import { useQueryClient } from '@tanstack/react-query';
 import { X } from 'lucide-react';
@@ -19,7 +19,6 @@ import NavLink from './NavLink';
 
 const Header = () => {
   const pathname = usePathname();
-  const router = useRouter();
   const [menuOpenPathname, setMenuOpenPathname] = useState<string | null>(null);
   const isMenuOpen = menuOpenPathname === pathname;
 
@@ -31,7 +30,7 @@ const Header = () => {
       onSuccess: () => {
         queryClient.clear();
         toast.success('로그아웃 되었습니다.');
-        router.replace('/');
+        window.location.href = process.env.NEXT_PUBLIC_CLIENT_URL!;
       },
     });
   };
