@@ -9,8 +9,3 @@ export const usePostAuth = () =>
     mutationFn: ({ provider, ...body }: PostAuthBodyType & { provider: OAuthProviderType }) =>
       post<void>(authUrl.postAuth(provider), body),
   });
-
-export const usePostSignOut = () =>
-  useMutation({
-    mutationFn: () => post<void>(authUrl.postSignOut()),
-  });

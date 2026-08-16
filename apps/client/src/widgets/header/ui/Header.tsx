@@ -10,10 +10,10 @@ import { X } from 'lucide-react';
 import { toast } from 'react-toastify';
 
 import { HamburgerIcon, Logo } from '@shared/assets';
+import { usePostSignOut } from '@shared/entities/auth';
 import { cn } from '@shared/lib';
 import { Button } from '@shared/ui';
 
-import { usePostSignOut } from '@/entities/auth';
 import { useGetMyInfo, userQueryKeys } from '@/entities/user';
 import { LoginModal } from '@/features/auth';
 
