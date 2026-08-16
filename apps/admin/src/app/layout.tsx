@@ -3,6 +3,8 @@ import type { Metadata } from 'next';
 import { TanStackProvider, ToastProvider } from '@shared/lib';
 import { pretendard } from '@shared/styles';
 
+import { Header } from '@/widgets/header';
+
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -22,6 +24,7 @@ const RootLayout = ({
     <html lang="ko">
       <body className={pretendard.className}>
         <TanStackProvider>
+          <Header />
           {children}
           <ToastProvider />
         </TanStackProvider>
