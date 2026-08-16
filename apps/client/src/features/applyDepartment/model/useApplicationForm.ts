@@ -2,15 +2,17 @@ import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
-import { isAxiosError } from 'axios';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import type { ApiResponseType } from '@shared/api';
+import { getApiErrorMessage, getApiErrorStatus } from '@shared/api';
 import { activityQueryKeys, revalidateActivityList } from '@shared/entities/activity';
 import { usePostApplication } from '@shared/entities/application';
 
 import { ApplicationFormSchema, type ApplicationFormType } from './schema';
+
+/** 활동의 신청 가능 상태가 서버에서 이미 바뀌었을 수 있는 응답 코드 (409: 이미 신청/기간 아님, 404: 활동 삭제) */
+const STALE_ACTIVITY_STATUSES = [404, 409];
 
 export const useApplicationForm = (activityId: number, userId: number, onSuccess?: () => void) => {
   const [isSchoolModalOpen, setIsSchoolModalOpen] = useState(false);
@@ -56,13 +58,13 @@ export const useApplicationForm = (activityId: number, userId: number, onSuccess
           onSuccess?.();
         },
         onError: async (error) => {
-          if (isAxiosError<ApiResponseType<null>>(error) && error.response?.status === 409) {
+          const status = getApiErrorStatus(error);
+
+          if (status !== undefined && STALE_ACTIVITY_STATUSES.includes(status)) {
             queryClient.invalidateQueries({ queryKey: activityQueryKeys.getActivityList() });
             await revalidateActivityList();
-            toast.error(error.response.data.message);
-            return;
           }
-          toast.error('신청 중 오류가 발생했습니다.');
+          toast.error(getApiErrorMessage(error, '신청 중 오류가 발생했습니다.'));
         },
       },
     );
