@@ -82,6 +82,7 @@ const Header = () => {
               href={link.href}
               label={link.label}
               isActive={getIsActive(link.href)}
+              icon={link.icon}
               withHover
             />
           ))}
@@ -130,6 +131,7 @@ const Header = () => {
                   href={link.href}
                   label={link.label}
                   isActive={getIsActive(link.href)}
+                  icon={link.icon}
                   onClick={handleMenuClose}
                 />
               ))}
