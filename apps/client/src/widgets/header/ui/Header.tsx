@@ -82,6 +82,8 @@ const Header = () => {
               href={link.href}
               label={link.label}
               isActive={getIsActive(link.href)}
+              icon={link.icon}
+              isExternal={link.isExternal}
               withHover
             />
           ))}
@@ -130,6 +132,8 @@ const Header = () => {
                   href={link.href}
                   label={link.label}
                   isActive={getIsActive(link.href)}
+                  icon={link.icon}
+                  isExternal={link.isExternal}
                   onClick={handleMenuClose}
                 />
               ))}
