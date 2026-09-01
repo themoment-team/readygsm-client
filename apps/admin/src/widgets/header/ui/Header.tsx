@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 import { useQueryClient } from '@tanstack/react-query';
 import { X } from 'lucide-react';
@@ -14,31 +14,23 @@ import { usePostSignOut } from '@shared/entities/auth';
 import { cn } from '@shared/lib';
 import { Button } from '@shared/ui';
 
-import { useGetMyInfo, userQueryKeys } from '@/entities/user';
-import { LoginModal } from '@/features/auth';
-
-import { NAV_LINKS } from '../model/navigation';
+import { ADMIN_NAV_LINKS } from '../model/navigation';
 import NavLink from './NavLink';
 
 const Header = () => {
   const pathname = usePathname();
-  const router = useRouter();
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [menuOpenPathname, setMenuOpenPathname] = useState<string | null>(null);
   const isMenuOpen = menuOpenPathname === pathname;
 
   const queryClient = useQueryClient();
-  const { data: user } = useGetMyInfo();
   const { mutate: signOut } = usePostSignOut();
-
-  const links = NAV_LINKS.client;
 
   const handleSignOut = () => {
     signOut(undefined, {
       onSuccess: () => {
-        queryClient.removeQueries({ queryKey: userQueryKeys.getMyInfo() });
+        queryClient.clear();
         toast.success('로그아웃 되었습니다.');
-        router.replace('/');
+        window.location.href = process.env.NEXT_PUBLIC_CLIENT_URL!;
       },
     });
   };
@@ -52,9 +44,9 @@ const Header = () => {
 
   const handleMenuClose = () => setMenuOpenPathname(null);
 
-  const activeLink = links
-    .filter((link) => pathname === link.href || pathname.startsWith(link.href + '/'))
-    .reduce((a, b) => (b.href.length > a.href.length ? b : a), { href: '' });
+  const activeLink = ADMIN_NAV_LINKS.filter(
+    (link) => pathname === link.href || pathname.startsWith(link.href + '/'),
+  ).reduce((a, b) => (b.href.length > a.href.length ? b : a), { href: '' });
 
   const getIsActive = (href: string) => activeLink.href === href;
 
@@ -76,29 +68,21 @@ const Header = () => {
         </Link>
 
         <nav className={cn('hidden items-center gap-12 xl:flex')}>
-          {links.map((link) => (
+          {ADMIN_NAV_LINKS.map((link) => (
             <NavLink
               key={link.href}
               href={link.href}
               label={link.label}
               isActive={getIsActive(link.href)}
-              icon={link.icon}
-              isExternal={link.isExternal}
               withHover
             />
           ))}
         </nav>
 
         <div className={cn('hidden items-center gap-4 xl:flex')}>
-          {user ? (
-            <Button onClick={handleSignOut} variant="outlinePrimary" size="md">
-              로그아웃
-            </Button>
-          ) : (
-            <Button onClick={() => setIsLoginModalOpen(true)} variant="default" size="md">
-              로그인
-            </Button>
-          )}
+          <Button onClick={handleSignOut} variant="outlinePrimary" size="md">
+            로그아웃
+          </Button>
         </div>
 
         <button
@@ -126,46 +110,29 @@ const Header = () => {
             )}
           >
             <div className={cn('flex flex-col items-end gap-12')}>
-              {links.map((link) => (
+              {ADMIN_NAV_LINKS.map((link) => (
                 <NavLink
                   key={link.href}
                   href={link.href}
                   label={link.label}
                   isActive={getIsActive(link.href)}
-                  icon={link.icon}
-                  isExternal={link.isExternal}
                   onClick={handleMenuClose}
                 />
               ))}
-              {user ? (
-                <Button
-                  onClick={() => {
-                    handleSignOut();
-                    handleMenuClose();
-                  }}
-                  variant="outlinePrimary"
-                  size="md"
-                >
-                  로그아웃
-                </Button>
-              ) : (
-                <Button
-                  onClick={() => {
-                    setIsLoginModalOpen(true);
-                    handleMenuClose();
-                  }}
-                  variant="default"
-                  size="md"
-                >
-                  로그인
-                </Button>
-              )}
+              <Button
+                onClick={() => {
+                  handleSignOut();
+                  handleMenuClose();
+                }}
+                variant="outlinePrimary"
+                size="md"
+              >
+                로그아웃
+              </Button>
             </div>
           </div>
         </>
       )}
-
-      <LoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />
     </header>
   );
 };
