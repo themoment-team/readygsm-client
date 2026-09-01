@@ -1,4 +1,4 @@
-import { getOAuthUrl } from '@/entities/auth';
+import { getOAuthUrl } from '@shared/entities/auth';
 
 export const useLogin = () => {
   const saveReturnUrl = () => {

@@ -8,9 +8,8 @@ import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 
 import { type ApiResponseType, get, userUrl } from '@shared/api';
-
-import { getRedirectUri, type OAuthProviderType, usePostAuth } from '@/entities/auth';
-import { userQueryKeys, type UserType } from '@/entities/user';
+import { getRedirectUri, type OAuthProviderType, usePostAuth } from '@shared/entities/auth';
+import { userQueryKeys, type UserType } from '@shared/entities/user';
 
 export const useOauthCallback = () => {
   const router = useRouter();
