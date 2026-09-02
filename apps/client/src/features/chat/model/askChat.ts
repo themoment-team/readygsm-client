@@ -27,6 +27,7 @@ const toFailReason = (status: number): ChatFailReasonType => {
 interface ParsedFrame {
   event: string;
   data: string;
+  hasData: boolean;
 }
 
 const parseFrame = (frame: string): ParsedFrame => {
@@ -91,11 +92,12 @@ export const askChat = async ({
 
       let boundary = buffer.indexOf(FRAME_DELIMITER);
       while (boundary !== -1) {
-        const { event, data } = parseFrame(buffer.slice(0, boundary));
+        const { event, data, hasData } = parseFrame(buffer.slice(0, boundary));
         buffer = buffer.slice(boundary + FRAME_DELIMITER.length);
 
+        /** heartbeat(: ping)만 담긴 프레임은 data 줄이 없다 — 토큰으로 취급하지 않는다 */
         if (event === 'message') {
-          onToken(data);
+          if (hasData) onToken(data);
         } else if (event === 'done') {
           result = { type: 'done', finishReason: JSON.parse(data).finishReason };
           break;
