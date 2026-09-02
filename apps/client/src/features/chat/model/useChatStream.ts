@@ -4,14 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { getApiErrorStatus } from '@shared/api';
 
-import {
-  type ChatFailReasonType,
-  type ChatMessageType,
-  clearStoredChatSession,
-  getStoredChatSessionId,
-  setStoredChatSessionId,
-  usePostChatSession,
-} from '@/entities/chat';
+import { type ChatFailReasonType, type ChatMessageType, usePostChatSession } from '@/entities/chat';
 
 import { askChat } from './askChat';
 
@@ -30,14 +23,19 @@ type SessionResultType =
   | { ok: false; reason: ChatFailReasonType };
 
 interface UseChatStreamOptions {
-  userId: number;
   onUnauthorized: () => void;
 }
 
-export const useChatStream = ({ userId, onUnauthorized }: UseChatStreamOptions) => {
+export const useChatStream = ({ onUnauthorized }: UseChatStreamOptions) => {
   const [messages, setMessages] = useState<ChatMessageType[]>([CHAT_GREETING]);
   const [isStreaming, setIsStreaming] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
+  /**
+   * 세션은 메모리에만 둔다. 대화 이력 조회 API가 없어서, 세션을 새로고침 너머로
+   * 복원하면 서버는 이전 대화를 기억하는데 화면은 비어 있는 상태가 된다.
+   * 화면의 대화와 서버의 세션이 항상 같은 수명을 갖도록 맞춘다.
+   */
+  const sessionIdRef = useRef<string | null>(null);
   const isAbortedRef = useRef(false);
   const lastQuestionRef = useRef('');
   const { mutateAsync: issueSession } = usePostChatSession();
@@ -52,7 +50,7 @@ export const useChatStream = ({ userId, onUnauthorized }: UseChatStreamOptions) 
     try {
       const res = await issueSession();
       const { sessionId } = res.data;
-      setStoredChatSessionId(userId, sessionId);
+      sessionIdRef.current = sessionId;
       return { ok: true, sessionId };
     } catch (error) {
       const status = getApiErrorStatus(error);
@@ -60,7 +58,7 @@ export const useChatStream = ({ userId, onUnauthorized }: UseChatStreamOptions) 
         status === 401 ? 'unauthorized' : status === 429 ? 'rate_limited' : 'connection_lost';
       return { ok: false, reason };
     }
-  }, [issueSession, userId]);
+  }, [issueSession]);
 
   const runStream = useCallback(
     async (question: string, botId: string) => {
@@ -68,9 +66,9 @@ export const useChatStream = ({ userId, onUnauthorized }: UseChatStreamOptions) 
       abortRef.current = controller;
       isAbortedRef.current = false;
 
-      const stored = getStoredChatSessionId(userId);
-      let session: SessionResultType = stored
-        ? { ok: true, sessionId: stored }
+      const current = sessionIdRef.current;
+      let session: SessionResultType = current
+        ? { ok: true, sessionId: current }
         : await createSession();
 
       if (!session.ok) return session.reason;
@@ -91,7 +89,7 @@ export const useChatStream = ({ userId, onUnauthorized }: UseChatStreamOptions) 
 
       /** 세션이 만료됐거나 다른 사용자에게 묶인 경우 — 재발급 후 같은 질문을 한 번만 재시도한다 */
       if (result.type === 'fail' && result.reason === 'session_expired' && !isAbortedRef.current) {
-        clearStoredChatSession();
+        sessionIdRef.current = null;
         session = await createSession();
 
         if (!session.ok) return session.reason;
@@ -114,7 +112,7 @@ export const useChatStream = ({ userId, onUnauthorized }: UseChatStreamOptions) 
 
       return result.reason;
     },
-    [createSession, updateMessage, userId],
+    [createSession, updateMessage],
   );
 
   const send = useCallback(

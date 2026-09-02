@@ -8,6 +8,7 @@ export type ChatFailReasonType =
   | 'rate_limited'
   | 'bad_request'
   | 'upstream_interrupted'
+  | 'idle_timeout'
   | 'connection_lost';
 
 export type ChatMessageStatusType = 'streaming' | 'done' | 'truncated' | 'failed';

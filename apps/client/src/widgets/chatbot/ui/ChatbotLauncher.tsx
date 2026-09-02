@@ -7,7 +7,6 @@ import { toast } from 'react-toastify';
 
 import { cn } from '@shared/lib';
 
-import { clearStoredChatSession } from '@/entities/chat';
 import { useGetMyInfo } from '@/entities/user';
 import { LoginModal } from '@/features/auth';
 
@@ -40,7 +39,6 @@ const ChatbotLauncher = () => {
 
   /** 스트리밍 도중 인증이 풀린 경우 — 대화를 닫고 다시 로그인시킨다 */
   const handleUnauthorized = () => {
-    clearStoredChatSession();
     setIsOpen(false);
     toast.error('로그인이 필요한 기능입니다.');
     setIsLoginModalOpen(true);
@@ -48,12 +46,8 @@ const ChatbotLauncher = () => {
 
   return (
     <>
-      {isPanelOpen && user && (
-        <ChatbotPanel
-          userId={user.id}
-          onClose={() => setIsOpen(false)}
-          onUnauthorized={handleUnauthorized}
-        />
+      {isPanelOpen && (
+        <ChatbotPanel onClose={() => setIsOpen(false)} onUnauthorized={handleUnauthorized} />
       )}
 
       <button

@@ -7,5 +7,6 @@ export const CHAT_FAIL_MESSAGE: Record<ChatFailReasonType, string> = {
   rate_limited: '지금 문의가 몰리고 있어요. 잠시 후 다시 시도해주세요.',
   bad_request: '질문을 보내지 못했어요. 다시 시도해주세요.',
   upstream_interrupted: '답변이 중간에 끊겼어요.',
+  idle_timeout: '답변이 중간에 끊겼어요.',
   connection_lost: '답변이 중간에 끊겼어요.',
 };

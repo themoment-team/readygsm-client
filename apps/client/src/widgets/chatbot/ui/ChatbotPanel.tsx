@@ -11,15 +11,14 @@ import { CHAT_MESSAGE_MAX_LENGTH, useChatStream } from '@/features/chat';
 import ChatMessage from './ChatMessage';
 
 interface ChatbotPanelProps {
-  userId: number;
   onClose: () => void;
   onUnauthorized: () => void;
 }
 
-const ChatbotPanel = ({ userId, onClose, onUnauthorized }: ChatbotPanelProps) => {
+const ChatbotPanel = ({ onClose, onUnauthorized }: ChatbotPanelProps) => {
   const [input, setInput] = useState('');
   const scrollRef = useRef<HTMLDivElement>(null);
-  const { messages, isStreaming, send, abort, retry } = useChatStream({ userId, onUnauthorized });
+  const { messages, isStreaming, send, abort, retry } = useChatStream({ onUnauthorized });
 
   const isOverLength = input.length > CHAT_MESSAGE_MAX_LENGTH;
   const isSendable = input.trim().length > 0 && !isOverLength && !isStreaming;

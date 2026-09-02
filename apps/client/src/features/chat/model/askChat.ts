@@ -17,11 +17,24 @@ interface AskChatOptions {
 }
 
 const toFailReason = (status: number): ChatFailReasonType => {
-  if (status === 401) return 'unauthorized';
-  /** 403은 다른 사용자에게 바인딩된 세션 — 만료와 동일하게 재발급으로 복구한다 */
-  if (status === 403 || status === 404) return 'session_expired';
+  /**
+   * 403은 로그인 자체가 없는 경우다. 세션 발급도 로그인을 요구하므로
+   * 재발급으로는 복구되지 않는다 — 로그인 플로우로 보내야 한다.
+   * 만료·미존재·남의 세션은 서버가 전부 404로 통일해서 내려준다.
+   */
+  if (status === 401 || status === 403) return 'unauthorized';
+  if (status === 404) return 'session_expired';
   if (status === 429) return 'rate_limited';
   return 'bad_request';
+};
+
+/** event: error의 data는 {"reason":"..."} 형태 — 모르는 값은 중단으로 뭉뚱그린다 */
+const toErrorEventReason = (data: string): ChatFailReasonType => {
+  try {
+    return JSON.parse(data).reason === 'idle_timeout' ? 'idle_timeout' : 'upstream_interrupted';
+  } catch {
+    return 'upstream_interrupted';
+  }
 };
 
 interface ParsedFrame {
@@ -102,7 +115,7 @@ export const askChat = async ({
           result = { type: 'done', finishReason: JSON.parse(data).finishReason };
           break;
         } else if (event === 'error') {
-          result = { type: 'fail', reason: 'upstream_interrupted' };
+          result = { type: 'fail', reason: toErrorEventReason(data) };
           break;
         }
 
