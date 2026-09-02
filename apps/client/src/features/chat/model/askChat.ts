@@ -51,7 +51,7 @@ const parseFrame = (frame: string): ParsedFrame => {
   }
 
   /** 토큰에 줄바꿈이 있으면 서버가 data: 줄을 여러 개로 쪼개 보낸다 */
-  return { event, data: dataLines.join('\n') };
+  return { event, data: dataLines.join('\n'), hasData: dataLines.length > 0 };
 };
 
 export const askChat = async ({
