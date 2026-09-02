@@ -14,13 +14,11 @@ interface ChatMessageProps {
 
 const ChatMessage = ({ message, onRetry }: ChatMessageProps) => {
   const isUser = message.role === 'user';
-  const isEmptyStreaming = message.status === 'streaming' && message.content.length === 0;
+  const hasContent = message.content.length > 0;
 
   return (
     <div className={cn('flex w-full flex-col gap-1.5', isUser ? 'items-end' : 'items-start')}>
-      {isEmptyStreaming ? (
-        <TypingIndicator />
-      ) : (
+      {hasContent && (
         <p
           className={cn(
             'max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-6 whitespace-pre-wrap',
@@ -32,6 +30,9 @@ const ChatMessage = ({ message, onRetry }: ChatMessageProps) => {
           {message.content}
         </p>
       )}
+
+      {/* 첫 토큰 전에 실패하면(401·429·__error__) 내용이 없다 — 빈 말풍선을 그리지 않는다 */}
+      {!hasContent && message.status === 'streaming' && <TypingIndicator />}
 
       {message.status === 'truncated' && (
         <span className={cn('text-slate-utility px-1 text-xs leading-4')}>
