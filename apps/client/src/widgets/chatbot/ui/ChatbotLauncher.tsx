@@ -5,9 +5,9 @@ import { useState } from 'react';
 import { MessageCircle, X } from 'lucide-react';
 import { toast } from 'react-toastify';
 
+import { useGetMyInfo } from '@shared/entities/user';
 import { cn } from '@shared/lib';
 
-import { useGetMyInfo } from '@/entities/user';
 import { LoginModal } from '@/features/auth';
 
 import ChatbotPanel from './ChatbotPanel';
