@@ -56,11 +56,11 @@ const ChatbotLauncher = () => {
         aria-expanded={isPanelOpen}
         aria-label={isPanelOpen ? '챗봇 닫기' : '챗봇 열기'}
         className={cn(
-          'fixed right-6 bottom-6 z-50 lg:right-10 lg:bottom-10',
+          'fixed top-1/2 right-6 z-50 -translate-y-1/2 lg:right-10',
           'flex size-14 cursor-pointer items-center justify-center rounded-full',
           'bg-brand-primary text-pure-white',
           'shadow-[0_0.25rem_1rem_rgba(74,128,248,0.35)]',
-          'transition-[background-color,transform,box-shadow] duration-200',
+          'transition-[background-color,transform,scale,box-shadow] duration-200',
           'hover:bg-brand-primary/90 hover:scale-105',
           'active:scale-95',
           'focus-visible:ring-brand-primary/30 outline-none focus-visible:ring-4',
