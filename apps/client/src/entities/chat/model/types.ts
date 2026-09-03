@@ -19,6 +19,8 @@ export interface ChatMessageType {
   content: string;
   status?: ChatMessageStatusType;
   failReason?: ChatFailReasonType;
+  /** 봇 메시지가 어떤 질문에 대한 답변인지 — 재시도 시 그 질문만 다시 보낸다 */
+  question?: string;
 }
 
 export interface ChatSessionType {

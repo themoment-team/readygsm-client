@@ -9,7 +9,7 @@ import TypingIndicator from './TypingIndicator';
 
 interface ChatMessageProps {
   message: ChatMessageType;
-  onRetry: () => void;
+  onRetry: (botId: string) => void;
 }
 
 const ChatMessage = ({ message, onRetry }: ChatMessageProps) => {
@@ -48,7 +48,7 @@ const ChatMessage = ({ message, onRetry }: ChatMessageProps) => {
           {message.failReason !== 'unauthorized' && (
             <button
               type="button"
-              onClick={onRetry}
+              onClick={() => onRetry(message.id)}
               className={cn(
                 'text-brand-primary flex cursor-pointer items-center gap-1 text-xs leading-4 font-semibold',
                 'hover:underline',

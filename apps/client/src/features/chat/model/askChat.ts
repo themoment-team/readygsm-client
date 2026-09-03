@@ -16,7 +16,7 @@ interface AskChatOptions {
   onToken: (token: string) => void;
 }
 
-const toFailReason = (status: number): ChatFailReasonType => {
+export const toFailReason = (status: number): ChatFailReasonType => {
   /**
    * 403은 로그인 자체가 없는 경우다. 세션 발급도 로그인을 요구하므로
    * 재발급으로는 복구되지 않는다 — 로그인 플로우로 보내야 한다.
@@ -34,6 +34,18 @@ const toErrorEventReason = (data: string): ChatFailReasonType => {
     return JSON.parse(data).reason === 'idle_timeout' ? 'idle_timeout' : 'upstream_interrupted';
   } catch {
     return 'upstream_interrupted';
+  }
+};
+
+/**
+ * 토큰은 이미 다 받은 뒤에 오는 프레임이라, 여기서 파싱이 깨져도 실패로 뒤집지 않는다.
+ * data 줄이 없거나 JSON이 아니면 정상 종료로 본다.
+ */
+const toFinishReason = (data: string): ChatFinishReasonType => {
+  try {
+    return JSON.parse(data).finishReason === 'length' ? 'length' : 'stop';
+  } catch {
+    return 'stop';
   }
 };
 
@@ -67,6 +79,22 @@ const parseFrame = (frame: string): ParsedFrame => {
   return { event, data: dataLines.join('\n'), hasData: dataLines.length > 0 };
 };
 
+/** 프레임 하나를 처리한다 — 종료 프레임이면 결과를, 그 외에는 null을 돌려준다 */
+const consumeFrame = (
+  frame: string,
+  onToken: (token: string) => void,
+): AskChatResultType | null => {
+  const { event, data, hasData } = parseFrame(frame);
+
+  if (event === 'done') return { type: 'done', finishReason: toFinishReason(data) };
+  if (event === 'error') return { type: 'fail', reason: toErrorEventReason(data) };
+
+  /** heartbeat(: ping)만 담긴 프레임은 data 줄이 없다 — 토큰으로 취급하지 않는다 */
+  if (event === 'message' && hasData) onToken(data);
+
+  return null;
+};
+
 export const askChat = async ({
   sessionId,
   message,
@@ -78,7 +106,11 @@ export const askChat = async ({
   try {
     res = await fetch(`${API_PROXY_PREFIX}${chatUrl.postChat()}`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'X-Session-Id': sessionId },
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/event-stream',
+        'X-Session-Id': sessionId,
+      },
       body: JSON.stringify({ message }),
       credentials: 'include',
       signal,
@@ -88,36 +120,39 @@ export const askChat = async ({
   }
 
   /** 200이 아니면 SSE가 아니라 JSON 오류 본문이다 */
-  if (!res.ok || !res.body) {
-    return { type: 'fail', reason: toFailReason(res.status) };
-  }
+  if (!res.ok) return { type: 'fail', reason: toFailReason(res.status) };
+  if (!res.body) return { type: 'fail', reason: 'connection_lost' };
 
   const reader = res.body.pipeThrough(new TextDecoderStream()).getReader();
   let buffer = '';
   let result: AskChatResultType | null = null;
+  /** 청크 경계에 CRLF가 걸리면 '\r'만 먼저 도착한다 — 짝을 볼 때까지 붙이지 않는다 */
+  let pendingCR = false;
 
   try {
     while (!result) {
       const { value, done } = await reader.read();
-      if (done) break;
 
-      buffer += value;
+      if (done) {
+        /** 서버가 마지막 프레임 뒤 빈 줄 없이 닫는 경우 — 남은 버퍼를 버리지 않는다 */
+        if (pendingCR) buffer += '\n';
+        if (buffer.trim()) result = consumeFrame(buffer, onToken);
+        break;
+      }
+
+      /** 명세는 CRLF·LF·CR을 모두 허용한다 — LF로 통일해야 프레임 경계를 찾을 수 있다 */
+      let chunk: string = pendingCR ? `\r${value}` : value;
+      pendingCR = chunk.endsWith('\r');
+      if (pendingCR) chunk = chunk.slice(0, -1);
+
+      buffer += chunk.replace(/\r\n?/g, '\n');
 
       let boundary = buffer.indexOf(FRAME_DELIMITER);
       while (boundary !== -1) {
-        const { event, data, hasData } = parseFrame(buffer.slice(0, boundary));
+        result = consumeFrame(buffer.slice(0, boundary), onToken);
         buffer = buffer.slice(boundary + FRAME_DELIMITER.length);
 
-        /** heartbeat(: ping)만 담긴 프레임은 data 줄이 없다 — 토큰으로 취급하지 않는다 */
-        if (event === 'message') {
-          if (hasData) onToken(data);
-        } else if (event === 'done') {
-          result = { type: 'done', finishReason: JSON.parse(data).finishReason };
-          break;
-        } else if (event === 'error') {
-          result = { type: 'fail', reason: toErrorEventReason(data) };
-          break;
-        }
+        if (result) break;
 
         boundary = buffer.indexOf(FRAME_DELIMITER);
       }
