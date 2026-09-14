@@ -1,20 +1,26 @@
-.Toastify__progress-bar--success {
-  background-color: #16a34a;
+/*
+ * react-toastify 기본 스타일 위에 덮어쓰는 커스텀 스타일.
+ * 크기·위치는 라이브러리 CSS 변수로 지정해, 컨테이너 기준으로 배치되고 모바일 규칙과도 충돌하지 않게 한다.
+ */
+.Toastify {
+  --toastify-toast-width: 21.6875rem;
+  --toastify-toast-min-height: 5rem;
+  --toastify-toast-top: max(5rem, env(safe-area-inset-top));
+  --toastify-toast-right: max(2.75rem, env(safe-area-inset-right));
+  --toastify-color-progress-success: #16a34a;
+  --toastify-font-family: inherit;
 }
 
+/* v11부터 메시지가 .Toastify__toast에 바로 렌더링되므로 텍스트 스타일도 여기에 지정한다. */
 .Toastify__toast {
-  height: 5rem;
-  width: 21.6875rem;
-  right: 1.75rem;
-  top: 4rem;
-}
-
-.Toastify__toast-body {
+  padding-right: 2.75rem;
   font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: 1.5rem;
   color: #292e3d;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 
 .Toastify__toast-icon {
@@ -26,4 +32,44 @@
   position: absolute;
   top: 0.75rem;
   right: 0.75rem;
+}
+
+/* 라이브러리 기본값은 모바일에서 화면 전체 폭 + 각진 띠 형태라, 좌우 여백을 둔 카드 형태로 맞춘다. */
+@media only screen and (max-width: 480px) {
+  .Toastify {
+    --toastify-toast-bd-radius: 0.75rem;
+  }
+
+  .Toastify .Toastify__toast-container {
+    left: max(1rem, env(safe-area-inset-left));
+    right: max(1rem, env(safe-area-inset-right));
+    width: auto;
+  }
+
+  /* 모바일 헤더(h-18.75) 바로 아래에 띄운다. */
+  .Toastify .Toastify__toast-container--top-right {
+    top: max(5.4375rem, env(safe-area-inset-top));
+  }
+
+  .Toastify .Toastify__toast {
+    min-height: 3.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0.75rem 2.5rem 0.75rem 0.875rem;
+    border-radius: var(--toastify-toast-bd-radius);
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  .Toastify .Toastify__toast-icon {
+    margin-right: 0.75rem;
+    margin-left: 0;
+  }
+
+  .Toastify .Toastify__Close-Button {
+    top: 50%;
+    right: 0.75rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    transform: translateY(-50%);
+  }
 }
