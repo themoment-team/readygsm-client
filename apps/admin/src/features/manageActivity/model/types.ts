@@ -55,7 +55,7 @@ export const toActivityFirstCreateReqDto = (values: ActivityFirstCreateFormType)
   return {
     ...toBaseFields(values),
     registrationStartAt: `${currentYear}-${pad(values.registrationStartMonth)}-${pad(values.registrationStartDay)}T09:00:00`,
-    registrationEndAt: `${currentYear}-${pad(values.registrationEndMonth)}-${pad(values.registrationEndDay)}T23:59:59`,
+    registrationEndAt: `${currentYear}-${pad(values.registrationEndMonth)}-${pad(values.registrationEndDay)}T17:00:00`,
   };
 };
 
