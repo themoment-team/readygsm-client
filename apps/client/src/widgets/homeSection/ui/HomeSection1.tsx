@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { cn } from '@shared/lib';
 import { AnimateOnView, buttonVariants } from '@shared/ui';
 
-const ACTIVITY_PERIOD = '9월 16일 ~ 9월 22일';
+const ACTIVITY_PERIOD = '9월 16일 오전 9시 ~ 9월 22일 오후 5시';
 
 const HomeSection1 = () => {
   return (

@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { cn, TanStackProvider, ToastProvider } from '@shared/lib';
 import { pretendard } from '@shared/styles';
 
+import { SentryUserSync } from '@/features/auth';
 import { ChatbotLauncher } from '@/widgets/chatbot';
 import { Footer } from '@/widgets/footer';
 import { Header } from '@/widgets/header';
@@ -76,6 +77,7 @@ const RootLayout = ({
           }}
         />
         <TanStackProvider>
+          <SentryUserSync />
           <Header />
           <div className={cn('flex-1')}>{children}</div>
           <Footer />

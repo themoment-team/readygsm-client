@@ -2,18 +2,17 @@ interface ApiFetcherOptions {
   endpoint: string;
   context: string;
   errorMessage: string;
-  tags?: string[];
 }
 
 export const apiFetcher = async <T>({
   endpoint,
   context,
   errorMessage,
-  tags,
 }: ApiFetcherOptions): Promise<T | undefined> => {
   try {
+    // client/admin은 데이터 캐시가 분리돼 있어 admin의 updateTag가 client에 닿지 않으므로 캐시하지 않음
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${endpoint}`, {
-      next: { revalidate: 3600, tags },
+      cache: 'no-store',
     });
 
     if (!res.ok) throw new Error(`${res.status}`);

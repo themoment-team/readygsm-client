@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
+import * as Sentry from '@sentry/nextjs';
 import { useQueryClient } from '@tanstack/react-query';
 import { X } from 'lucide-react';
 import { toast } from 'react-toastify';
@@ -37,6 +38,8 @@ const Header = () => {
     signOut(undefined, {
       onSuccess: () => {
         queryClient.removeQueries({ queryKey: userQueryKeys.getMyInfo() });
+        // removeQueries는 구독 중인 observer에 알리지 않으므로 Sentry 유저는 직접 해제한다
+        Sentry.setUser(null);
         toast.success('로그아웃 되었습니다.');
         router.replace('/');
       },
