@@ -30,6 +30,16 @@ const ProgramsPage = ({
   const [selectedActivity, setSelectedActivity] = useState<ActivityType | null>(null);
   const [isApplicationCompleted, setIsApplicationCompleted] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const sortedActivities = [...activities].sort((left, right) => {
+    const leftIsFull = left.currentApplicant >= left.maxApplicant;
+    const rightIsFull = right.currentApplicant >= right.maxApplicant;
+
+    if (leftIsFull !== rightIsFull) {
+      return leftIsFull ? 1 : -1;
+    }
+
+    return left.currentApplicant - right.currentApplicant;
+  });
 
   const handleSelectActivity = (activity: ActivityType) => {
     if (!userId) {
@@ -115,7 +125,7 @@ const ProgramsPage = ({
             </p>
           </div>
           <HomeProgramSection
-            activities={activities}
+            activities={sortedActivities}
             selectedActivityId={selectedActivity?.id}
             onSelect={handleSelectActivity}
           />
