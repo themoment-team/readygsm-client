@@ -14,6 +14,8 @@ import { trackEvent } from '@/shared/lib';
 import { ApplicationForm } from '@/widgets/applyDepartment';
 import { HomeProgramSection } from '@/widgets/homeProgramSection';
 
+import { APPLICATION_FORM_ID, useApplicationFormScroll } from '../model/useApplicationFormScroll';
+
 interface ProgramsPageProps {
   activities: ActivityType[];
   archivedActivities: ActivityType[];
@@ -30,6 +32,11 @@ const ProgramsPage = ({
   const [selectedActivity, setSelectedActivity] = useState<ActivityType | null>(null);
   const [isApplicationCompleted, setIsApplicationCompleted] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
+  useApplicationFormScroll({
+    selectedActivityId: selectedActivity?.id,
+    userId,
+  });
 
   const handleSelectActivity = (activity: ActivityType) => {
     if (!userId) {
@@ -121,7 +128,7 @@ const ProgramsPage = ({
           />
         </div>
         {selectedActivity && userId && (
-          <div className={cn('flex w-full flex-col gap-5 xl:w-155.5')}>
+          <div id={APPLICATION_FORM_ID} className={cn('flex w-full flex-col gap-5 xl:w-155.5')}>
             <div className={cn('flex flex-col gap-2')}>
               <p className={cn('text-neutral-dark text-[1.5rem] leading-[1.2] font-semibold')}>
                 체험 신청자 정보 작성
