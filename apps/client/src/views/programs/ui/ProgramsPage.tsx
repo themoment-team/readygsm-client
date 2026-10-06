@@ -30,20 +30,21 @@ const ProgramsPage = ({
   const [selectedActivity, setSelectedActivity] = useState<ActivityType | null>(null);
   const [isApplicationCompleted, setIsApplicationCompleted] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
   const sortedActivities = useMemo(
-  () =>
-    [...activities].sort((left, right) => {
-      const leftIsFull = left.currentApplicant >= left.maxApplicant;
-      const rightIsFull = right.currentApplicant >= right.maxApplicant;
+    () =>
+      [...activities].sort((left, right) => {
+        const leftIsFull = left.currentApplicant >= left.maxApplicant;
+        const rightIsFull = right.currentApplicant >= right.maxApplicant;
 
-      if (leftIsFull !== rightIsFull) {
-        return leftIsFull ? 1 : -1;
-      }
+        if (leftIsFull !== rightIsFull) {
+          return leftIsFull ? 1 : -1;
+        }
 
-      return left.currentApplicant - right.currentApplicant;
-    }),
-  [activities],
-);
+        return left.currentApplicant - right.currentApplicant;
+      }),
+    [activities],
+  );
 
   const handleSelectActivity = (activity: ActivityType) => {
     if (!userId) {
