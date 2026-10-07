@@ -1,11 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
+import { flushSync } from 'react-dom';
 import { toast } from 'react-toastify';
 
 import { ActivityType } from '@shared/entities/activity';
-import { cn } from '@shared/lib';
+import { cn, scrollToElement } from '@shared/lib';
 import { CompletionMessage } from '@shared/ui';
 
 import { ProgramCard } from '@/entities/program';
@@ -20,7 +21,7 @@ interface ProgramsPageProps {
   application: boolean;
   userId?: number;
 }
-
+const APPLICATION_FORM_ID = 'application-form-section';
 const ProgramsPage = ({
   activities,
   archivedActivities,
@@ -30,6 +31,21 @@ const ProgramsPage = ({
   const [selectedActivity, setSelectedActivity] = useState<ActivityType | null>(null);
   const [isApplicationCompleted, setIsApplicationCompleted] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
+  const sortedActivities = useMemo(
+    () =>
+      [...activities].sort((left, right) => {
+        const leftIsFull = left.currentApplicant >= left.maxApplicant;
+        const rightIsFull = right.currentApplicant >= right.maxApplicant;
+
+        if (leftIsFull !== rightIsFull) {
+          return leftIsFull ? 1 : -1;
+        }
+
+        return left.currentApplicant - right.currentApplicant;
+      }),
+    [activities],
+  );
 
   const handleSelectActivity = (activity: ActivityType) => {
     if (!userId) {
@@ -42,7 +58,14 @@ const ProgramsPage = ({
       activity_id: String(activity.id),
       activity_name: activity.name,
     });
-    setSelectedActivity(activity);
+
+    flushSync(() => {
+      setSelectedActivity(activity);
+    });
+    // Tailwind xl breakpoint: 90rem
+    if (window.matchMedia('(min-width: 90rem)').matches) return;
+
+    scrollToElement(`#${APPLICATION_FORM_ID}`);
   };
 
   if (activities.length === 0) {
@@ -115,13 +138,16 @@ const ProgramsPage = ({
             </p>
           </div>
           <HomeProgramSection
-            activities={activities}
+            activities={sortedActivities}
             selectedActivityId={selectedActivity?.id}
             onSelect={handleSelectActivity}
           />
         </div>
         {selectedActivity && userId && (
-          <div className={cn('flex w-full flex-col gap-5 xl:w-155.5')}>
+          <div
+            id={APPLICATION_FORM_ID}
+            className={cn('flex w-full scroll-mt-24 flex-col gap-5 xl:w-155.5')}
+          >
             <div className={cn('flex flex-col gap-2')}>
               <p className={cn('text-neutral-dark text-[1.5rem] leading-[1.2] font-semibold')}>
                 체험 신청자 정보 작성
