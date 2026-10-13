@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { cn } from '@shared/lib';
 import { AnimateOnView, buttonVariants } from '@shared/ui';
 
-const ACTIVITY_PERIOD = '9월 16일 오전 9시 ~ 9월 22일 오후 5시';
+import { ACTIVITY_APPLICATION_PERIOD } from '@/shared/constants/activityPeriod';
 
 const HomeSection1 = () => {
   return (
@@ -31,7 +31,7 @@ const HomeSection1 = () => {
             </span>
           </h1>
           <p className={cn('text-xs leading-[1.4] font-medium lg:text-base')}>
-            학과 체험 접수 기간 : {ACTIVITY_PERIOD}
+            학과 체험 접수 기간 : {ACTIVITY_APPLICATION_PERIOD}
           </p>
         </div>
         <Link
