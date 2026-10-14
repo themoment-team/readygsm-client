@@ -95,6 +95,7 @@ const ProgramsPage = ({
                 maxApplicant={activity.maxApplicant}
                 currentApplicant={activity.currentApplicant}
                 disableHover
+                hideApplicant
               />
             ))}
           </div>
