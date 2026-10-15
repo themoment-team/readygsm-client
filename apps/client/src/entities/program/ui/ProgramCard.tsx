@@ -9,6 +9,7 @@ interface ProgramCardProps extends Pick<
   isReserved?: boolean;
   reserveOrder?: number | null;
   disableHover?: boolean;
+  hideApplicant?: boolean;
   onClick?: () => void;
 }
 
@@ -22,13 +23,14 @@ const ProgramCard = ({
   isReserved,
   reserveOrder,
   disableHover = false,
+  hideApplicant = false,
   onClick,
 }: ProgramCardProps) => {
   const reserveApplicant = Math.max(currentApplicant - maxApplicant, 0);
   const isReserveFull = reserveApplicant >= MAX_RESERVE_APPLICANT;
-  const isApplyDisabled = isReserved === undefined && isReserveFull;
+  const isApplyDisabled = !hideApplicant && isReserved === undefined && isReserveFull;
   const showReserveWarning =
-    isReserved !== undefined ? isReserved : currentApplicant >= maxApplicant;
+    !hideApplicant && (isReserved !== undefined ? isReserved : currentApplicant >= maxApplicant);
   const reserveBadgeText =
     isReserved && reserveOrder != null ? `예비신청 ${reserveOrder}번` : '예비 신청';
 
@@ -58,18 +60,20 @@ const ProgramCard = ({
         >
           {name}
         </h2>
-        <p
-          className={cn(
-            'text-[1.5rem] leading-[1.2] font-semibold',
-            isSelected ? 'text-[#2563EB]' : 'text-neutral-dark',
-          )}
-        >
-          {isApplyDisabled
-            ? '신청불가'
-            : showReserveWarning
-              ? reserveBadgeText
-              : `${currentApplicant}/${maxApplicant}`}
-        </p>
+        {!hideApplicant && (
+          <p
+            className={cn(
+              'text-[1.5rem] leading-[1.2] font-semibold',
+              isSelected ? 'text-[#2563EB]' : 'text-neutral-dark',
+            )}
+          >
+            {isApplyDisabled
+              ? '신청불가'
+              : showReserveWarning
+                ? reserveBadgeText
+                : `${currentApplicant}/${maxApplicant}`}
+          </p>
+        )}
       </header>
 
       <p
