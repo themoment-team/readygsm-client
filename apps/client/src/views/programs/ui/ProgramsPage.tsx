@@ -11,7 +11,7 @@ import { CompletionMessage } from '@shared/ui';
 
 import { ProgramCard } from '@/entities/program';
 import { LoginModal } from '@/features/auth';
-import { ACTIVITY_APPLICATION_PERIOD } from '@/shared/constants/activityPeriod';
+import { APPLICATION_PERIOD } from '@/shared/constants/applicationPeriod';
 import { trackEvent } from '@/shared/lib';
 import { ApplicationForm } from '@/widgets/applyDepartment';
 import { HomeProgramSection } from '@/widgets/homeProgramSection';
@@ -106,7 +106,7 @@ const ProgramsPage = ({
     return (
       <CompletionMessage
         title="학과 체험 신청 기간이 아닙니다"
-        description={`학과 체험 신청 기간은 ${ACTIVITY_APPLICATION_PERIOD}입니다.`}
+        description={`학과 체험 신청 기간은 ${APPLICATION_PERIOD}입니다.`}
       />
     );
   }
