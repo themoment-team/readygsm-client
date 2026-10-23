@@ -11,7 +11,7 @@ import { CompletionMessage } from '@shared/ui';
 
 import { ProgramCard } from '@/entities/program';
 import { LoginModal } from '@/features/auth';
-import { APPLICATION_PERIOD } from '@/shared/constants/applicationPeriod';
+import { APPLICATION_PERIOD } from '@/shared/constants';
 import { trackEvent } from '@/shared/lib';
 import { ApplicationForm } from '@/widgets/applyDepartment';
 import { HomeProgramSection } from '@/widgets/homeProgramSection';

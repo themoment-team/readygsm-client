@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { cn } from '@shared/lib';
 import { AnimateOnView, buttonVariants } from '@shared/ui';
 
-import { APPLICATION_PERIOD } from '@/shared/constants/applicationPeriod';
+import { APPLICATION_PERIOD } from '@/shared/constants';
 
 const HomeSection1 = () => {
   return (
