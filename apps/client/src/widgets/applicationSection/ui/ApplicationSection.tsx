@@ -19,12 +19,12 @@ interface ApplicationSectionProps {
   activity: ActivityType | undefined;
 }
 
-const subscribeToPeriodEnd = () => () => {};
+const noopSubscribe = () => () => {};
 
 const ApplicationSection = ({ user, application, activity }: ApplicationSectionProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isPeriodEnded = useSyncExternalStore(
-    subscribeToPeriodEnd,
+    noopSubscribe,
     () => (activity ? new Date() > new Date(activity.registrationEndAt) : false),
     () => false,
   );
