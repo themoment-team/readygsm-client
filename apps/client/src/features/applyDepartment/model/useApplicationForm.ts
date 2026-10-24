@@ -33,7 +33,7 @@ export const useApplicationForm = ({
   const [isSchoolModalOpen, setIsSchoolModalOpen] = useState(false);
   const submissionLockRef = useRef(false);
   const queryClient = useQueryClient();
-  const { mutateAsync: postApplication, isPending, isSuccess } = usePostApplication();
+  const { mutateAsync: postApplication, isSuccess } = usePostApplication();
   const activityParams = { activity_id: String(activityId), activity_name: activityName };
 
   const form = useForm<ApplicationFormType>({
@@ -108,7 +108,6 @@ export const useApplicationForm = ({
     isSchoolModalOpen,
     setIsSchoolModalOpen,
     handleSubmit,
-    isPending,
     isSuccess,
   };
 };

@@ -1,60 +1,58 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
+
+import { useQuery } from '@tanstack/react-query';
 
 import { useDebounce } from '@shared/lib';
 
 import { getSchools } from '../api/getSchools';
 import type { SchoolType } from './types';
 
+const searchSchoolQueryKeys = {
+  search: (keyword: string) => ['schoolSearch', keyword] as const,
+} as const;
+
 export const useSearchSchool = (onSchoolSelect?: (school: SchoolType) => void) => {
   const [keyword, setKeyword] = useState('');
-  const [schools, setSchools] = useState<SchoolType[]>([]);
   const [isSelected, setIsSelected] = useState(false);
+  const [isSearchDismissed, setIsSearchDismissed] = useState(false);
   const [focusedIndex, setFocusedIndex] = useState(-1);
-  const abortControllerRef = useRef<AbortController | null>(null);
-
   const debouncedKeyword = useDebounce(keyword, 400);
-
-  useEffect(() => {
-    if (!debouncedKeyword.trim() || keyword !== debouncedKeyword || isSelected) return;
-
-    const controller = new AbortController();
-    abortControllerRef.current = controller;
-
-    void (async () => {
-      try {
-        const results = await getSchools(debouncedKeyword.trim(), controller.signal);
-        if (!controller.signal.aborted) setSchools(results);
-      } catch {
-        if (!controller.signal.aborted) setSchools([]);
-      }
-    })();
-
-    return () => controller.abort();
-  }, [debouncedKeyword, keyword, isSelected]);
+  const { data: schools = [] } = useQuery({
+    queryKey: searchSchoolQueryKeys.search(keyword),
+    queryFn: ({ queryKey, signal }) => getSchools(queryKey[1].trim(), signal),
+    enabled: Boolean(keyword.trim()) && keyword === debouncedKeyword && !isSelected,
+  });
 
   const handleKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    abortControllerRef.current?.abort();
     setKeyword(e.target.value);
-    setSchools([]);
     setIsSelected(false);
+    setIsSearchDismissed(false);
     setFocusedIndex(-1);
   };
 
   const handleSchoolSelect = (school: SchoolType) => {
-    abortControllerRef.current?.abort();
     setKeyword(school.SCHUL_NM);
-    setSchools([]);
     setIsSelected(true);
     setFocusedIndex(-1);
     onSchoolSelect?.(school);
   };
 
   const displaySchools =
-    !isSelected && keyword === debouncedKeyword && keyword.trim() ? schools : [];
+    !isSelected && !isSearchDismissed && keyword === debouncedKeyword && keyword.trim()
+      ? schools
+      : [];
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Escape') {
+      if (displaySchools.length > 0) {
+        setIsSearchDismissed(true);
+        setFocusedIndex(-1);
+      }
+      return;
+    }
+
     if (displaySchools.length === 0) return;
 
     switch (e.key) {
@@ -71,11 +69,6 @@ export const useSearchSchool = (onSchoolSelect?: (school: SchoolType) => void) =
           e.preventDefault();
           handleSchoolSelect(displaySchools[focusedIndex]);
         }
-        break;
-      case 'Escape':
-        abortControllerRef.current?.abort();
-        setSchools([]);
-        setFocusedIndex(-1);
         break;
     }
   };

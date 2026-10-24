@@ -47,7 +47,7 @@ interface ApplicationFormProps {
 }
 
 const ApplicationForm = ({ activityId, activityName, userId, onSuccess }: ApplicationFormProps) => {
-  const { form, isSchoolModalOpen, setIsSchoolModalOpen, handleSubmit, isPending, isSuccess } =
+  const { form, isSchoolModalOpen, setIsSchoolModalOpen, handleSubmit, isSuccess } =
     useApplicationForm({
       activityId,
       activityName,
@@ -62,7 +62,7 @@ const ApplicationForm = ({ activityId, activityName, userId, onSuccess }: Applic
     formState: { isValid, isSubmitting, errors },
   } = form;
 
-  const isSubmitPending = isSubmitting || isPending;
+  const isSubmitPending = isSubmitting;
   const guardianRelation = useWatch({ control, name: 'guardianRelation' });
   const agreed = useWatch({ control, name: 'agreed' });
 
