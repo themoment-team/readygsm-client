@@ -51,7 +51,9 @@ const ProgramCard = ({
       )}
       onClick={isApplyDisabled ? undefined : onClick}
     >
-      <header className="flex flex-col items-start gap-2 sm:flex-row sm:justify-between sm:gap-4">
+      <header
+        className={cn('flex flex-col items-start gap-2 sm:flex-row sm:justify-between sm:gap-4')}
+      >
         <h2
           className={cn(
             'min-w-0 text-[1.5rem] leading-[1.2] font-semibold wrap-anywhere sm:flex-1',
