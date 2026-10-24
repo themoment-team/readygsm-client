@@ -51,10 +51,10 @@ const ProgramCard = ({
       )}
       onClick={isApplyDisabled ? undefined : onClick}
     >
-      <header className={cn('flex items-center justify-between')}>
+      <header className="flex flex-col items-start gap-2 sm:flex-row sm:justify-between sm:gap-4">
         <h2
           className={cn(
-            'text-[1.5rem] leading-[1.2] font-semibold',
+            'min-w-0 text-[1.5rem] leading-[1.2] font-semibold wrap-anywhere sm:flex-1',
             isSelected ? 'text-[#2563EB]' : 'text-neutral-dark',
           )}
         >
@@ -63,8 +63,8 @@ const ProgramCard = ({
         {!hideApplicant && (
           <p
             className={cn(
-              'text-[1.5rem] leading-[1.2] font-semibold',
-              isSelected ? 'text-[#2563EB]' : 'text-neutral-dark',
+              'shrink-0 text-[1.5rem] leading-[1.2] font-semibold whitespace-nowrap',
+              isApplyDisabled || showReserveWarning ? 'text-error-red' : 'text-brand-primary',
             )}
           >
             {isApplyDisabled
