@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
@@ -31,9 +31,9 @@ export const useApplicationForm = ({
   onSuccess,
 }: UseApplicationFormOptions) => {
   const [isSchoolModalOpen, setIsSchoolModalOpen] = useState(false);
+  const submissionLockRef = useRef(false);
   const queryClient = useQueryClient();
-  const { mutate: postApplication } = usePostApplication();
-
+  const { mutateAsync: postApplication, isPending, isSuccess } = usePostApplication();
   const activityParams = { activity_id: String(activityId), activity_name: activityName };
 
   const form = useForm<ApplicationFormType>({
@@ -54,30 +54,31 @@ export const useApplicationForm = ({
     mode: 'onChange',
   });
 
-  const handleSubmit = form.handleSubmit((data) => {
-    trackEvent('apply_submit', activityParams);
+  const handleSubmit: ReturnType<typeof form.handleSubmit> = async (event) => {
+    event?.preventDefault();
+    if (submissionLockRef.current) return;
 
-    postApplication(
-      {
-        userId,
-        activityId,
-        name: data.name,
-        grade: Number(data.grade),
-        classNumber: Number(data.classNum),
-        number: Number(data.number),
-        schoolName: data.schoolName,
-        phoneNumber: data.phone,
-        familyPhoneNumber: data.guardianPhone,
-      },
-      {
-        onSuccess: async () => {
-          trackEvent('apply_success', activityParams);
-          queryClient.invalidateQueries({ queryKey: activityQueryKeys.getActivityList() });
-          await revalidateActivityList();
-          toast.success('학과 체험 신청이 완료되었습니다.');
-          onSuccess?.();
-        },
-        onError: async (error) => {
+    // 유효성 검사와 pending 상태 반영 전의 중복 제출도 차단한다.
+    submissionLockRef.current = true;
+    let isApplicationSuccessful = false;
+
+    try {
+      await form.handleSubmit(async (data) => {
+        trackEvent('apply_submit', activityParams);
+
+        try {
+          await postApplication({
+            userId,
+            activityId,
+            name: data.name,
+            grade: Number(data.grade),
+            classNumber: Number(data.classNum),
+            number: Number(data.number),
+            schoolName: data.schoolName,
+            phoneNumber: data.phone,
+            familyPhoneNumber: data.guardianPhone,
+          });
+        } catch (error) {
           const status = getApiErrorStatus(error);
 
           trackEvent('apply_error', { ...activityParams, status: String(status ?? 'unknown') });
@@ -87,15 +88,27 @@ export const useApplicationForm = ({
             await revalidateActivityList();
           }
           toast.error(getApiErrorMessage(error, '신청 중 오류가 발생했습니다.'));
-        },
-      },
-    );
-  });
+          return;
+        }
+
+        isApplicationSuccessful = true;
+        trackEvent('apply_success', activityParams);
+        queryClient.invalidateQueries({ queryKey: activityQueryKeys.getActivityList() });
+        await revalidateActivityList();
+        toast.success('학과 체험 신청이 완료되었습니다.');
+        onSuccess?.();
+      })(event);
+    } finally {
+      submissionLockRef.current = isApplicationSuccessful;
+    }
+  };
 
   return {
     form,
     isSchoolModalOpen,
     setIsSchoolModalOpen,
     handleSubmit,
+    isPending,
+    isSuccess,
   };
 };

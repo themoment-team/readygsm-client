@@ -47,20 +47,22 @@ interface ApplicationFormProps {
 }
 
 const ApplicationForm = ({ activityId, activityName, userId, onSuccess }: ApplicationFormProps) => {
-  const { form, isSchoolModalOpen, setIsSchoolModalOpen, handleSubmit } = useApplicationForm({
-    activityId,
-    activityName,
-    userId,
-    onSuccess,
-  });
+  const { form, isSchoolModalOpen, setIsSchoolModalOpen, handleSubmit, isPending, isSuccess } =
+    useApplicationForm({
+      activityId,
+      activityName,
+      userId,
+      onSuccess,
+    });
   const {
     register,
     control,
     setValue,
     trigger,
-    formState: { isValid, errors },
+    formState: { isValid, isSubmitting, errors },
   } = form;
 
+  const isSubmitPending = isSubmitting || isPending;
   const guardianRelation = useWatch({ control, name: 'guardianRelation' });
   const agreed = useWatch({ control, name: 'agreed' });
 
@@ -294,16 +296,16 @@ const ApplicationForm = ({ activityId, activityName, userId, onSuccess }: Applic
       </label>
 
       <div
-        className={cn('w-full', !isValid && 'cursor-not-allowed')}
-        onClick={!isValid ? () => trigger() : undefined}
+        className={cn('w-full', (!isValid || isSubmitPending || isSuccess) && 'cursor-not-allowed')}
+        onClick={!isValid && !isSubmitPending && !isSuccess ? () => trigger() : undefined}
       >
         <Button
           type="submit"
           variant={isValid ? 'default' : 'neutral'}
           size="full"
-          className={cn(!isValid && 'pointer-events-none')}
+          disabled={!isValid || isSubmitPending || isSuccess}
         >
-          학과 체험 신청
+          {isSubmitPending ? '신청 중...' : isSuccess ? '신청 완료' : '학과 체험 신청'}
         </Button>
       </div>
     </form>

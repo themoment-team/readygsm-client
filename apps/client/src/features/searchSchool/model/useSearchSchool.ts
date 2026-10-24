@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { useDebounce } from '@shared/lib';
 
+import { getSchools } from '../api/getSchools';
 import type { SchoolType } from './types';
 
 export const useSearchSchool = (onSchoolSelect?: (school: SchoolType) => void) => {
@@ -11,40 +12,38 @@ export const useSearchSchool = (onSchoolSelect?: (school: SchoolType) => void) =
   const [schools, setSchools] = useState<SchoolType[]>([]);
   const [isSelected, setIsSelected] = useState(false);
   const [focusedIndex, setFocusedIndex] = useState(-1);
-  const skipFetchRef = useRef(false);
+  const abortControllerRef = useRef<AbortController | null>(null);
 
   const debouncedKeyword = useDebounce(keyword, 400);
 
   useEffect(() => {
-    if (skipFetchRef.current) {
-      skipFetchRef.current = false;
-      return;
-    }
+    if (!debouncedKeyword.trim() || keyword !== debouncedKeyword || isSelected) return;
 
-    if (!debouncedKeyword.trim()) return;
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
 
     void (async () => {
       try {
-        const res = await fetch(
-          `https://open.neis.go.kr/hub/schoolInfo?KEY=${process.env.NEXT_PUBLIC_NEIS_API_KEY}&Type=json&SCHUL_NM=${encodeURIComponent(debouncedKeyword)}&SCHUL_KND_SC_NM=${encodeURIComponent('중학교')}`,
-        );
-        if (!res.ok) return;
-        const data = await res.json();
-        setSchools(data?.schoolInfo?.[1]?.row ?? []);
+        const results = await getSchools(debouncedKeyword.trim(), controller.signal);
+        if (!controller.signal.aborted) setSchools(results);
       } catch {
-        setSchools([]);
+        if (!controller.signal.aborted) setSchools([]);
       }
     })();
-  }, [debouncedKeyword]);
+
+    return () => controller.abort();
+  }, [debouncedKeyword, keyword, isSelected]);
 
   const handleKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    abortControllerRef.current?.abort();
     setKeyword(e.target.value);
+    setSchools([]);
     setIsSelected(false);
     setFocusedIndex(-1);
   };
 
   const handleSchoolSelect = (school: SchoolType) => {
-    skipFetchRef.current = true;
+    abortControllerRef.current?.abort();
     setKeyword(school.SCHUL_NM);
     setSchools([]);
     setIsSelected(true);
@@ -52,7 +51,8 @@ export const useSearchSchool = (onSchoolSelect?: (school: SchoolType) => void) =
     onSchoolSelect?.(school);
   };
 
-  const displaySchools = debouncedKeyword.trim() ? schools : [];
+  const displaySchools =
+    !isSelected && keyword === debouncedKeyword && keyword.trim() ? schools : [];
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (displaySchools.length === 0) return;
@@ -73,6 +73,7 @@ export const useSearchSchool = (onSchoolSelect?: (school: SchoolType) => void) =
         }
         break;
       case 'Escape':
+        abortControllerRef.current?.abort();
         setSchools([]);
         setFocusedIndex(-1);
         break;
