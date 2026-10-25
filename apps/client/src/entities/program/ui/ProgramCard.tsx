@@ -31,6 +31,7 @@ const ProgramCard = ({
   const isApplyDisabled = !hideApplicant && isReserved === undefined && isReserveFull;
   const showReserveWarning =
     !hideApplicant && (isReserved !== undefined ? isReserved : currentApplicant >= maxApplicant);
+  const isInteractive = onClick !== undefined;
   const reserveBadgeText =
     isReserved && reserveOrder != null ? `예비신청 ${reserveOrder}번` : '예비 신청';
 
@@ -39,8 +40,11 @@ const ProgramCard = ({
       className={cn(
         'w-full max-w-155.5 rounded-lg border bg-white px-6 py-5',
         !disableHover &&
+          isInteractive &&
           !isApplyDisabled &&
           'cursor-pointer transition-colors duration-200 hover:bg-[#EFF4FF]',
+        isInteractive &&
+          'focus-visible:outline-brand-primary focus-visible:outline-2 focus-visible:outline-offset-2',
         isApplyDisabled
           ? 'border-border-variant cursor-not-allowed opacity-50'
           : isSelected === true
@@ -49,7 +53,20 @@ const ProgramCard = ({
               ? 'opacity-50'
               : cn('border-border-variant', !disableHover && 'hover:border-[#7C91A9]'),
       )}
+      role={isInteractive ? 'button' : undefined}
+      tabIndex={isInteractive ? 0 : undefined}
+      aria-disabled={isInteractive ? isApplyDisabled : undefined}
       onClick={isApplyDisabled ? undefined : onClick}
+      onKeyDown={
+        isInteractive
+          ? (event) => {
+              if (event.key !== 'Enter' && event.key !== ' ') return;
+
+              event.preventDefault();
+              if (!isApplyDisabled && !event.repeat) onClick();
+            }
+          : undefined
+      }
     >
       <header
         className={cn('flex flex-col items-start gap-2 sm:flex-row sm:justify-between sm:gap-4')}
