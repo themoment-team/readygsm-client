@@ -38,13 +38,11 @@ const ProgramCard = ({
   return (
     <section
       className={cn(
-        'w-full max-w-155.5 rounded-lg border bg-white px-6 py-5',
+        'relative w-full max-w-155.5 rounded-lg border bg-white px-6 py-5',
         !disableHover &&
           isInteractive &&
           !isApplyDisabled &&
           'cursor-pointer transition-colors duration-200 hover:bg-[#EFF4FF]',
-        isInteractive &&
-          'focus-visible:outline-brand-primary focus-visible:outline-2 focus-visible:outline-offset-2',
         isApplyDisabled
           ? 'border-border-variant cursor-not-allowed opacity-50'
           : isSelected === true
@@ -53,20 +51,6 @@ const ProgramCard = ({
               ? 'opacity-50'
               : cn('border-border-variant', !disableHover && 'hover:border-[#7C91A9]'),
       )}
-      role={isInteractive ? 'button' : undefined}
-      tabIndex={isInteractive ? 0 : undefined}
-      aria-disabled={isInteractive ? isApplyDisabled : undefined}
-      onClick={isApplyDisabled ? undefined : onClick}
-      onKeyDown={
-        isInteractive
-          ? (event) => {
-              if (event.key !== 'Enter' && event.key !== ' ') return;
-
-              event.preventDefault();
-              if (!isApplyDisabled && !event.repeat) onClick();
-            }
-          : undefined
-      }
     >
       <header
         className={cn('flex flex-col items-start gap-2 sm:flex-row sm:justify-between sm:gap-4')}
@@ -77,7 +61,22 @@ const ProgramCard = ({
             isSelected ? 'text-[#2563EB]' : 'text-neutral-dark',
           )}
         >
-          {name}
+          {isInteractive ? (
+            <button
+              type="button"
+              aria-disabled={isApplyDisabled}
+              onClick={isApplyDisabled ? undefined : onClick}
+              className={cn(
+                'appearance-none border-0 bg-transparent p-0 text-left font-[inherit] leading-[inherit]',
+                "after:absolute after:inset-0 after:z-10 after:content-['']",
+                'focus-visible:after:outline-brand-primary focus-visible:after:outline-2 focus-visible:after:outline-offset-2',
+              )}
+            >
+              {name}
+            </button>
+          ) : (
+            name
+          )}
         </h2>
         {!hideApplicant && (
           <p
