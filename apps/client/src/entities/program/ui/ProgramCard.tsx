@@ -65,6 +65,7 @@ const ProgramCard = ({
             <button
               type="button"
               aria-disabled={isApplyDisabled}
+              aria-pressed={isSelected === true}
               onClick={isApplyDisabled ? undefined : onClick}
               className={cn(
                 'appearance-none border-0 bg-transparent p-0 text-left font-[inherit] leading-[inherit]',
