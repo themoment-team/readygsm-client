@@ -50,6 +50,9 @@ const ProgramCard = ({
             : isSelected === false
               ? 'opacity-50'
               : cn('border-border-variant', !disableHover && 'hover:border-[#7C91A9]'),
+        isInteractive &&
+          (isApplyDisabled || isSelected === false) &&
+          'has-[:focus-visible]:opacity-100',
       )}
     >
       <header
