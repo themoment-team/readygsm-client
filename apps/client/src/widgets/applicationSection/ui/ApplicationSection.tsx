@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 
 import { toast } from 'react-toastify';
 
@@ -19,13 +19,14 @@ interface ApplicationSectionProps {
   activity: ActivityType | undefined;
 }
 
+const noopSubscribe = () => () => {};
+
 const ApplicationSection = ({ user, application, activity }: ApplicationSectionProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const [isPeriodEnded] = useState(() =>
-    typeof window !== 'undefined' && activity
-      ? new Date() > new Date(activity.registrationEndAt)
-      : false,
+  const isPeriodEnded = useSyncExternalStore(
+    noopSubscribe,
+    () => (activity ? new Date() > new Date(activity.registrationEndAt) : false),
+    () => false,
   );
 
   const handleCancelClick = () => {
