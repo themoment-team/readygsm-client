@@ -45,3 +45,4 @@ overrides:
 
 # PR 설정 — 팀 공용어 한국어
 language: ko
+base_branch: develop
